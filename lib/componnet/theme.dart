@@ -1,27 +1,34 @@
+
+
+import 'package:di_state_managment/resorse/app_colors.dart';
+import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:flutter/material.dart';
 
-abstract class AppColors {
-  static const Color title = Colors.black;
+ThemeData lightTheme(){
 
-  static const Color hint = Color.fromARGB(255, 217, 220, 228);
-
-  static const Color appBar = Color.fromARGB(255, 255, 255, 255);
-
-  static const Color border = Color.fromARGB(255, 217, 217, 228);
-
-  static const Color borderSelected = Color.fromARGB(255, 0, 117, 251);
-
-  static const Color buttonColor = Color.fromARGB(255, 0, 117, 251);
-
-  static const Color surfaceColor = Color.fromARGB(255, 243, 243, 243);
-
-  static const Color iconColor = Color.fromARGB(255, 217, 220, 228);
-
-  static const Color iconSelected = Color.fromARGB(255, 0, 0, 0);
-
-  static const Color discountColor = Color.fromARGB(255, 255, 58, 58);
-
-  static const Color progressShpping = Color.fromARGB(255, 30, 130, 255);
-
-  static const Color continueButton = Color.fromARGB(255, 255, 97, 97);
+  return ThemeData(
+    brightness: Brightness.light,
+    iconTheme: IconThemeData(color: Colors.black),
+    primaryColor: LightAppColors.primaryColor,
+    scaffoldBackgroundColor: LightAppColors.scaffoldColor,
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: WidgetStateColor.resolveWith((callback){
+        if (callback.contains(WidgetState.focused)) {
+          return LightAppColors.focusedTextFlied;
+        } else {
+          return LightAppColors.unfocusedTextFlied;
+        }
+      }),
+      contentPadding: EdgeInsets.all(Dimens.medium),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(Dimens.medium),
+        borderSide: BorderSide(color: LightAppColors.border)
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(Dimens.medium),
+        borderSide: BorderSide(color: LightAppColors.borderSelected)
+      )
+    )
+  );
 }

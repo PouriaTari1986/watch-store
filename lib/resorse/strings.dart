@@ -4,15 +4,17 @@ abstract class AppStrings {
 
   AppStrings._();
 
+  static const String replace = "replace";
+
   static const String enterYourNum = "شماره خود را وارد کنید";
 
   static const String enterYourNumHint = "مثل :  09121114466";
 
   static const String sendingCode = "ارسال کد فعال سازی";
 
-  static const String submitedNum = "کد فعال سازی برای +   + ارسال شد";
+  static const String submitedNum = "کد فعال سازی برای $replace ارسال شد";
 
-  static const String editNum = "شماره اشتباه است/ ویرایش شماره";
+  static const String editNum = "شماره اشتباه است / ویرایش شماره";
 
   static const String enterCode = "کد فعال سازی را وارد کنید";
 
