@@ -14,6 +14,18 @@ import 'package:flutter/widgets.dart';
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/aiW.png
+  AssetGenImage get aiW => const AssetGenImage('assets/png/aiW.png');
+
+  /// File path: assets/png/classicW.png
+  AssetGenImage get classicW => const AssetGenImage('assets/png/classicW.png');
+
+  /// File path: assets/png/digitalW.png
+  AssetGenImage get digitalW => const AssetGenImage('assets/png/digitalW.png');
+
+  /// File path: assets/png/tableW.png
+  AssetGenImage get tableW => const AssetGenImage('assets/png/tableW.png');
+
   /// File path: assets/png/user.png
   AssetGenImage get user => const AssetGenImage('assets/png/user.png');
 
@@ -22,20 +34,45 @@ class $AssetsPngGen {
       const AssetGenImage('assets/png/whatch store.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [user, whatchStore];
+  List<AssetGenImage> get values => [
+    aiW,
+    classicW,
+    digitalW,
+    tableW,
+    user,
+    whatchStore,
+  ];
 }
 
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/Vector.svg
+  String get vector => 'assets/svg/Vector.svg';
+
   /// File path: assets/svg/arrow left.svg
   String get arrowLeft => 'assets/svg/arrow left.svg';
+
+  /// File path: assets/svg/card.svg
+  String get card => 'assets/svg/card.svg';
+
+  /// File path: assets/svg/close.svg
+  String get close => 'assets/svg/close.svg';
 
   /// File path: assets/svg/home-hashtag.svg
   String get homeHashtag => 'assets/svg/home-hashtag.svg';
 
   /// File path: assets/svg/list.svg
   String get list => 'assets/svg/list.svg';
+
+  /// File path: assets/svg/minus.svg
+  String get minus => 'assets/svg/minus.svg';
+
+  /// File path: assets/svg/plus.svg
+  String get plus => 'assets/svg/plus.svg';
+
+  /// File path: assets/svg/recycleBin.svg
+  String get recycleBin => 'assets/svg/recycleBin.svg';
 
   /// File path: assets/svg/search-normal.svg
   String get searchNormal => 'assets/svg/search-normal.svg';
@@ -46,14 +83,24 @@ class $AssetsSvgGen {
   /// File path: assets/svg/user.svg
   String get user => 'assets/svg/user.svg';
 
+  /// File path: assets/svg/vuesax-linear-call.svg
+  String get vuesaxLinearCall => 'assets/svg/vuesax-linear-call.svg';
+
   /// List of all assets
   List<String> get values => [
+    vector,
     arrowLeft,
+    card,
+    close,
     homeHashtag,
     list,
+    minus,
+    plus,
+    recycleBin,
     searchNormal,
     shoppingBascket,
     user,
+    vuesaxLinearCall,
   ];
 }
 
