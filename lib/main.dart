@@ -4,6 +4,7 @@
 
 
 
+import 'package:di_state_managment/screens/sent_otp_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "watch store",
-        home: Container(),
+        home: SentOtpScreen()
     );
   }
 }
