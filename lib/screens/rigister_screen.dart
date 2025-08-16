@@ -1,5 +1,5 @@
 import 'package:di_state_managment/componnet/extension.dart';
-import 'package:di_state_managment/gen/assets.gen.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
@@ -12,47 +12,60 @@ class RigisterScreen extends StatelessWidget {
   final TextEditingController _controllerNameLastName = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Dimens.large.height,
-                Avatar(),
-                Dimens.large.height,
-                AppTextField(
-                  lable: AppStrings.prName,
-                  hint: AppStrings.prNameHint,
-                  controller: _controllerNameLastName,
-                ),
-                AppTextField(
-                  lable: AppStrings.stablePhone,
-                  hint: AppStrings.stablePhoneHint,
-                  controller: _controllerNameLastName,
-                ),
-                AppTextField(
-                  lable: AppStrings.address,
-                  hint: AppStrings.addressHint,
-                  controller: _controllerNameLastName,
-                ),
-                AppTextField(
-                  lable: AppStrings.postalCode,
-                  hint: AppStrings.postalCodeHint,
-                  controller: _controllerNameLastName,
-                ),
-                AppTextField(
-                  lable: AppStrings.location,
-                  hint: AppStrings.locationHint,
-                  controller: _controllerNameLastName,
-                  icon: Icon(Icons.location_on_outlined),
-                ),
-                MainBottun(text: AppStrings.register, onPressed: ((){})),
-                Dimens.large.height
-              ],
+    Size size  = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Scaffold(
+        appBar: PreferredSize(preferredSize: Size(size.width, size.height*0.1), child: Container(
+          child: Row(
+            children: [
+              IconButton(onPressed: ((){
+                
+              }), icon: Icon(Icons.arrow_back)),
+      
+              Text(AppStrings.register,style: LightAppTextStyle.title,)
+            ],
+          ),
+        )),
+        body: SafeArea(
+          child: SizedBox(
+            width: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Dimens.large.height,
+                  Avatar(),
+                  Dimens.large.height,
+                  AppTextField(
+                    lable: AppStrings.prName,
+                    hint: AppStrings.prNameHint,
+                    controller: _controllerNameLastName,
+                  ),
+                  AppTextField(
+                    lable: AppStrings.stablePhone,
+                    hint: AppStrings.stablePhoneHint,
+                    controller: _controllerNameLastName,
+                  ),
+                  AppTextField(
+                    lable: AppStrings.address,
+                    hint: AppStrings.addressHint,
+                    controller: _controllerNameLastName,
+                  ),
+                  AppTextField(
+                    lable: AppStrings.postalCode,
+                    hint: AppStrings.postalCodeHint,
+                    controller: _controllerNameLastName,
+                  ),
+                  AppTextField(
+                    lable: AppStrings.location,
+                    hint: AppStrings.locationHint,
+                    controller: _controllerNameLastName,
+                    icon: Icon(Icons.location_on_outlined),
+                  ),
+                  MainBottun(text: AppStrings.register, onPressed: ((){})),
+                  Dimens.large.height
+                ],
+              ),
             ),
           ),
         ),

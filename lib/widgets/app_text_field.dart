@@ -1,4 +1,5 @@
 import 'package:di_state_managment/componnet/extension.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class AppTextField extends StatelessWidget {
 
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(prefixLable), Text(lable)],
+              children: [Text(prefixLable,style: LightAppTextStyle.title,), Text(lable,style: LightAppTextStyle.title,)],
             ),
           ),
 
@@ -49,7 +50,7 @@ class AppTextField extends StatelessWidget {
               textAlign: textAlign,
               controller: controller,
               keyboardType: inputType,
-              decoration: InputDecoration(hintText: hint, prefixIcon: icon),
+              decoration: InputDecoration(hintText: hint,hintStyle: LightAppTextStyle.hintTitle, prefixIcon: icon),
             ),
           ),
         ],

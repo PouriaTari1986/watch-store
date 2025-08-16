@@ -8,6 +8,8 @@ LightAppColors._();
 
   static const Color hint = Color.fromARGB(255, 217, 220, 228);
 
+  static const Color editNumber = Color.fromARGB(255, 0, 117, 251);
+
   static const Color focusedTextFlied = Color.fromARGB(255, 255, 255, 255);
 
   static const Color unfocusedTextFlied = Color.fromARGB(255, 251, 251, 251);
@@ -21,6 +23,8 @@ LightAppColors._();
   static const Color borderSelected = Color.fromARGB(255, 0, 117, 251);
 
   static const Color buttonColor = Color.fromARGB(255, 0, 117, 251);
+
+  static const Color buttonTextColor = Color.fromARGB(255, 255, 255, 255);
 
   static const Color surfaceColor = Color.fromARGB(255, 243, 243, 243);
 

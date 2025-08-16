@@ -1,6 +1,7 @@
 
 
 import 'package:di_state_managment/componnet/button_style.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -24,7 +25,7 @@ final  Function()onPressed;
       child: ElevatedButton(
         style: AppButtonStyle.mainButtonStyle,
         onPressed: onPressed, 
-        child:Text(text,style: TextStyle(color: Colors.white),)),
+        child:Text(text,style: LightAppTextStyle.elevetedBotton),)
     )
     ;
   }

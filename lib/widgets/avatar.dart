@@ -2,6 +2,7 @@
 
 
 import 'package:di_state_managment/componnet/extension.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
@@ -19,7 +20,7 @@ class Avatar extends StatelessWidget {
           child: Image.asset(Assets.png.user.path),
         ),
         Dimens.medium.height,
-        Text(AppStrings.choosePic)
+        Text(AppStrings.choosePic,style: LightAppTextStyle.avatar,)
       ],
     );
   }

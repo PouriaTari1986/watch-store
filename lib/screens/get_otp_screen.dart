@@ -1,4 +1,5 @@
 import 'package:di_state_managment/componnet/extension.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
@@ -12,7 +13,7 @@ class GetOtpScreen extends StatelessWidget {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SafeArea(
@@ -24,9 +25,10 @@ class GetOtpScreen extends StatelessWidget {
             children: [
               Image.asset(Assets.png.whatchStore.path),
               (Dimens.large *2).height,
-              Text(AppStrings.submitedNum.replaceAll(AppStrings.replace, "09122578846")),
+              Text(AppStrings.submitedNum.replaceAll(AppStrings.replace, "09122578846"),
+              style: LightAppTextStyle.title,),
                 Dimens.large.height,
-              Text(AppStrings.editNum),
+              Text(AppStrings.editNum,style: LightAppTextStyle.editNumber,),
                 (Dimens.large*2).height,
               
               
