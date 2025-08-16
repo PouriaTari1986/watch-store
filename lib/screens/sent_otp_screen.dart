@@ -2,6 +2,7 @@ import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +27,15 @@ class SentOtpScreen extends StatelessWidget {
               (Dimens.large * 2).height,
               AppTextField(
                 lable: AppStrings.enterYourNum,
-                
+
                 hint: AppStrings.enterYourNumHint,
                 controller: controller,
               ),
-              MainBottun(text: AppStrings.sendingCode, onPressed: ((){
-
-              }))
+              MainBottun(
+                text: AppStrings.sendingCode,
+                onPressed: (() =>
+                    Navigator.pushNamed(context, ScreensNames.getOtpScrren)),
+              ),
             ],
           ),
         ),

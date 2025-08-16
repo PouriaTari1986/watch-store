@@ -1,7 +1,0 @@
-
-
-class MyAppBar {
-  MyAppBar._();
-
-  
-}

@@ -3,6 +3,7 @@ import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class GetOtpScreen extends StatelessWidget {
                 prefixLable: "2:55",
               ),
               MainBottun(text: AppStrings.edmae, onPressed: ((){
-
+                Navigator.pushNamed(context, ScreensNames.registerScreen);
               }))
             ],
           ),

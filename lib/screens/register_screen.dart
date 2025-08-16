@@ -1,31 +1,21 @@
 import 'package:di_state_managment/componnet/extension.dart';
-import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
 import 'package:di_state_managment/widgets/avatar.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
+import 'package:di_state_managment/widgets/registeration_app_bar.dart.dart';
 import 'package:flutter/material.dart';
 
-class RigisterScreen extends StatelessWidget {
-  RigisterScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({super.key});
   final TextEditingController _controllerNameLastName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size  = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(preferredSize: Size(size.width, size.height*0.1), child: Container(
-          child: Row(
-            children: [
-              IconButton(onPressed: ((){
-                
-              }), icon: Icon(Icons.arrow_back)),
-      
-              Text(AppStrings.register,style: LightAppTextStyle.title,)
-            ],
-          ),
-        )),
+        appBar: RegisterationAppBar(size: size),
         body: SafeArea(
           child: SizedBox(
             width: double.infinity,
@@ -73,3 +63,4 @@ class RigisterScreen extends StatelessWidget {
     );
   }
 }
+
