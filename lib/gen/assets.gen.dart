@@ -20,11 +20,11 @@ class $AssetsPngGen {
   /// File path: assets/png/classicW.png
   AssetGenImage get classicW => const AssetGenImage('assets/png/classicW.png');
 
-  /// File path: assets/png/digitalW.png
-  AssetGenImage get digitalW => const AssetGenImage('assets/png/digitalW.png');
+  /// File path: assets/png/digital.png
+  AssetGenImage get digital => const AssetGenImage('assets/png/digital.png');
 
-  /// File path: assets/png/tableW.png
-  AssetGenImage get tableW => const AssetGenImage('assets/png/tableW.png');
+  /// File path: assets/png/table.png
+  AssetGenImage get table => const AssetGenImage('assets/png/table.png');
 
   /// File path: assets/png/user.png
   AssetGenImage get user => const AssetGenImage('assets/png/user.png');
@@ -37,8 +37,8 @@ class $AssetsPngGen {
   List<AssetGenImage> get values => [
     aiW,
     classicW,
-    digitalW,
-    tableW,
+    digital,
+    table,
     user,
     whatchStore,
   ];
