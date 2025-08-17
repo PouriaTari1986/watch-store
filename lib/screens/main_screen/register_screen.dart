@@ -1,6 +1,7 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
 import 'package:di_state_managment/widgets/avatar.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
@@ -52,7 +53,9 @@ class RegisterScreen extends StatelessWidget {
                     controller: _controllerNameLastName,
                     icon: Icon(Icons.location_on_outlined),
                   ),
-                  MainBottun(text: AppStrings.register, onPressed: ((){})),
+                  MainBottun(text: AppStrings.register, onPressed: ((){
+                    Navigator.pushNamed(context,ScreensNames.mainScreen );
+                  })),
                   Dimens.large.height
                 ],
               ),

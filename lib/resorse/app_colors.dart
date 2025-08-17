@@ -26,6 +26,8 @@ LightAppColors._();
 
   static const Color buttonTextColor = Color.fromARGB(255, 255, 255, 255);
 
+  static const Color btNavColor = Color.fromARGB(255, 255, 255, 255);
+
   static const Color surfaceColor = Color.fromARGB(255, 243, 243, 243);
 
   static const Color iconColor = Color.fromARGB(255, 217, 220, 228);
@@ -39,4 +41,8 @@ LightAppColors._();
   static const Color continueButton = Color.fromARGB(255, 255, 97, 97);
 
   static const Color primaryColor = Color.fromARGB(255, 30, 130, 255);
+
+  static const Color btNavActiveColor = Color.fromARGB(255, 0, 0, 0);
+
+  static const Color btNavInActiveColor = Color.fromARGB(255, 196, 196, 196);
 }

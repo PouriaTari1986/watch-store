@@ -40,4 +40,18 @@ class LightAppTextStyle {
         fontWeight: FontWeight.bold
 
   );
+
+  static const TextStyle btNavActive = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 12,
+    color: LightAppColors.btNavActiveColor,
+
+  );
+
+  static const TextStyle btNavInActive = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 12,
+    color: LightAppColors.btNavInActiveColor,
+
+  );
 }
