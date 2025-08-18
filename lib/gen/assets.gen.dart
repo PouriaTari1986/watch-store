@@ -26,6 +26,9 @@ class $AssetsPngGen {
   /// File path: assets/png/table.png
   AssetGenImage get table => const AssetGenImage('assets/png/table.png');
 
+  /// File path: assets/png/unnamed.png
+  AssetGenImage get unnamed => const AssetGenImage('assets/png/unnamed.png');
+
   /// File path: assets/png/user.png
   AssetGenImage get user => const AssetGenImage('assets/png/user.png');
 
@@ -39,6 +42,7 @@ class $AssetsPngGen {
     classicW,
     digital,
     table,
+    unnamed,
     user,
     whatchStore,
   ];

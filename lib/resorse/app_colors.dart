@@ -24,6 +24,13 @@ LightAppColors._();
 
   ];
 
+  static const List<Color> productPage = [
+    Color.fromARGB(255,238,238,238),
+    Color.fromARGB(255, 255, 255, 255)
+
+
+  ];
+
   static const List<Color> catAiColor = [
     Color.fromARGB(255, 139, 162, 168),
     Color.fromARGB(255, 223, 238, 245),
@@ -75,4 +82,12 @@ LightAppColors._();
   static const Color btNavInActiveColor = Color.fromARGB(255, 196, 196, 196);
 
   static const Color searchBar = Color.fromARGB(255, 255, 255, 255);
+
+  static const Color disctontText = Color.fromARGB(255, 0, 0, 0);
+
+  static const Color wonderText = Color.fromARGB(255, 57, 24, 80);
+
+  static const Color timerText = Color.fromARGB(255, 0, 117, 251);
+
+  static const Color oldProductPrice = Color.fromARGB(255, 191, 191, 191);
 }

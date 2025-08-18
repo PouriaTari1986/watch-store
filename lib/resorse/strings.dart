@@ -66,9 +66,9 @@ abstract class AppStrings {
 
   static const String shopBs = "سبد خرید";
 
-  static const String bestSelled = "پرفروش‌ها";
+  static const String bestSelled = "پرفروشترین ها";
 
-  static const String newes = "جدیدترین محصولات";
+  static const String newest = "جدیدترین محصولات";
 
   static const String details = "خصوصیات ";
 

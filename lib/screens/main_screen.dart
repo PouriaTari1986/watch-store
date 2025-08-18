@@ -114,6 +114,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
       
                     BtmNAvItems(
+                      count: 1,
                       iconSvgPath: Assets.svg.shoppingBascket,
                       text: AppStrings.shopBs,
                       isActive:

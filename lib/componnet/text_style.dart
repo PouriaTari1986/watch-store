@@ -12,6 +12,13 @@ class LightAppTextStyle {
     fontWeight: FontWeight.bold
   );
 
+  static const TextStyle prodactTitle = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 16,
+    color: LightAppColors.title,
+    fontWeight: FontWeight.normal
+  );
+
   static const TextStyle avatar = TextStyle(
     fontFamily: FontFamily.dana,
     fontSize: 11,
@@ -53,5 +60,41 @@ class LightAppTextStyle {
     fontSize: 12,
     color: LightAppColors.btNavInActiveColor,
 
+  );
+
+  static const TextStyle discountText = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 12,
+    color: LightAppColors.disctontText,
+
+  );
+
+  static const TextStyle wonderTextStyle = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 22,
+    color: LightAppColors.wonderText,
+    fontWeight: FontWeight.w700
+  );
+
+
+  static const TextStyle oldPrice = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 15,
+    color: LightAppColors.oldProductPrice,
+    decoration: TextDecoration.lineThrough
+  );
+
+  static const TextStyle timerStyle = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 15,
+    color: LightAppColors.timerText,
+
+  );
+
+  static const TextStyle seeMore = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 13,
+    color: LightAppColors.title,
+    fontWeight: FontWeight.w400
   );
 }

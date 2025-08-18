@@ -5,17 +5,20 @@ import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-// ignore: must_be_immutable
 class BtmNAvItems extends StatelessWidget {
-final  String iconSvgPath;
-final  String text;
-final  bool isActive;
-final  void Function()onTap;
-  const BtmNAvItems({super.key, 
+  final String iconSvgPath;
+  final String text;
+  final bool isActive;
+  final int? count;
+  final VoidCallback onTap;
+
+  const BtmNAvItems({
+    super.key,
+    this.count,
     required this.iconSvgPath,
     required this.text,
     required this.isActive,
-    required this.onTap
+    required this.onTap,
   });
 
   @override
@@ -29,16 +32,54 @@ final  void Function()onTap;
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                iconSvgPath,
-                colorFilter: ColorFilter.mode(isActive?
-                  LightAppColors.btNavActiveColor: LightAppColors.btNavInActiveColor,
-                  BlendMode.srcIn,
-                ),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  SvgPicture.asset(
+                    iconSvgPath,
+                    colorFilter: ColorFilter.mode(
+                      isActive
+                          ? LightAppColors.btNavActiveColor
+                          : LightAppColors.btNavInActiveColor,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+
+                  // Badge
+                  if (count != null && count! > 0)
+                    Positioned(
+                      top: -4,
+                      right: -6,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: LightAppColors.discountColor,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: const BoxConstraints(
+                          minWidth: 18,
+                          minHeight: 18,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          count.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               ),
               Dimens.small.height,
-              Text(text,
-               style:isActive? LightAppTextStyle.btNavActive:LightAppTextStyle.btNavInActive),
+              Text(
+                text,
+                style: isActive
+                    ? LightAppTextStyle.btNavActive
+                    : LightAppTextStyle.btNavInActive,
+              ),
             ],
           ),
         ),
