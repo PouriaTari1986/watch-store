@@ -12,6 +12,36 @@ class LightAppTextStyle {
     fontWeight: FontWeight.bold
   );
 
+
+  static const TextStyle selectedTab = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 14,
+    color: LightAppColors.title,
+    fontWeight: FontWeight.bold
+  );
+
+
+  static  TextStyle unSelectedTab = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 14,
+    color: LightAppColors.title.withAlpha(125),
+    fontWeight: FontWeight.bold
+  );
+
+  static  TextStyle caption = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 13,
+    color: LightAppColors.title.withAlpha(150),
+    fontWeight: FontWeight.normal
+  );
+
+  static const TextStyle taglistStyle = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 14,
+    color: LightAppColors.surfaceColor,
+    fontWeight: FontWeight.bold
+  );
+
   static const TextStyle prodactTitle = TextStyle(
     fontFamily: FontFamily.dana,
     fontSize: 16,

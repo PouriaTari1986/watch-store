@@ -1,9 +1,12 @@
 
 import 'package:di_state_managment/componnet/extension.dart';
+import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resorse/app_colors.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/widgets/app_bar.dart';
+import 'package:di_state_managment/widgets/cart_badges.dart';
+import 'package:di_state_managment/widgets/product_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -19,7 +22,7 @@ class ProductListScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
            
-            CartBadge(count: 1,),
+            CartBadge(),
             Row(
               children: [Text(AppStrings.bestSelled),
               Dimens.small.width,
@@ -31,78 +34,79 @@ class ProductListScreen extends StatelessWidget {
             icon: SvgPicture.asset(Assets.svg.close))
           ],
         )
-        )
-      ),
-    );
-  }
-}
-class CustomAppBar extends StatelessWidget implements PreferredSize{
- 
-
-  const CustomAppBar({super.key,required this.child});
-@override
-final Widget child;
-  @override
-  Widget build(BuildContext context) {
-    return PreferredSize(preferredSize: preferredSize, child: Container(
-      height: preferredSize.height,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(Dimens.medium),
-        bottomRight: Radius.circular(Dimens.medium),
         ),
-        color: LightAppColors.appBar,
-        boxShadow: [
-          BoxShadow(
-            
-            color: LightAppColors.shadowColor,
-            offset: Offset(0, 2),
-            blurRadius: 3
-          )
-        ]
+        
+        body: Column(
+
+          children: [
+
+            TagList(),
+            (Dimens.large*3).height,
+            ProductGridView()
+          ],
+        ),
+      
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimens.medium),
-        child: child,
-      ),
-    ));
+    );
   }
-  
-
-  
-  @override
-  
-  Size get preferredSize => const Size.fromHeight(50);
-
 }
 
 
-class CartBadge extends StatelessWidget {
-  const CartBadge({super.key,this.count});
-final count;
+
+
+
+
+class TagList extends StatelessWidget {
+  const TagList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(height: 32,width: 32,),
-        SvgPicture.asset(Assets.svg.shoppingBascket,colorFilter: ColorFilter.mode(Colors.black,BlendMode.srcIn),),
-        Visibility(
-          visible: count>0?true:false,
-          child: Positioned(
-            top: 0,
-            right: 0,
-            child: Container(
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: LightAppColors.discountColor,
-                
-              ),
-              child: Text(count.toString(),style: TextStyle(color: Colors.white),),
-            ),
-          ))
-      ],
-    );
+    return Padding(padding: EdgeInsetsGeometry.symmetric(
+      vertical: Dimens.medium,
+    ),
+    child: SizedBox(height: 24,
+    
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      reverse: true,
+      itemCount: 6,
+      itemBuilder: (context, index) {
+      
+      return Container(
+        margin: EdgeInsets.symmetric(horizontal: Dimens.small),
+        padding: EdgeInsets.symmetric(horizontal: Dimens.small),
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(Dimens.large)
+        ),
+        child: Center(child: Text("تیو فورس",style: LightAppTextStyle.taglistStyle,)),
+      );
+    },) ,),);
+  }
+}
+class ProductGridView
+ extends StatelessWidget {
+  const ProductGridView
+  ({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: 
+      GridView.builder(
+        itemCount: 30,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 2,
+          childAspectRatio: 0.77,
+          mainAxisSpacing: 2),
+        
+         itemBuilder: (context, index) {
+
+           return ProductItem(productName: "productName", price: 100);
+
+         },)
+      )
+    ;
   }
 }

@@ -22,6 +22,6 @@ Map<String,Widget Function(BuildContext)> routes ={
   ScreensNames.pruductListScreen: (context) => ProductListScreen(),
 
 
-  ScreensNames.pruductSingleScreen: (context) => PruductSingleScreen(),
+  ScreensNames.pruductSingleScreen: (context) => ProductSingleScreen(),
 
 };
