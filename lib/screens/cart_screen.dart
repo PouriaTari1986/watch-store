@@ -22,7 +22,7 @@ class CartScreen extends StatelessWidget {
         appBar: CustomAppBar(child:
         
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.centerRight,
           child: Text(AppStrings.shopBs,style: LightAppTextStyle.title,)),),
 
           body: Column(

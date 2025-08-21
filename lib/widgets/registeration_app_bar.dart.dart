@@ -1,4 +1,6 @@
+import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
+import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,7 @@ class RegisterationAppBar extends StatelessWidget
       preferredSize: Size(size.width, size.height * 0.1),
       child: SizedBox(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
             IconButton(
               onPressed: (() {
@@ -22,8 +24,9 @@ class RegisterationAppBar extends StatelessWidget
               }),
               icon: Icon(Icons.arrow_back),
             ),
-
+            Expanded(child: SizedBox()),
             Text(AppStrings.register, style: LightAppTextStyle.title),
+            Dimens.small.width
           ],
         ),
       ),

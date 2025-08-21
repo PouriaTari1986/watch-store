@@ -14,11 +14,22 @@ import 'package:flutter/widgets.dart';
 class $AssetsPngGen {
   const $AssetsPngGen();
 
+  /// File path: assets/png/addvertise.png
+  AssetGenImage get addvertise =>
+      const AssetGenImage('assets/png/addvertise.png');
+
   /// File path: assets/png/aiW.png
   AssetGenImage get aiW => const AssetGenImage('assets/png/aiW.png');
 
   /// File path: assets/png/classicW.png
   AssetGenImage get classicW => const AssetGenImage('assets/png/classicW.png');
+
+  /// File path: assets/png/cnaceled.png
+  AssetGenImage get cnaceled => const AssetGenImage('assets/png/cnaceled.png');
+
+  /// File path: assets/png/delivered.png
+  AssetGenImage get delivered =>
+      const AssetGenImage('assets/png/delivered.png');
 
   /// File path: assets/png/digital.png
   AssetGenImage get digital => const AssetGenImage('assets/png/digital.png');
@@ -28,6 +39,10 @@ class $AssetsPngGen {
 
   /// File path: assets/png/table.png
   AssetGenImage get table => const AssetGenImage('assets/png/table.png');
+
+  /// File path: assets/png/underProsses.png
+  AssetGenImage get underProsses =>
+      const AssetGenImage('assets/png/underProsses.png');
 
   /// File path: assets/png/unnamed.png
   AssetGenImage get unnamed => const AssetGenImage('assets/png/unnamed.png');
@@ -41,11 +56,15 @@ class $AssetsPngGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+    addvertise,
     aiW,
     classicW,
+    cnaceled,
+    delivered,
     digital,
     product,
     table,
+    underProsses,
     unnamed,
     user,
     whatchStore,
@@ -91,6 +110,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/user.svg
   String get user => 'assets/svg/user.svg';
 
+  /// File path: assets/svg/userProfile.svg
+  String get userProfile => 'assets/svg/userProfile.svg';
+
   /// File path: assets/svg/vuesax-linear-call.svg
   String get vuesaxLinearCall => 'assets/svg/vuesax-linear-call.svg';
 
@@ -108,6 +130,7 @@ class $AssetsSvgGen {
     searchNormal,
     shoppingBascket,
     user,
+    userProfile,
     vuesaxLinearCall,
   ];
 }

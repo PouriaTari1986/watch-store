@@ -7,7 +7,6 @@
 import 'package:di_state_managment/componnet/theme.dart';
 import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/route/routes.dart';
-import 'package:di_state_managment/screens/cart.dart';
 
 
 import 'package:flutter/material.dart';

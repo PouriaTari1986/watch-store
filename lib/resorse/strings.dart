@@ -66,6 +66,8 @@ abstract class AppStrings {
 
   static const String prIcon ="پروفایل";
 
+  static const String profile ="پروفایل کاربری";
+
   static const String shopBs = "سبد خرید";
 
   static const String bestSelled = "پرفروشترین ها";
@@ -97,6 +99,12 @@ abstract class AppStrings {
   static const String productExName = "ساعت شیائومی mi Watch lite ";
 
   static const String productExPrice = " قیمت  : 40000 تومان ";
+
+  static const String cartNo = " 6219-8619-2957-5198  ";
+
+  static const String phonrNo = " 0921-4028548  ";
+
+  static const String myNae =  "پوریا ترابزاده طاری"  ;
 
   static const String productExPriceWithDiscount = " با تخفیف: 500000  تومان";
 
