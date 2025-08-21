@@ -7,8 +7,8 @@
 import 'package:di_state_managment/componnet/theme.dart';
 import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/route/routes.dart';
+import 'package:di_state_managment/screens/cart.dart';
 
-import 'package:di_state_managment/screens/main_screen/product_single_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget{
         debugShowCheckedModeBanner: false,
         title: "watch store",
         initialRoute: ScreensNames.rout,
-        // routes: routes ,
-        home: ProductSingleScreen(),
+        routes: routes ,
+        // home: CartScreen(),
     );
   }
 }

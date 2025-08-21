@@ -1,6 +1,5 @@
 
 
-import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +8,13 @@ class MainBottun extends StatelessWidget {
 
   final String text;
 final  Function()onPressed;
-
-  const MainBottun({
+ final ButtonStyle? style;
+  const MainBottun({super.key, 
     required this.text,
     required this.onPressed,
+    required this.style
     
-    super.key});
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,8 @@ final  Function()onPressed;
       height: size.height*0.07,
       width: size.width*0.75,
       child: ElevatedButton(
-        style: AppButtonStyle.mainButtonStyle,
+        
+        style: style,
         onPressed: onPressed, 
         child:Text(text,style: LightAppTextStyle.elevetedBotton),)
     )

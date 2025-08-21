@@ -1,3 +1,4 @@
+import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
@@ -42,7 +43,7 @@ class GetOtpScreen extends StatelessWidget {
               ),
               MainBottun(text: AppStrings.edmae, onPressed: ((){
                 Navigator.pushNamed(context, ScreensNames.registerScreen);
-              }))
+              }), style: AppButtonStyle.mainButtonStyle,)
             ],
           ),
         ),

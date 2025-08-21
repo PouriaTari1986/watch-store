@@ -23,6 +23,9 @@ class $AssetsPngGen {
   /// File path: assets/png/digital.png
   AssetGenImage get digital => const AssetGenImage('assets/png/digital.png');
 
+  /// File path: assets/png/product.png
+  AssetGenImage get product => const AssetGenImage('assets/png/product.png');
+
   /// File path: assets/png/table.png
   AssetGenImage get table => const AssetGenImage('assets/png/table.png');
 
@@ -41,6 +44,7 @@ class $AssetsPngGen {
     aiW,
     classicW,
     digital,
+    product,
     table,
     unnamed,
     user,

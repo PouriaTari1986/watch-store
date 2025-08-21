@@ -1,3 +1,4 @@
+import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
 import 'package:di_state_managment/resorse/strings.dart';
@@ -55,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   MainBottun(text: AppStrings.register, onPressed: ((){
                     Navigator.pushNamed(context,ScreensNames.mainScreen );
-                  })),
+                  }), style: AppButtonStyle.mainButtonStyle,),
                   Dimens.large.height
                 ],
               ),

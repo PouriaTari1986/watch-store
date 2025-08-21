@@ -22,6 +22,8 @@ abstract class AppStrings {
 
   static const String edmae = "ادامه";
 
+  static const String edmaeShpping = "ادامه فرایند خرید";
+
   static const String choosePic = "انتخاب تصویر پروفایل";
 
   static const String prName = "نام و نام خانوادگی";
@@ -89,6 +91,16 @@ abstract class AppStrings {
   static const String cnacels = "لغو شده";
 
   static const String delivered = "تحویل شده";
+
+  static const String selectedNum = "  1 عدد";
+
+  static const String productExName = "ساعت شیائومی mi Watch lite ";
+
+  static const String productExPrice = " قیمت  : 40000 تومان ";
+
+  static const String productExPriceWithDiscount = " با تخفیف: 500000  تومان";
+
+  static const String lurem = " لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ ";
 
 
  

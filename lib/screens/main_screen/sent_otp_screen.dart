@@ -1,3 +1,4 @@
+import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/dimens.dart';
@@ -34,7 +35,7 @@ class SentOtpScreen extends StatelessWidget {
               MainBottun(
                 text: AppStrings.sendingCode,
                 onPressed: (() =>
-                    Navigator.pushNamed(context, ScreensNames.getOtpScrren)),
+                    Navigator.pushNamed(context, ScreensNames.getOtpScrren)), style: AppButtonStyle.mainButtonStyle,
               ),
             ],
           ),

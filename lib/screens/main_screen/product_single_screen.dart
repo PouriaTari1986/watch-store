@@ -1,5 +1,6 @@
 
 
+import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
@@ -54,11 +55,17 @@ class ProductSingleScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                
-                        Text("benser",style: LightAppTextStyle.title,
-                        textDirection: TextDirection.rtl,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("benser",style: LightAppTextStyle.title,
+                          textDirection: TextDirection.rtl,),
+                        ),
                
-                        Text("مسواک بنسر مدل اکسترا با برس متوسط 3 عددی",style: LightAppTextStyle.caption,
-                        textDirection: TextDirection.rtl,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("مسواک بنسر مدل اکسترا با برس متوسط 3 عددی",style: LightAppTextStyle.caption,
+                          textDirection: TextDirection.rtl,),
+                        ),
                
                         Divider(),
                
@@ -75,6 +82,7 @@ class ProductSingleScreen extends StatelessWidget {
               left: 0,
               right: 0,
                child: Container(
+                margin: EdgeInsets.all(Dimens.medium),
                 height: 60,
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -85,12 +93,13 @@ class ProductSingleScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProductPrice(discount: 20),
+                      ProductPrice(discount: 10),
                       
                       SizedBox(
                         height: 55,
                         width: 170,
-                        child: MainBottun(text: AppStrings.addToBs, onPressed: (){})),
+                        child: MainBottun(text: AppStrings.addToBs, onPressed: (){},
+                         style: AppButtonStyle.mainButtonStyle,)),
                         
                     ],
                   ),

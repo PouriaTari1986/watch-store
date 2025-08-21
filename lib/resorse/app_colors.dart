@@ -65,6 +65,7 @@ LightAppColors._();
 
   static const Color surfaceColor = Color.fromARGB(255, 243, 243, 243);
 
+
   static const Color iconColor = Color.fromARGB(255, 217, 220, 228);
 
   static const Color iconSelected = Color.fromARGB(255, 0, 0, 0);

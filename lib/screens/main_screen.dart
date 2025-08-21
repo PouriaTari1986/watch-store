@@ -1,7 +1,7 @@
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resorse/app_colors.dart';
 import 'package:di_state_managment/resorse/strings.dart';
-import 'package:di_state_managment/screens/basket_screen.dart';
+import 'package:di_state_managment/screens/cart.dart';
 import 'package:di_state_managment/screens/home_screen.dart';
 import 'package:di_state_managment/screens/profile_screen.dart';
 import 'package:di_state_managment/widgets/button_navigation_item.dart';
@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator(
                     key: _basketKey,
                     onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (context) => BasketScreen()),
+                        MaterialPageRoute(builder: (context) => CartScreen()),
                   ),
                   Navigator(
                     key: _profileKey,
