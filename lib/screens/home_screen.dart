@@ -1,9 +1,9 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resorse/app_colors.dart';
-import 'package:di_state_managment/resorse/dimens.dart';
-import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/resource/app_colors.dart';
+import 'package:di_state_managment/resource/dimens.dart';
+import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/widgets/app_slider.dart';
 import 'package:di_state_managment/widgets/cat_widget.dart';
 import 'package:di_state_managment/widgets/product_items.dart';

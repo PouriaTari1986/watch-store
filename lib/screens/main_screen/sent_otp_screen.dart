@@ -1,8 +1,8 @@
 import 'package:di_state_managment/componnet/button_style.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resorse/dimens.dart';
-import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/resource/dimens.dart';
+import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/widgets/app_text_field.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';

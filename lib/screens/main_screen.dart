@@ -1,6 +1,6 @@
 import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resorse/app_colors.dart';
-import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/resource/app_colors.dart';
+import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/screens/cart_screen.dart';
 import 'package:di_state_managment/screens/home_screen.dart';
 import 'package:di_state_managment/screens/profile_screen.dart';

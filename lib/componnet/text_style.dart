@@ -1,5 +1,5 @@
 import 'package:di_state_managment/gen/fonts.gen.dart';
-import 'package:di_state_managment/resorse/app_colors.dart';
+import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:flutter/widgets.dart';
 
 class LightAppTextStyle {

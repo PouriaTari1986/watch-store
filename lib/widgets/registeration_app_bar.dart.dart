@@ -1,7 +1,7 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
-import 'package:di_state_managment/resorse/dimens.dart';
-import 'package:di_state_managment/resorse/strings.dart';
+import 'package:di_state_managment/resource/dimens.dart';
+import 'package:di_state_managment/resource/strings.dart';
 import 'package:flutter/material.dart';
 
 class RegisterationAppBar extends StatelessWidget
