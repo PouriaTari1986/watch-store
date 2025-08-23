@@ -42,7 +42,7 @@ abstract class AppStrings {
 
   static const String postalCodeHint = "کد پستی  10 رقمی خود را وارد کنید";
 
-  static const String location = "موقعیت مکانی";
+  static const String location = " انتخاب موقیت مکانی";
 
   static const String locationHint = "برای انتخاب موقعیت مکانی ضربه برنید";
 

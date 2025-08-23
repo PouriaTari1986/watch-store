@@ -47,6 +47,10 @@ dependencies:
   dio: ^5.9.0
   image_picker: ^1.2.0
   image_cropper: ^9.1.0
+  flutter_osm_plugin: ^1.4.2
+  extended_image: ^10.0.1
+  path_provider: ^2.1.5
+  geocoding: ^4.0.0
 
 
 dev_dependencies:

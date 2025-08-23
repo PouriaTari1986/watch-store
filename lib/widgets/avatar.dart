@@ -1,6 +1,8 @@
 
 
 
+import 'dart:io';
+
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
@@ -10,8 +12,8 @@ import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
   const Avatar({super.key,required this.onTap,required this.file});
-final onTap;
-final file;
+final VoidCallback onTap;
+final File? file;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -23,8 +25,9 @@ final file;
             width: size.width*.3,
             height: size.width*.3,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(1000),
-              child: file ==null ?  Image.asset(Assets.png.user.path):Image.file(file),
+              borderRadius: BorderRadius.circular(100),
+              child: file ==null ?  Image.asset(Assets.png.user.path,fit: BoxFit.cover,)
+              :Image.file(file!,fit: BoxFit.cover,),
             ),
           ),
           Dimens.medium.height,

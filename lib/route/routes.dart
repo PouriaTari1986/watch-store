@@ -5,7 +5,7 @@ import 'package:di_state_managment/screens/home_screen.dart';
 import 'package:di_state_managment/screens/main_screen.dart';
 import 'package:di_state_managment/screens/main_screen/product_list_screen.dart';
 import 'package:di_state_managment/screens/main_screen/product_single_screen.dart';
-import 'package:di_state_managment/screens/main_screen/register_screen.dart';
+import 'package:di_state_managment/screens/register/register_screen.dart';
 import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
 import 'package:flutter/widgets.dart';
 
