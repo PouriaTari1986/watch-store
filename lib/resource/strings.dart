@@ -1,7 +1,4 @@
-
-
 abstract class AppStrings {
-
   AppStrings._();
 
   static const String replace = "replace";
@@ -28,11 +25,13 @@ abstract class AppStrings {
 
   static const String prName = "نام و نام خانوادگی";
 
-  static const String prNameHint = "نام و نام خانوادگی خود را با حروف فارسی وارد کنید";
+  static const String prNameHint =
+      "نام و نام خانوادگی خود را با حروف فارسی وارد کنید";
 
   static const String stablePhone = "تلفن ثابت";
 
-  static const String stablePhoneHint = "شماره تلفن ثابت را با پیش شماره وارد بفرمایید";
+  static const String stablePhoneHint =
+      "شماره تلفن ثابت را با پیش شماره وارد بفرمایید";
 
   static const String address = "آدرس";
 
@@ -64,9 +63,9 @@ abstract class AppStrings {
 
   static const String homeIcon = "خانه";
 
-  static const String prIcon ="پروفایل";
+  static const String prIcon = "پروفایل";
 
-  static const String profile ="پروفایل کاربری";
+  static const String profile = "پروفایل کاربری";
 
   static const String shopBs = "سبد خرید";
 
@@ -104,14 +103,10 @@ abstract class AppStrings {
 
   static const String phonrNo = " 0921-4028548  ";
 
-  static const String myNae =  "پوریا ترابزاده طاری"  ;
+  static const String myNae = "پوریا ترابزاده طاری";
 
   static const String productExPriceWithDiscount = " با تخفیف: 500000  تومان";
 
-  static const String lurem = " لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ ";
-
-
- 
-
-
+  static const String lurem =
+      " لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ ";
 }

@@ -22,7 +22,7 @@ class BannerModel {
       updatedAt: DateTime.parse(json['updated_at']),
     );
   }
-     Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'title': title,
@@ -31,5 +31,4 @@ class BannerModel {
       'updated_at': updatedAt.toIso8601String(),
     };
   }
-
 }

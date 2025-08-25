@@ -5,27 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ProfileItem extends StatelessWidget {
-  const ProfileItem({
-    super.key, required this.iconPath, required this.text,
-  });
- final String iconPath;
- final String text;
+  const ProfileItem({super.key, required this.iconPath, required this.text});
+  final String iconPath;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: Text(
-           text,
+            text,
             style: LightAppTextStyle.title,
-    
+
             textAlign: TextAlign.right,
           ),
-    
         ),
         Dimens.small.width,
         SvgPicture.asset(iconPath),
-    
       ],
     );
   }

@@ -37,20 +37,27 @@ class AppTextField extends StatelessWidget {
 
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(prefixLable,style: LightAppTextStyle.title,), Text(lable,style: LightAppTextStyle.title,)],
+              children: [
+                Text(prefixLable, style: LightAppTextStyle.title),
+                Text(lable, style: LightAppTextStyle.title),
+              ],
             ),
           ),
 
           Dimens.medium.height,
           SizedBox(
             height: size.height * 0.07,
-                      width: size.width*0.75,
+            width: size.width * 0.75,
 
             child: TextField(
               textAlign: textAlign,
               controller: controller,
               keyboardType: inputType,
-              decoration: InputDecoration(hintText: hint,hintStyle: LightAppTextStyle.hintTitle, prefixIcon: icon),
+              decoration: InputDecoration(
+                hintText: hint,
+                hintStyle: LightAppTextStyle.hintTitle,
+                prefixIcon: icon,
+              ),
             ),
           ),
         ],

@@ -53,8 +53,6 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
     });
   }
 
-
-
   @override
   void dispose() {
     _controller.dispose();
@@ -87,8 +85,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               Dimens.large.height,
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
-                child: Text(AppStrings.editNum,
-                    style: LightAppTextStyle.editNumber),
+                child: Text(
+                  AppStrings.editNum,
+                  style: LightAppTextStyle.editNumber,
+                ),
               ),
               (Dimens.large * 2).height,
               AppTextField(
@@ -106,10 +106,14 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
 
                   if (state is VerifiedIsNotRegisterdeState) {
                     Navigator.pushReplacementNamed(
-                        context, ScreensNames.registerScreen);
+                      context,
+                      ScreensNames.registerScreen,
+                    );
                   } else if (state is VerifiedIsRegisterdeState) {
                     Navigator.pushReplacementNamed(
-                        context, ScreensNames.mainScreen);
+                      context,
+                      ScreensNames.mainScreen,
+                    );
                   }
                 },
                 buildWhen: (previous, current) =>
@@ -117,20 +121,19 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     current is! VerifiedIsRegisterdeState,
                 builder: (context, state) {
                   if (state is LoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   } else {
                     return MainBottun(
                       text: AppStrings.edmae,
                       onPressed: () {
-
                         log(
                           "📌 Verification Code Entered: ${_controller.text.trim()}",
                           name: "VerificationCodeScreen",
                         );
                         context.read<AuthenticationCubit>().verifyCode(
-                            mobileRoutArgument, _controller.text.trim());
+                          mobileRoutArgument,
+                          _controller.text.trim(),
+                        );
                       },
                       style: AppButtonStyle.mainButtonStyle,
                     );

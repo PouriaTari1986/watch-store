@@ -11,11 +11,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit() : super(AuthenticationInitial());
 
   final Dio _dio = Dio();
+
   /// ارسال SMS
   void sendSms(String mobile) async {
     emit(LoadingState());
     try {
-      final response = await _dio.post(EndPoints.sendSms, data: {"mobile": mobile});
+      final response = await _dio.post(
+        EndPoints.sendSms,
+        data: {"mobile": mobile},
+      );
       if (response.statusCode == 201) {
         emit(LoadedState(mobile: mobile));
       } else {
@@ -30,7 +34,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void verifyCode(String mobile, String code) async {
     emit(VerifiedState());
     try {
-      final response = await _dio.post(EndPoints.checkSmsCode, data: {"mobile": mobile, "code": code});
+      final response = await _dio.post(
+        EndPoints.checkSmsCode,
+        data: {"mobile": mobile, "code": code},
+      );
       if (response.statusCode == 201) {
         SharedPreferencesManager().saveString(
           SharedPrefrencesConst.token,

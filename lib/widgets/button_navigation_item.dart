@@ -52,7 +52,9 @@ class BtmNAvItems extends StatelessWidget {
                       right: -6,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 2),
+                          horizontal: 5,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: LightAppColors.discountColor,
                           shape: BoxShape.circle,

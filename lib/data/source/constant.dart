@@ -1,6 +1,4 @@
-
-class EndPoints{
-
+class EndPoints {
   static const baseUrl = "https://watchstore.sasansafari.com$versionRoute";
   static const versionRoute = "/public/api/v1";
   static const sendSms = "$baseUrl/send_sms";
@@ -10,10 +8,10 @@ class EndPoints{
   static const productsByCategory = "$baseUrl/products_by_category/";
   static const search = "$baseUrl/all_products/";
   static const home = "$baseUrl/home";
- 
+  static const singlePage = "$baseUrl/product_details/";
 }
-class ProductSortRoute{
 
+class ProductSortRoute {
   static const newestProducts = "/newest_products";
   static const cheapestProducts = "/cheapest_products";
   static const mostExpensiveProducts = "/most_expensive_products";

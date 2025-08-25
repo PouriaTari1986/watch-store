@@ -6,9 +6,9 @@ import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-await  SharedPreferencesManager().init();
+  await SharedPreferencesManager().init();
 
   runApp(MyApp());
 }
@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
             // }else{
             //   return SendSmsScreen();
             // }
-            
           },
         ),
       ),

@@ -6,15 +6,10 @@ import 'package:equatable/equatable.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
-
-
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-
   final IHomeRepo homeRepo;
   HomeBloc(this.homeRepo) : super(HomeLoading()) {
     on<HomeEvent>((event, emit) async {
-
-
       if (event is HomeInIt) {
         try {
           emit(HomeLoading());
@@ -23,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         } catch (e) {
           emit(HomeError());
         }
-      } 
+      }
     });
   }
 }

@@ -1,18 +1,16 @@
-
-
 import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:flutter/material.dart';
 
 class ProfileDecoration extends StatelessWidget {
-  const ProfileDecoration({super.key,required this.child});
-final Widget child;
+  const ProfileDecoration({super.key, required this.child});
+  final Widget child;
   @override
   Widget build(BuildContext context) {
-   var size = MediaQuery.sizeOf(context);
+    var size = MediaQuery.sizeOf(context);
     return Container(
       width: double.infinity,
-      height: size.height/5.4,
+      height: size.height / 5.4,
       decoration: BoxDecoration(
         color: LightAppColors.surfaceColor,
         borderRadius: BorderRadius.circular(Dimens.medium),
@@ -20,27 +18,27 @@ final Widget child;
           BoxShadow(
             color: LightAppColors.shadowColor,
             blurRadius: 2,
-            offset: Offset(1, 1)
-          )
-        ]
+            offset: Offset(1, 1),
+          ),
+        ],
       ),
       child: child,
     );
   }
 }
+
 class ProfileAddDecoration extends StatelessWidget {
-  const ProfileAddDecoration({super.key,required this.child});
-final Widget child;
+  const ProfileAddDecoration({super.key, required this.child});
+  final Widget child;
   @override
   Widget build(BuildContext context) {
-   var size = MediaQuery.sizeOf(context);
+    var size = MediaQuery.sizeOf(context);
     return Container(
       width: double.infinity,
-      height: size.height/7.6,
+      height: size.height / 7.6,
       decoration: BoxDecoration(
         color: LightAppColors.surfaceColor,
         borderRadius: BorderRadius.circular(Dimens.small),
-      
       ),
       child: child,
     );

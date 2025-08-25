@@ -37,32 +37,35 @@ class SendSmsScreen extends StatelessWidget {
               BlocConsumer<AuthenticationCubit, AuthenticationState>(
                 listener: (context, state) {
                   if (state is LoadedState) {
-                    Navigator.pushNamed(context, ScreensNames.verificationCodeScreen,
-                    arguments: state.mobile);
-                  } else if(state is ErrorState){
+                    Navigator.pushNamed(
+                      context,
+                      ScreensNames.verificationCodeScreen,
+                      arguments: state.mobile,
+                    );
+                  } else if (state is ErrorState) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.redAccent,
                         duration: Duration(milliseconds: 800),
-                        content: Text("خطا رخ داده است")));
+                        content: Text("خطا رخ داده است"),
+                      ),
+                    );
                   }
                 },
                 builder: (context, state) {
-
                   if (state is LoadingState) {
-                    return Center(child: CircularProgressIndicator(),);
+                    return Center(child: CircularProgressIndicator());
                   } else {
-                    return 
-                  
-                   MainBottun(
-                    text: AppStrings.sendingCode,
-                    onPressed: (() {
-                     BlocProvider.of<AuthenticationCubit>(context).sendSms(_controller.text); 
-                    }),
-                    style: AppButtonStyle.mainButtonStyle,
-                  );
+                    return MainBottun(
+                      text: AppStrings.sendingCode,
+                      onPressed: (() {
+                        BlocProvider.of<AuthenticationCubit>(
+                          context,
+                        ).sendSms(_controller.text);
+                      }),
+                      style: AppButtonStyle.mainButtonStyle,
+                    );
                   }
-                  
                 },
               ),
             ],

@@ -4,12 +4,12 @@ import 'package:di_state_managment/data/models/product.dart';
 import 'package:di_state_managment/data/models/slide.dart';
 
 class Home {
-    List<SliderModel> sliders;
-    List<CategoryModel> categories;
-    List<Product> amazingProducts;
-    BannerModel banner;
-    List<Product> mostSellerProducts;
-    List<Product> newextProducts;
+  List<SliderModel> sliders;
+  List<CategoryModel> categories;
+  List<Product> amazingProducts;
+  BannerModel banner;
+  List<Product> mostSellerProducts;
+  List<Product> newextProducts;
 
   Home({
     required this.sliders,
@@ -32,12 +32,13 @@ class Home {
           .map((e) => Product.fromJson(e))
           .toList(),
       banner: BannerModel.fromJson(json['banner']),
-      
+
       newextProducts: (json['newest_products'] as List<dynamic>)
           .map((e) => Product.fromJson(e))
-          .toList(), 
-      mostSellerProducts: (json['most_seller_products']as List<dynamic>).
-      map((e)=>Product.fromJson(e)).toList(),
+          .toList(),
+      mostSellerProducts: (json['most_seller_products'] as List<dynamic>)
+          .map((e) => Product.fromJson(e))
+          .toList(),
     );
   }
 }

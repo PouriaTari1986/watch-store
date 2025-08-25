@@ -1,11 +1,8 @@
-
-
 import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:flutter/material.dart';
 
-ThemeData lightTheme(){
-
+ThemeData lightTheme() {
   return ThemeData(
     brightness: Brightness.light,
     iconTheme: IconThemeData(color: Colors.black),
@@ -13,7 +10,7 @@ ThemeData lightTheme(){
     scaffoldBackgroundColor: LightAppColors.scaffoldColor,
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: WidgetStateColor.resolveWith((callback){
+      fillColor: WidgetStateColor.resolveWith((callback) {
         if (callback.contains(WidgetState.focused)) {
           return LightAppColors.focusedTextFlied;
         } else {
@@ -23,12 +20,12 @@ ThemeData lightTheme(){
       contentPadding: EdgeInsets.all(Dimens.medium),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(Dimens.medium),
-        borderSide: BorderSide(color: LightAppColors.border)
+        borderSide: BorderSide(color: LightAppColors.border),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(Dimens.medium),
-        borderSide: BorderSide(color: LightAppColors.borderSelected)
-      )
-    )
+        borderSide: BorderSide(color: LightAppColors.borderSelected),
+      ),
+    ),
   );
 }

@@ -16,7 +16,6 @@ class RegisterationAppBar extends StatelessWidget
       preferredSize: Size(size.width, size.height * 0.1),
       child: SizedBox(
         child: Row(
-
           children: [
             IconButton(
               onPressed: (() {
@@ -26,7 +25,7 @@ class RegisterationAppBar extends StatelessWidget
             ),
             Expanded(child: SizedBox()),
             Text(AppStrings.register, style: LightAppTextStyle.title),
-            Dimens.small.width
+            Dimens.small.width,
           ],
         ),
       ),

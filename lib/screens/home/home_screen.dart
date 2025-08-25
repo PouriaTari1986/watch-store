@@ -6,6 +6,7 @@ import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/screens/home/bloc/home_bloc.dart';
+import 'package:di_state_managment/screens/product_list/product_list_screen.dart';
 import 'package:di_state_managment/widgets/app_slider.dart';
 import 'package:di_state_managment/widgets/cat_widget.dart';
 import 'package:di_state_managment/widgets/product_items.dart';
@@ -37,30 +38,37 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       SearchBtn(onTap: () {}),
                       AppSlider(imgList: state.home.sliders),
-                      //cat
 
-                     SizedBox(
-                      height: 150,
-                      width: double.infinity,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: state.home.categories.length,
-                        reverse: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CatWidget(
-                              color: 
-                              index.isEven?
-                              LightAppColors.catAiColor:LightAppColors.catClassicColor,
-                              iconPath: state.home.categories[index].image, 
-                              title: state.home.categories[index].title, 
-                              onTap: (){
-                                state.home.categories[index].id;
-                              }),
-                          );
-                        },),
-                     ),
+                      //cat
+                      SizedBox(
+                        height: 150,
+                        width: double.infinity,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.home.categories.length,
+                          reverse: true,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CatWidget(
+                                color: index.isEven
+                                    ? LightAppColors.catAiColor
+                                    : LightAppColors.catClassicColor,
+                                iconPath: state.home.categories[index].image,
+                                title: state.home.categories[index].title,
+                                onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductListScreen(
+                                      param: state.home.categories[index].id,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                       Dimens.large.height,
                       SizedBox(
                         height: 300,
@@ -77,12 +85,24 @@ class HomeScreen extends StatelessWidget {
                                   itemCount: state.home.amazingProducts.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => ProductItem(
-                                    image: state.home.amazingProducts[index].image,
-                                    productName: state.home.amazingProducts[index].title,
-                                    price: state.home.amazingProducts[index].discountPrice,
-                                    oldPriceT: state.home.amazingProducts[index].price,
-                                    discount: state.home.amazingProducts[index].discount,
-                                    specialExpiration: state.home.amazingProducts[index].specialExpiration,
+                                    image:
+                                        state.home.amazingProducts[index].image,
+                                    productName:
+                                        state.home.amazingProducts[index].title,
+                                    price: state
+                                        .home
+                                        .amazingProducts[index]
+                                        .discountPrice,
+                                    oldPriceT:
+                                        state.home.amazingProducts[index].price,
+                                    discount: state
+                                        .home
+                                        .amazingProducts[index]
+                                        .discount,
+                                    specialExpiration: state
+                                        .home
+                                        .amazingProducts[index]
+                                        .specialExpiration,
                                   ),
                                 ),
                               ),
@@ -91,17 +111,21 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                          Container(
-                            height: MediaQuery.sizeOf(context).height/6.7,
-                            width: MediaQuery.sizeOf(context).width/1.2,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(Dimens.medium),
-                                bottomRight: Radius.circular(Dimens.medium))
-                            ),
-                            child: Image.asset(Assets.png.unnamed.path,fit: BoxFit.contain,)
+                      Container(
+                        height: MediaQuery.sizeOf(context).height / 6.7,
+                        width: MediaQuery.sizeOf(context).width / 1.2,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(Dimens.medium),
+                            bottomRight: Radius.circular(Dimens.medium),
                           ),
+                        ),
+                        child: Image.asset(
+                          Assets.png.unnamed.path,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                       Dimens.large.height,
                       SizedBox(
                         height: 300,
@@ -115,15 +139,34 @@ class HomeScreen extends StatelessWidget {
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   physics: ClampingScrollPhysics(),
-                                  itemCount: state.home.mostSellerProducts.length,
+                                  itemCount:
+                                      state.home.mostSellerProducts.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => ProductItem(
-                                    image: state.home.mostSellerProducts[index].image,
-                                    productName: state.home.mostSellerProducts[index].title,
-                                    price: state.home.mostSellerProducts[index].price,
-                                    discount: state.home.mostSellerProducts[index].discount,
-                                    oldPriceT: state.home.mostSellerProducts[index].price,
-                                    specialExpiration: state.home.mostSellerProducts[index].specialExpiration,
+                                    image: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .image,
+                                    productName: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .title,
+                                    price: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .price,
+                                    discount: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .discount,
+                                    oldPriceT: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .price,
+                                    specialExpiration: state
+                                        .home
+                                        .mostSellerProducts[index]
+                                        .specialExpiration,
                                   ),
                                 ),
                               ),
@@ -148,9 +191,12 @@ class HomeScreen extends StatelessWidget {
                                   itemCount: state.home.newextProducts.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => ProductItem(
-                                    image: state.home.newextProducts[index].image,
-                                    productName: state.home.newextProducts[index].title,
-                                    price: state.home.newextProducts[index].price,
+                                    image:
+                                        state.home.newextProducts[index].image,
+                                    productName:
+                                        state.home.newextProducts[index].title,
+                                    price:
+                                        state.home.newextProducts[index].price,
                                   ),
                                 ),
                               ),
@@ -162,7 +208,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   );
                 } else if (state is HomeError) {
-                 return Text("Error");
+                  return Text("Error");
                 } else {
                   throw Exception('invalid state');
                 }

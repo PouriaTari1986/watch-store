@@ -1,40 +1,31 @@
 import 'package:flutter/material.dart';
 
- class LightAppColors {
-
-LightAppColors._();
+class LightAppColors {
+  LightAppColors._();
 
   static const List<Color> catClassicColor = [
     Color.fromARGB(255, 255, 166, 114),
     Color.fromARGB(255, 255, 227, 200),
-
   ];
 
   static const List<Color> catDigitalAiColor = [
     Color(0xFFE183D4),
-    Color(0xFFFFE6F5 ),
-   
-
+    Color(0xFFFFE6F5),
   ];
 
   static const List<Color> catTableAiColor = [
     Color(0xFFFFE6F5),
     Color(0xFFE2F8FE),
-
-
   ];
 
   static const List<Color> productPage = [
-    Color.fromARGB(255,238,238,238),
-    Color.fromARGB(255, 255, 255, 255)
-
-
+    Color.fromARGB(255, 238, 238, 238),
+    Color.fromARGB(255, 255, 255, 255),
   ];
 
   static const List<Color> catAiColor = [
     Color.fromARGB(255, 139, 162, 168),
     Color.fromARGB(255, 223, 238, 245),
-
   ];
 
   static const Color title = Colors.black;
@@ -64,7 +55,6 @@ LightAppColors._();
   static const Color btNavColor = Color.fromARGB(255, 255, 255, 255);
 
   static const Color surfaceColor = Color.fromARGB(255, 243, 243, 243);
-
 
   static const Color iconColor = Color.fromARGB(255, 217, 220, 228);
 

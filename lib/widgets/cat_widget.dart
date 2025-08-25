@@ -11,13 +11,13 @@ class CatWidget extends StatelessWidget {
     required this.onTap,
     super.key,
   });
- final String iconPath; 
-final List<Color> color;  
-final VoidCallback onTap;
-final String title;
+  final String iconPath;
+  final List<Color> color;
+  final VoidCallback onTap;
+  final String title;
   @override
   Widget build(BuildContext context) {
-        Size size = MediaQuery.sizeOf(context);
+    Size size = MediaQuery.sizeOf(context);
 
     return GestureDetector(
       onTap: onTap,
@@ -32,20 +32,15 @@ final String title;
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors:color
+                colors: color,
               ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 60,
-                  child: Image.network(iconPath),
-                )
-              ],
-            )
+              children: [SizedBox(height: 60, child: Image.network(iconPath))],
+            ),
           ),
-          (Dimens.small/2).height,
+          (Dimens.small / 2).height,
           Text(title, style: LightAppTextStyle.title.copyWith(fontSize: 14)),
         ],
       ),

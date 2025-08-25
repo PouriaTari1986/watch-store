@@ -53,13 +53,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     Avatar(
                       file: imageHandler.getImage,
-                      onTap: ()  {
-                      
+                      onTap: () {
                         showModalBottomSheet(
                           context: context,
-                           builder:  (_) {
-                            return
-                             Column(
+                          builder: (_) {
+                            return Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 ListTile(
@@ -68,26 +66,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onTap: () async {
                                     Navigator.pop(context);
                                     await imageHandler.pickAndCropImage(
-                                      source: ImageSource.gallery, context: context);
-                                      setState(() { });
-   
+                                      source: ImageSource.gallery,
+                                      context: context,
+                                    );
+                                    setState(() {});
                                   },
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.camera_alt),
                                   title: Text("انتخاب از دوربین"),
-                                  onTap: () async{
+                                  onTap: () async {
                                     Navigator.pop(context);
                                     await imageHandler.pickAndCropImage(
-                                      source: ImageSource.camera, context: context);
-                                      setState(() {                                        
-                                      });
-
+                                      source: ImageSource.camera,
+                                      context: context,
+                                    );
+                                    setState(() {});
                                   },
-                                )
+                                ),
                               ],
-                             );
-                           },);
+                            );
+                          },
+                        );
                       },
                     ),
                     Dimens.large.height,
@@ -114,12 +114,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     BlocConsumer<RegisterCubit, RegisterState>(
                       listener: (context, state) {
                         if (state is LocationPickedState) {
-                          
-                            _controllerLocation.text =
-                                state.address ?? "";
-                            lat = state.location!.latitude;
-                            lng = state.location!.longitude;
-                          
+                          _controllerLocation.text = state.address ?? "";
+                          lat = state.location!.latitude;
+                          lng = state.location!.longitude;
                         }
                       },
                       builder: (context, state) {
@@ -142,32 +139,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       listener: (context, state) {
                         if (state is OkResponseState) {
                           Navigator.pushNamed(context, ScreensNames.mainScreen);
-                        }else if(state is ErrorState){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("خطایی رخ داده")));
+                        } else if (state is ErrorState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("خطایی رخ داده")),
+                          );
                         }
                       },
                       builder: (context, state) {
                         if (state is LoadingState) {
-                          return Center(child: CircularProgressIndicator(),);
+                          return Center(child: CircularProgressIndicator());
                         } else {
                           return MainBottun(
-                          text: AppStrings.register,
-                          onPressed: (() async {
-
-                            User user = User(name: _controllerNameLastName.text,
-                             phone: _controllerPhone.text,
-                              address: _controllerAddress.text,
-                               postalCode: _controllerPostalCode.text,
-                                image: await MultipartFile.fromFile(imageHandler.getImage!.path),
-                                 lat: lat,
-                                  lng: lng);
-                            // ignore: use_build_context_synchronously
-                            BlocProvider.of<RegisterCubit>(context).register(user: user);
-                          }),
-                          style: AppButtonStyle.mainButtonStyle,
-                        );
+                            text: AppStrings.register,
+                            onPressed: (() async {
+                              User user = User(
+                                name: _controllerNameLastName.text,
+                                phone: _controllerPhone.text,
+                                address: _controllerAddress.text,
+                                postalCode: _controllerPostalCode.text,
+                                image: await MultipartFile.fromFile(
+                                  imageHandler.getImage!.path,
+                                ),
+                                lat: lat,
+                                lng: lng,
+                              );
+                              // ignore: use_build_context_synchronously
+                              BlocProvider.of<RegisterCubit>(
+                                // ignore: use_build_context_synchronously
+                                context,
+                              ).register(user: user);
+                            }),
+                            style: AppButtonStyle.mainButtonStyle,
+                          );
                         }
-                        
                       },
                     ),
                     Dimens.large.height,

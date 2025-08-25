@@ -1,6 +1,3 @@
-
-
-
 import 'dart:io';
 
 import 'package:di_state_managment/componnet/extension.dart';
@@ -11,9 +8,9 @@ import 'package:di_state_managment/resource/strings.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
-  const Avatar({super.key,required this.onTap,required this.file});
-final VoidCallback onTap;
-final File? file;
+  const Avatar({super.key, required this.onTap, required this.file});
+  final VoidCallback onTap;
+  final File? file;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -22,16 +19,17 @@ final File? file;
       child: Column(
         children: [
           SizedBox(
-            width: size.width*.3,
-            height: size.width*.3,
+            width: size.width * .3,
+            height: size.width * .3,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: file ==null ?  Image.asset(Assets.png.user.path,fit: BoxFit.cover,)
-              :Image.file(file!,fit: BoxFit.cover,),
+              child: file == null
+                  ? Image.asset(Assets.png.user.path, fit: BoxFit.cover)
+                  : Image.file(file!, fit: BoxFit.cover),
             ),
           ),
           Dimens.medium.height,
-          Text(AppStrings.choosePic,style: LightAppTextStyle.avatar,)
+          Text(AppStrings.choosePic, style: LightAppTextStyle.avatar),
         ],
       ),
     );

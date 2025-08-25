@@ -1,11 +1,8 @@
-
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
 class User {
-
   final String name;
 
   final String phone;
@@ -26,26 +23,28 @@ class User {
     required this.lat,
     required this.lng,
   });
-  Map<String,dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
-      'name':name,
-      'phone':phone,
-      'address':address,
-      'postal_code':postalCode,
-      'image':image,
-      'lat':lat,
-      'lng':lng,
+      'name': name,
+      'phone': phone,
+      'address': address,
+      'postal_code': postalCode,
+      'image': image,
+      'lat': lat,
+      'lng': lng,
     };
   }
-  factory User.fromJson(String? jsonString){
-    Map<String,dynamic>map = jsonDecode(jsonString!);
+
+  factory User.fromJson(String? jsonString) {
+    Map<String, dynamic> map = jsonDecode(jsonString!);
     return User(
-      name: map["name"], 
-      phone: map["phone"], 
-      address: map ["address"], 
-      postalCode:map ["postal_code"], 
-      image: map["image"], 
-      lat:map ["lat"], 
-      lng:map["lng"]);
+      name: map["name"],
+      phone: map["phone"],
+      address: map["address"],
+      postalCode: map["postal_code"],
+      image: map["image"],
+      lat: map["lat"],
+      lng: map["lng"],
+    );
   }
 }

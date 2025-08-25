@@ -17,9 +17,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   final Dio _dio = Dio();
 
   // ignore: strict_top_level_inference
-  Future<void> pickLocation({required BuildContext context})async{
-    GeoPoint? value =
-    await showSimplePickerLocation(
+  Future<void> pickLocation({required BuildContext context}) async {
+    GeoPoint? value = await showSimplePickerLocation(
       context: context,
       isDismissible: true,
       title: "انتخاب موقعیت مکانی",
@@ -27,38 +26,40 @@ class RegisterCubit extends Cubit<RegisterState> {
       textConfirmPicker: "انتخاب",
       zoomOption: ZoomOption(initZoom: 8),
       initCurrentUserPosition: UserTrackingOption.withoutUserPosition(),
-      radius: 8.0
+      radius: 8.0,
+    );
+    if (value != null) {
+      List<Placemark> placeMark = await placemarkFromCoordinates(
+        value.latitude,
+        value.longitude,
       );
-      if (value != null) {
-        List<Placemark> placeMark = await placemarkFromCoordinates(
-          value.latitude, value.longitude);
 
-          Placemark place = placeMark.first;
-          String address = 
+      Placemark place = placeMark.first;
+      String address =
           "${place.street},${place.locality},${place.administrativeArea}";
-          emit(LocationPickedState(location: value, address:address));
-      }
+      emit(LocationPickedState(location: value, address: address));
+    }
   }
 
-  Future<void> register({required User user})async{
-
+  Future<void> register({required User user}) async {
     emit(LoadingState());
 
     try {
-      String? token = SharedPreferencesManager().getString(SharedPrefrencesConst.token);
+      String? token = SharedPreferencesManager().getString(
+        SharedPrefrencesConst.token,
+      );
       _dio.options.headers["Authorization"] = "Bearer $token";
-      await _dio.post(EndPoints.register,
-      data: FormData.fromMap(user.toMap())).then((value){
-        
-        if (value.statusCode == 201) {
-          emit(OkResponseState());
-        } else {
-          emit(ErrorState());
-        }
-      });
+      await _dio
+          .post(EndPoints.register, data: FormData.fromMap(user.toMap()))
+          .then((value) {
+            if (value.statusCode == 201) {
+              emit(OkResponseState());
+            } else {
+              emit(ErrorState());
+            }
+          });
     } catch (e) {
       emit(ErrorState());
     }
-
   }
 }

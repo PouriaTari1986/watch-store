@@ -49,101 +49,106 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Text("پوریا ترابزداه طاری", style: LightAppTextStyle.title),
                   Dimens.large.height,
                   Column(
-                   crossAxisAlignment: CrossAxisAlignment.end, 
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                    AppStrings.activatedAdd,
-                    style: LightAppTextStyle.title,
-                  ),
-                  Dimens.medium.height,
-                  Row(
-                    children: [
-                      SvgPicture.asset(Assets.svg.vector),
-                      Expanded(
-                        child: Text(
-                          AppStrings.lurem,
-                          style: LightAppTextStyle.title,
-                          softWrap: true,
-                          maxLines: 2,
-                          textAlign: TextAlign.right,
-                        ),
+                        AppStrings.activatedAdd,
+                        style: LightAppTextStyle.title,
+                      ),
+                      Dimens.medium.height,
+                      Row(
+                        children: [
+                          SvgPicture.asset(Assets.svg.vector),
+                          Expanded(
+                            child: Text(
+                              AppStrings.lurem,
+                              style: LightAppTextStyle.title,
+                              softWrap: true,
+                              maxLines: 2,
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Container(
+                        height: 2,
+                        width: double.infinity,
+                        color: LightAppColors.surfaceColor,
+                      ),
+                      Dimens.medium.height,
+                      ProfileItem(
+                        iconPath: Assets.svg.card,
+
+                        text: AppStrings.cartNo,
+                      ),
+                      Dimens.medium.height,
+                      ProfileItem(
+                        iconPath: Assets.svg.vuesaxLinearCall,
+
+                        text: AppStrings.phonrNo,
+                      ),
+                      Dimens.medium.height,
+                      ProfileItem(
+                        iconPath: Assets.svg.userProfile,
+
+                        text: AppStrings.myNae,
                       ),
                     ],
                   ),
-                  
-                  Container(
-                    height: 2,
-                    width: double.infinity,
-                    color: LightAppColors.surfaceColor,
-                  ),
-                  Dimens.medium.height,
-                   ProfileItem(
-                    
-                    iconPath: Assets.svg.card,
-                    
-                    text: AppStrings.cartNo,),
-                  Dimens.medium.height,
-                   ProfileItem(
-                    
-                    iconPath: Assets.svg.vuesaxLinearCall,
-                    
-                    text: AppStrings.phonrNo,),
-                  Dimens.medium.height,
-                   ProfileItem(
-                    
-                    iconPath: Assets.svg.userProfile,
-                    
-                    text: AppStrings.myNae,),
-
-                  ],),
                   Dimens.large.height,
                   SurfaceContainer(
                     child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(AppStrings.terms,style: LightAppTextStyle.title,))),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        AppStrings.terms,
+                        style: LightAppTextStyle.title,
+                      ),
+                    ),
+                  ),
 
-                    Dimens.large.height,
+                  Dimens.large.height,
 
-                    ProfileDecoration(
-                      
-                      child:
-
-                     Padding(
-                       padding: const EdgeInsets.only(top: Dimens.xlarge),
-                       child: Row(
-                        
+                  ProfileDecoration(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: Dimens.xlarge),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        
+
                         children: [
-                                           
                           Column(
                             children: [
                               Image.asset(Assets.png.delivered.path),
-                                  Dimens.small.height,         
-                              Text(AppStrings.delivered)
+                              Dimens.small.height,
+                              Text(AppStrings.delivered),
                             ],
                           ),
                           Column(
                             children: [
                               Image.asset(Assets.png.cnaceled.path),
-                                           Dimens.small.height,   
-                              Text(AppStrings.cnacels)
+                              Dimens.small.height,
+                              Text(AppStrings.cnacels),
                             ],
                           ),
-                          
+
                           Column(
                             children: [
                               Image.asset(Assets.png.underProsses.path),
-                                           Dimens.small.height,   
-                              Text(AppStrings.inProgress,)
+                              Dimens.small.height,
+                              Text(AppStrings.inProgress),
                             ],
                           ),
                         ],
-                       ),
-                     )),
-                     Dimens.medium.height,
-                     ProfileAddDecoration(child: 
-                     Image.asset(Assets.png.addvertise.path,fit: BoxFit.cover,))
+                      ),
+                    ),
+                  ),
+                  Dimens.medium.height,
+                  ProfileAddDecoration(
+                    child: Image.asset(
+                      Assets.png.addvertise.path,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -153,4 +158,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
-

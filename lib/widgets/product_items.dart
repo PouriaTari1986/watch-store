@@ -10,22 +10,21 @@ import 'package:flutter/material.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({
-    
     super.key,
-    
+
     this.discount = 0,
-    this.specialExpiration = "",
+    this.specialExpiration = '',
     this.oldPriceT = 0,
     required this.productName,
     required this.price,
-    required this.image
+    required this.image,
   });
-final String image;
-final String productName;
-final int  price;
-final int oldPriceT;
-final int discount;
-final String specialExpiration;
+  final String image;
+  final String productName;
+  final int price;
+  final int oldPriceT;
+  final int discount;
+  final String specialExpiration;
 
   @override
   State<ProductItem> createState() => _ProductItemState();
@@ -34,45 +33,40 @@ final String specialExpiration;
 class _ProductItemState extends State<ProductItem> {
   Duration _duration = Duration(seconds: 0);
   late Timer timer;
-  late int inSeconds;
+  int inSeconds = 0;
   @override
   void initState() {
-  
     super.initState();
+    timer = Timer(_duration, () {});
     DateTime now = DateTime.now();
     if (widget.specialExpiration.isNotEmpty) {
-     DateTime expiration = DateTime.parse(widget.specialExpiration);
-    _duration = expiration.difference(now);
-    inSeconds = _duration.inSeconds;
-    if (inSeconds>0) {
-       startTimer();
-    }
-   
+      DateTime expiration = DateTime.parse(widget.specialExpiration);
+      _duration = expiration.difference(now);
+      inSeconds = _duration.inSeconds;
+      if (inSeconds > 0) {
+        startTimer();
+      }
     } else {
       inSeconds = 0;
     }
-   
-
   }
+
   @override
   Widget build(BuildContext context) {
-    bool isExpired = inSeconds <=0;
+    bool isExpired = inSeconds <= 0;
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-         MaterialPageRoute(builder: (context) => ProductSingleScreen(
-          
-         ),));
+          MaterialPageRoute(builder: (context) => ProductSingleScreen()),
+        );
       },
       child: Container(
         padding: EdgeInsets.all(Dimens.small),
         margin: EdgeInsets.all(Dimens.medium),
         width: 200,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            Dimens.medium,
-          ),
+          borderRadius: BorderRadius.circular(Dimens.medium),
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -82,8 +76,12 @@ class _ProductItemState extends State<ProductItem> {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.sizeOf(context).height/9.5,
-              child: Image(image: NetworkImage(widget.image),fit: BoxFit.contain,)),
+              height: MediaQuery.sizeOf(context).height / 9.5,
+              child: Image(
+                image: NetworkImage(widget.image),
+                fit: BoxFit.contain,
+              ),
+            ),
             Dimens.medium.height,
             Align(
               alignment: Alignment.centerRight,
@@ -96,57 +94,60 @@ class _ProductItemState extends State<ProductItem> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("${widget.price.seperatedWithComa}  تومان",
-                style: LightAppTextStyle.title,),
-                if(widget.discount >0 && !isExpired)
-                Text("${widget.oldPriceT.seperatedWithComa}  تومان",
-                style: LightAppTextStyle.oldPrice,)
+                Text(
+                  "${widget.price.seperatedWithComa}  تومان",
+                  style: LightAppTextStyle.title,
+                ),
+                if (widget.discount > 0 && !isExpired)
+                  Text(
+                    "${widget.oldPriceT.seperatedWithComa}  تومان",
+                    style: LightAppTextStyle.oldPrice,
+                  ),
               ],
             ),
-           
-                   if(!isExpired && widget.discount >0)           
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(60),
-                color: Colors.red
+
+            if (!isExpired && widget.discount > 0)
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(60),
+                  color: Colors.red,
+                ),
+                child: Text("${widget.discount}%"),
               ),
-              child: 
-              Text("${widget.discount}%"),
-             
-            ),
-           
-              Dimens.large.height,                
-              if(!isExpired)
+
+            Dimens.large.height,
+            if (!isExpired)
               Column(
                 children: [
-              Container(
-              height: 2,
-              width: double.infinity,
-              color: Colors.blue,
-            ),
-            Dimens.medium.height,
-            Text(formatTime(inSeconds),
-            style: LightAppTextStyle.prodTimerStyle,)
+                  Container(
+                    height: 2,
+                    width: double.infinity,
+                    color: Colors.blue,
+                  ),
+                  Dimens.medium.height,
+                  Text(
+                    formatTime(inSeconds),
+                    style: LightAppTextStyle.prodTimerStyle,
+                  ),
                 ],
-              )
+              ),
           ],
         ),
-        
       ),
     );
   }
-   void startTimer(){
-      const oneSec = Duration(seconds: 1);
-      timer = Timer.periodic(oneSec, (timer){
-        setState(() {
-          if(inSeconds <= 0){
-            timer.cancel();
-          }else{
-            inSeconds--;
-          }
-        });
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    timer = Timer.periodic(oneSec, (timer) {
+      setState(() {
+        if (inSeconds <= 0) {
+          timer.cancel();
+        } else {
+          inSeconds--;
+        }
       });
-    }
-  
+    });
+  }
 }

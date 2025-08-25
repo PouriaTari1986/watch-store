@@ -21,39 +21,35 @@ class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
-class _MainScreenState extends State<MainScreen> {
 
- final List <int> _routeHistory =[ButtonNavigationScreensIndex.home];
+class _MainScreenState extends State<MainScreen> {
+  final List<int> _routeHistory = [ButtonNavigationScreensIndex.home];
 
   int selectedIndex = ButtonNavigationScreensIndex.home;
 
-  final GlobalKey<NavigatorState> _homeKey =GlobalKey();
+  final GlobalKey<NavigatorState> _homeKey = GlobalKey();
 
-  final GlobalKey<NavigatorState> _basketKey =GlobalKey();
+  final GlobalKey<NavigatorState> _basketKey = GlobalKey();
 
-  final GlobalKey<NavigatorState> _profileKey =GlobalKey();
+  final GlobalKey<NavigatorState> _profileKey = GlobalKey();
 
-  late final Map map={
+  late final Map map = {
     ButtonNavigationScreensIndex.home: _homeKey,
     ButtonNavigationScreensIndex.basket: _basketKey,
     ButtonNavigationScreensIndex.profile: _profileKey,
   };
 
-  Future<bool> _onPopIvoked()async{
-
+  Future<bool> _onPopIvoked() async {
     if (map[selectedIndex].currentState!.canPop()) {
       map[selectedIndex].currentState!.pop();
-    }else if(_routeHistory.length>1){
+    } else if (_routeHistory.length > 1) {
       setState(() {
         _routeHistory.removeLast();
         selectedIndex = _routeHistory.last;
       });
-
     }
     return false;
-    
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +81,9 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   Navigator(
                     key: _profileKey,
-                    onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (context) => ProfileScreen()),
+                    onGenerateRoute: (settings) => MaterialPageRoute(
+                      builder: (context) => ProfileScreen(),
+                    ),
                   ),
                 ],
               ),
@@ -95,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
               bottom: 0,
               left: 0,
               right: 0,
-      
+
               child: Container(
                 height: btNavHeight,
                 color: LightAppColors.btNavColor,
@@ -112,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                         index: ButtonNavigationScreensIndex.profile,
                       ),
                     ),
-      
+
                     BtmNAvItems(
                       count: 1,
                       iconSvgPath: Assets.svg.shoppingBascket,
@@ -123,7 +120,7 @@ class _MainScreenState extends State<MainScreen> {
                         index: ButtonNavigationScreensIndex.basket,
                       ),
                     ),
-      
+
                     BtmNAvItems(
                       iconSvgPath: Assets.svg.homeHashtag,
                       text: AppStrings.homeIcon,
@@ -147,7 +144,6 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       selectedIndex = index;
       _routeHistory.add(selectedIndex);
-
     });
   }
 }

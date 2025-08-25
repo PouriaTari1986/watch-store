@@ -16,11 +16,9 @@ final class ErrorState extends RegisterState {}
 final class OkResponseState extends RegisterState {}
 
 final class LocationPickedState extends RegisterState {
-
   final GeoPoint? location;
   final String? address;
-  const LocationPickedState({required this.location,required this.address});
+  const LocationPickedState({required this.location, required this.address});
   @override
-  List<Object> get props => [Location,address ??""];
+  List<Object> get props => [Location, address ?? ""];
 }
-
