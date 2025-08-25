@@ -10,7 +10,6 @@ import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/widgets/app_bar.dart';
 import 'package:di_state_managment/widgets/cart_badges.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
-import 'package:di_state_managment/widgets/product_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -93,7 +92,6 @@ class ProductSingleScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProductPrice(discount: 10),
                       
                       SizedBox(
                         height: 55,

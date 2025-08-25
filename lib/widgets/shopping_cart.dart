@@ -18,7 +18,7 @@ class ShopingCartItem extends StatelessWidget {
     });
 
 int count =0;
-final productTitle;
+final String productTitle;
 final int productPrices;
 final int productPricesWithDiscount;
   @override

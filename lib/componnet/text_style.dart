@@ -127,4 +127,11 @@ class LightAppTextStyle {
     color: LightAppColors.title,
     fontWeight: FontWeight.w400
   );
+
+  static const TextStyle prodTimerStyle = TextStyle(
+    fontFamily: FontFamily.dana,
+    fontSize: 13,
+    color: LightAppColors.oldProductPrice,
+    fontWeight: FontWeight.w400
+  );
 }

@@ -32,12 +32,12 @@ class Home {
           .map((e) => Product.fromJson(e))
           .toList(),
       banner: BannerModel.fromJson(json['banner']),
-      mostSellerProducts: (json['most_seller_products'] as List<dynamic>)
-          .map((e) => Product.fromJson(e))
-          .toList(),
+      
       newextProducts: (json['newest_products'] as List<dynamic>)
           .map((e) => Product.fromJson(e))
-          .toList(),
+          .toList(), 
+      mostSellerProducts: (json['most_seller_products']as List<dynamic>).
+      map((e)=>Product.fromJson(e)).toList(),
     );
   }
 }

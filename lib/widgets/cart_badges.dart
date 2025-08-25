@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 
 class CartBadge extends StatelessWidget {
   const CartBadge({super.key,this.count});
-final count;
+final int? count;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,7 +14,7 @@ final count;
         SizedBox(height: 32,width: 36,),
         SvgPicture.asset(Assets.svg.shoppingBascket,colorFilter: ColorFilter.mode(Colors.black,BlendMode.srcIn),),
         //badges
-        if(count!= null && count !>0)
+        if(count!= null && count !> 0)
         Positioned(
           top: -4,
           right: 0,

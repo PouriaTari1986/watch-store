@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ProfileDecoration extends StatelessWidget {
   const ProfileDecoration({super.key,required this.child});
-final child;
+final Widget child;
   @override
   Widget build(BuildContext context) {
    var size = MediaQuery.sizeOf(context);
@@ -30,7 +30,7 @@ final child;
 }
 class ProfileAddDecoration extends StatelessWidget {
   const ProfileAddDecoration({super.key,required this.child});
-final child;
+final Widget child;
   @override
   Widget build(BuildContext context) {
    var size = MediaQuery.sizeOf(context);

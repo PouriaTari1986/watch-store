@@ -12,7 +12,7 @@ class ImageHandler {
   File? _image;
 
   File? get getImage =>_image;
-  
+
   // ignore: strict_top_level_inference
   Future<File?> pickAndCropImage({
     required ImageSource  source,
@@ -25,6 +25,7 @@ class ImageHandler {
    if(pickedFile == null)return null;
 
      File imageFile = File(pickedFile.path);
+     // ignore: use_build_context_synchronously
      final croopedFile = await Navigator.of(context).push<File>(
       MaterialPageRoute(builder: (_) => CropImageScrren(imageFile: imageFile),));
       if(croopedFile != null){
@@ -128,6 +129,7 @@ class _CropImageScrrenState extends State<CropImageScrren> {
       await file.writeAsBytes(
         buffer.asUint8List(byteData.offsetInBytes,byteData.lengthInBytes)
       );
+      // ignore: use_build_context_synchronously
       Navigator.pop(context,file);
     }
   

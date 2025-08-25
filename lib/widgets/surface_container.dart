@@ -10,7 +10,7 @@ class SurfaceContainer extends StatelessWidget {
   });
 
   
- final child;
+ final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(

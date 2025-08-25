@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+
 class User {
 
   final String name;
@@ -12,7 +14,7 @@ class User {
 
   final String postalCode;
 
-  final  image;
+  final MultipartFile? image;
   final double lat;
   final double lng;
   User({

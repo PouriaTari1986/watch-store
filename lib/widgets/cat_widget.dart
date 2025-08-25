@@ -1,6 +1,5 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
-import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class CatWidget extends StatelessWidget {
     required this.onTap,
     super.key,
   });
- final AssetGenImage iconPath; 
+ final String iconPath; 
 final List<Color> color;  
 final VoidCallback onTap;
 final String title;
@@ -36,10 +35,18 @@ final String title;
                 colors:color
               ),
             ),
-            child: iconPath.image(fit: BoxFit.contain)
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 60,
+                  child: Image.network(iconPath),
+                )
+              ],
+            )
           ),
           (Dimens.small/2).height,
-          Text(title, style: LightAppTextStyle.title.copyWith(fontSize: 18)),
+          Text(title, style: LightAppTextStyle.title.copyWith(fontSize: 14)),
         ],
       ),
     );

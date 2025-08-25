@@ -103,7 +103,7 @@ class ProductGridView
         
          itemBuilder: (context, index) {
 
-           return ProductItem(productName: "productName", price: 100);
+           return ProductItem(productName: "productName", price: 100, image: "",);
 
          },)
       )
