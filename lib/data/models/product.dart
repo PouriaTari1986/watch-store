@@ -37,5 +37,18 @@ class Product {
       image: json['image'],
     );
   }
-  
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'price': price,
+      'discount': discount,
+      'special_expiration': specialExpiration,
+      'discount_price': discountPrice,
+      'product_count': productCount,
+      'category': category,
+      'brand': brand,
+      'image': image,
+    };
+  }
 }

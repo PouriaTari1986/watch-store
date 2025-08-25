@@ -1,4 +1,4 @@
 {
-    "CodeGPT.apiKey": "OpenAI",
+    "CodeGPT.apiKey": "Anthropic",
     "cmake.ignoreCMakeListsMissing": true
 }

@@ -1,7 +1,7 @@
 
 import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/screens/authentication/verification_code_screen.dart';
-import 'package:di_state_managment/screens/home_screen.dart';
+import 'package:di_state_managment/screens/home/home_screen.dart';
 import 'package:di_state_managment/screens/main_screen.dart';
 import 'package:di_state_managment/screens/main_screen/product_list_screen.dart';
 import 'package:di_state_managment/screens/main_screen/product_single_screen.dart';
