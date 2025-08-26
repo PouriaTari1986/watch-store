@@ -103,6 +103,10 @@ class HomeScreen extends StatelessWidget {
                                         .home
                                         .amazingProducts[index]
                                         .specialExpiration,
+                                    id:state
+                                    .home
+                                    .amazingProducts[index]
+                                    .id,
                                   ),
                                 ),
                               ),
@@ -166,7 +170,11 @@ class HomeScreen extends StatelessWidget {
                                     specialExpiration: state
                                         .home
                                         .mostSellerProducts[index]
-                                        .specialExpiration,
+                                        .specialExpiration, 
+                                    id: state
+                                    .home
+                                    .mostSellerProducts[index]
+                                    .id,
                                   ),
                                 ),
                               ),
@@ -196,7 +204,9 @@ class HomeScreen extends StatelessWidget {
                                     productName:
                                         state.home.newextProducts[index].title,
                                     price:
-                                        state.home.newextProducts[index].price,
+                                        state.home.newextProducts[index].price, 
+                                    id: state
+                                    .home.newextProducts[index].id,
                                   ),
                                 ),
                               ),

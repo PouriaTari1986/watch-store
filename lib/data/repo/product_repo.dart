@@ -1,9 +1,12 @@
 import 'package:di_state_managment/data/models/product.dart';
+import 'package:di_state_managment/data/models/product_details.dart';
 import 'package:di_state_managment/data/source/product_data_src.dart';
 import 'package:dio/dio.dart';
 
 abstract class IProductRepo {
   Future<List<Product>> getAllByCategory(int id);
+
+  Future<ProductDetails> productDetails(int id);
 
   Future<List<Product>> getAllByBrand(int id);
 
@@ -32,6 +35,17 @@ class ProductRepository implements IProductRepo {
   @override
   Future<List<Product>> searchProduct(String searchKey) =>
       _iProductDataSource.searchProduct(searchKey);
+      
+  @override
+  Future<ProductDetails> productDetails(int id)=>
+    _iProductDataSource.getProductDetails(id);
+          
+        
+      
+
+    
+   
+        
 }
 
 final productRepository = ProductRepository(ProductRemoteDataSource(Dio()));

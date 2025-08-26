@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 
-class Product {
+class ProductDetails {
   final int id;
   final String title;
   final String titleEn;
@@ -22,7 +22,7 @@ class Product {
   final String discussion;
   final List<ProductComment> comments;
 
-  Product({
+  ProductDetails({
     required this.id,
     required this.title,
     required this.titleEn,
@@ -44,41 +44,41 @@ class Product {
     required this.comments,
   });
 
-  factory Product.fromMap(Map<String, dynamic> map) {
-    return Product(
-      id: map['id'] ?? 0,
-      title: map['title'] ?? '',
-      titleEn: map['title_en'] ?? '',
-      price: map['price'] ?? 0,
-      discount: map['discount'] ?? 0,
-      discountPrice: map['discount_price'] ?? 0,
-      guaranty: map['guaranty'] ?? '',
-      productCount: map['product_count'] ?? 0,
-      category: map['category'] ?? '',
-      categoryId: map['category_id'] ?? 0,
+  factory ProductDetails.fromMap(Map<String, dynamic> json) {
+    return ProductDetails(
+      id: json['id'] ,
+      title: json['title'] ,
+      titleEn: json['title_en'] ,
+      price: json['price'] ,
+      discount: json['discount'] ,
+      discountPrice: json['discount_price'] ,
+      guaranty: json['guaranty'] ,
+      productCount: json['product_count'],
+      category: json['category'] ,
+      categoryId: json['category_id'],
       colors: List<ProductColor>.from(
-        (map['colors'] as List<dynamic>? ?? [])
+        (json['colors'] as List<dynamic>? ?? [])
             .map((e) => ProductColor.fromMap(e)),
       ),
-      brand: map['brand'] ?? '',
-      brandId: map['brand_id'] ?? 0,
-      review: map['review'] ?? 0,
-      image: map['image'] ?? '',
+      brand: json['brand'] ,
+      brandId: json['brand_id'] ,
+      review: json['review'] ,
+      image: json['image'] ,
       properties: List<ProductProperty>.from(
-        (map['properties'] as List<dynamic>? ?? [])
+        (json['properties'] as List<dynamic>? ?? [])
             .map((e) => ProductProperty.fromMap(e)),
       ),
-      description: map['description'] ?? '',
-      discussion: map['discussion'] ?? '',
+      description: json['description'] ,
+      discussion: json['discussion'] ,
       comments: List<ProductComment>.from(
-        (map['comments'] as List<dynamic>? ?? [])
+        (json['comments'] as List<dynamic>? ?? [])
             .map((e) => ProductComment.fromMap(e)),
       ),
     );
   }
 
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source));
+  factory ProductDetails.fromJson(String source) =>
+      ProductDetails.fromMap(json.decode(source));
 
   Map<String, dynamic> toMap() {
     return {
@@ -113,8 +113,8 @@ class ProductColor {
 
   factory ProductColor.fromMap(Map<String, dynamic> map) {
     return ProductColor(
-      title: map['title'] ?? '',
-      code: map['code'] ?? '',
+      title: map['title'] ,
+      code: map['code'] ,
     );
   }
 
@@ -134,8 +134,8 @@ class ProductProperty {
 
   factory ProductProperty.fromMap(Map<String, dynamic> map) {
     return ProductProperty(
-      property: map['property'] ?? '',
-      value: map['value'] ?? '',
+      property: map['property'] ,
+      value: map['value'] ,
     );
   }
 
@@ -155,8 +155,8 @@ class ProductComment {
 
   factory ProductComment.fromMap(Map<String, dynamic> map) {
     return ProductComment(
-      user: map['user'] ?? '',
-      body: map['body'] ?? '',
+      user: map['user'] ,
+      body: map['body'] ,
     );
   }
 

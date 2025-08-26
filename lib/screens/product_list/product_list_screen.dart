@@ -75,7 +75,8 @@ class ProductListScreen extends StatelessWidget {
                             oldPriceT: state.productList[index].discountPrice,
                             specialExpiration:
                                 state.productList[index].specialExpiration,
-                            image: state.productList[index].image,
+                            image: state.productList[index].image, 
+                            id: state.productList[index].id,
                           );
                         },
                       ),

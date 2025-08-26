@@ -4,7 +4,7 @@ import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
-import 'package:di_state_managment/screens/main_screen/product_single_screen.dart';
+import 'package:di_state_managment/screens/product_single/product_single_screen.dart';
 import 'package:di_state_managment/utils/format_time.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +18,7 @@ class ProductItem extends StatefulWidget {
     required this.productName,
     required this.price,
     required this.image,
+    required this.id,
   });
   final String image;
   final String productName;
@@ -25,7 +26,7 @@ class ProductItem extends StatefulWidget {
   final int oldPriceT;
   final int discount;
   final String specialExpiration;
-
+  final id;
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
@@ -37,18 +38,16 @@ class _ProductItemState extends State<ProductItem> {
   @override
   void initState() {
     super.initState();
-    timer = Timer(_duration, () {});
-    DateTime now = DateTime.now();
+    
     if (widget.specialExpiration.isNotEmpty) {
+      DateTime now = DateTime.now();
       DateTime expiration = DateTime.parse(widget.specialExpiration);
       _duration = expiration.difference(now);
       inSeconds = _duration.inSeconds;
       if (inSeconds > 0) {
         startTimer();
       }
-    } else {
-      inSeconds = 0;
-    }
+    } 
   }
 
   @override
@@ -58,7 +57,7 @@ class _ProductItemState extends State<ProductItem> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProductSingleScreen()),
+          MaterialPageRoute(builder: (context) => ProductSingleScreen(id: widget.id,)),
         );
       },
       child: Container(
@@ -144,8 +143,14 @@ class _ProductItemState extends State<ProductItem> {
       setState(() {
         if (inSeconds <= 0) {
           timer.cancel();
+          setState(() {
+            
+          });
         } else {
-          inSeconds--;
+          setState(() {
+            inSeconds--;
+          });
+          
         }
       });
     });

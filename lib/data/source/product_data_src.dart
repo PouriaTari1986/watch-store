@@ -1,4 +1,5 @@
 import 'package:di_state_managment/data/models/product.dart';
+import 'package:di_state_managment/data/models/product_details.dart';
 import 'package:di_state_managment/data/source/constant.dart';
 import 'package:di_state_managment/utils/response_validator.dart';
 import 'package:dio/dio.dart';
@@ -6,6 +7,8 @@ import 'package:dio/dio.dart';
 abstract class IProductDataSource {
   Future<List<Product>> getAllByCategory(int id);
 
+  Future<ProductDetails> getProductDetails(int id);
+  
   Future<List<Product>> getAllByBrand(int id);
 
   Future<List<Product>> getSorted(String routeParam);
@@ -66,5 +69,12 @@ class ProductRemoteDataSource implements IProductDataSource {
       product.add(Product.fromJson(element));
     }
     return product;
+  }
+  
+  @override
+  Future<ProductDetails> getProductDetails(int id) async {
+    final response = await httpClient.get(EndPoints.productDetails+id.toString());
+    HttpResponseValidator.isValidStatusCode(response.statusCode!);
+    return ProductDetails.fromJson(response.data['data'][0]);
   }
 }
