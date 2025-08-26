@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:di_state_managment/data/source/constant.dart';
+import 'package:di_state_managment/utils/response_validator.dart';
 import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:di_state_managment/utils/shared_prefrences_const.dart';
 import 'package:equatable/equatable.dart';
@@ -20,7 +21,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         EndPoints.sendSms,
         data: {"mobile": mobile},
       );
-      if (response.statusCode == 201) {
+      if (HttpResponseValidator.isValidStatusCode(response.statusCode!)) {
         emit(LoadedState(mobile: mobile));
       } else {
         emit(ErrorState());
@@ -38,7 +39,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         EndPoints.checkSmsCode,
         data: {"mobile": mobile, "code": code},
       );
-      if (response.statusCode == 201) {
+      if (HttpResponseValidator.isValidStatusCode(response.statusCode!)){
         SharedPreferencesManager().saveString(
           SharedPrefrencesConst.token,
           response.data["data"]["token"],

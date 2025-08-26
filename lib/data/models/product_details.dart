@@ -1,169 +1,166 @@
-
-import 'dart:convert';
-
 class ProductDetails {
-  final int id;
-  final String title;
-  final String titleEn;
-  final int price;
-  final int discount;
-  final int discountPrice;
-  final String guaranty;
-  final int productCount;
-  final String category;
-  final int categoryId;
-  final List<ProductColor> colors;
-  final String brand;
-  final int brandId;
-  final int review;
-  final String image;
-  final List<ProductProperty> properties;
-  final String description;
-  final String discussion;
-  final List<ProductComment> comments;
+  int? id;
+  String? title;
+  String? titleEn;
+  int? price;
+  int? discount;
+  int? discountPrice;
+  String? guaranty;
+  int? productCount;
+  String? category;
+  int? categoryId;
+  List<Colors>? colors;
+  String? brand;
+  int? brandId;
+  int? review;
+  String? image;
+  List<Properties>? properties;
+  String? description;
+  String? discussion;
+  List<Comments>? comments;
 
-  ProductDetails({
-    required this.id,
-    required this.title,
-    required this.titleEn,
-    required this.price,
-    required this.discount,
-    required this.discountPrice,
-    required this.guaranty,
-    required this.productCount,
-    required this.category,
-    required this.categoryId,
-    required this.colors,
-    required this.brand,
-    required this.brandId,
-    required this.review,
-    required this.image,
-    required this.properties,
-    required this.description,
-    required this.discussion,
-    required this.comments,
-  });
+  ProductDetails(
+      {this.id,
+      this.title,
+      this.titleEn,
+      this.price,
+      this.discount,
+      this.discountPrice,
+      this.guaranty,
+      this.productCount,
+      this.category,
+      this.categoryId,
+      this.colors,
+      this.brand,
+      this.brandId,
+      this.review,
+      this.image,
+      this.properties,
+      this.description,
+      this.discussion,
+      this.comments});
 
-  factory ProductDetails.fromMap(Map<String, dynamic> json) {
-    return ProductDetails(
-      id: json['id'] ,
-      title: json['title'] ,
-      titleEn: json['title_en'] ,
-      price: json['price'] ,
-      discount: json['discount'] ,
-      discountPrice: json['discount_price'] ,
-      guaranty: json['guaranty'] ,
-      productCount: json['product_count'],
-      category: json['category'] ,
-      categoryId: json['category_id'],
-      colors: List<ProductColor>.from(
-        (json['colors'] as List<dynamic>? ?? [])
-            .map((e) => ProductColor.fromMap(e)),
-      ),
-      brand: json['brand'] ,
-      brandId: json['brand_id'] ,
-      review: json['review'] ,
-      image: json['image'] ,
-      properties: List<ProductProperty>.from(
-        (json['properties'] as List<dynamic>? ?? [])
-            .map((e) => ProductProperty.fromMap(e)),
-      ),
-      description: json['description'] ,
-      discussion: json['discussion'] ,
-      comments: List<ProductComment>.from(
-        (json['comments'] as List<dynamic>? ?? [])
-            .map((e) => ProductComment.fromMap(e)),
-      ),
-    );
+  ProductDetails.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    titleEn = json['title_en'];
+    price = json['price'];
+    discount = json['discount'];
+    discountPrice = json['discount_price'];
+    guaranty = json['guaranty'];
+    productCount = json['product_count'];
+    category = json['category'];
+    categoryId = json['category_id'];
+    if (json['colors'] != null) {
+      colors = <Colors>[];
+      json['colors'].forEach((v) {
+        colors!.add(Colors.fromJson(v));
+      });
+    }
+    brand = json['brand'];
+    brandId = json['brand_id'];
+    review = json['review'];
+    image = json['image'];
+    if (json['properties'] != null) {
+      properties = <Properties>[];
+      json['properties'].forEach((v) {
+        properties!.add( Properties.fromJson(v));
+      });
+    }
+    description = json['description'];
+    discussion = json['discussion'];
+    if (json['comments'] != null) {
+      comments = <Comments>[];
+      json['comments'].forEach((v) {
+        comments!.add(Comments.fromJson(v));
+      });
+    }
   }
 
-  factory ProductDetails.fromJson(String source) =>
-      ProductDetails.fromMap(json.decode(source));
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'title_en': titleEn,
-      'price': price,
-      'discount': discount,
-      'discount_price': discountPrice,
-      'guaranty': guaranty,
-      'product_count': productCount,
-      'category': category,
-      'category_id': categoryId,
-      'colors': colors.map((e) => e.toMap()).toList(),
-      'brand': brand,
-      'brand_id': brandId,
-      'review': review,
-      'image': image,
-      'properties': properties.map((e) => e.toMap()).toList(),
-      'description': description,
-      'discussion': discussion,
-      'comments': comments.map((e) => e.toMap()).toList(),
-    };
-  }
-}
-
-class ProductColor {
-  final String title;
-  final String code;
-
-  ProductColor({required this.title, required this.code});
-
-  factory ProductColor.fromMap(Map<String, dynamic> map) {
-    return ProductColor(
-      title: map['title'] ,
-      code: map['code'] ,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'code': code,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['title'] = title;
+    data['title_en'] = titleEn;
+    data['price'] = price;
+    data['discount'] = discount;
+    data['discount_price'] = discountPrice;
+    data['guaranty'] = guaranty;
+    data['product_count'] = productCount;
+    data['category'] = category;
+    data['category_id'] = categoryId;
+    if (colors != null) {
+      data['colors'] = colors!.map((v) => v.toJson()).toList();
+    }
+    data['brand'] = brand;
+    data['brand_id'] = brandId;
+    data['review'] = review;
+    data['image'] = image;
+    if (properties != null) {
+      data['properties'] = properties!.map((v) => v.toJson()).toList();
+    }
+    data['description'] = description;
+    data['discussion'] = discussion;
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 }
 
-class ProductProperty {
-  final String property;
-  final String value;
+class Colors {
+  String? title;
+  String? code;
 
-  ProductProperty({required this.property, required this.value});
+  Colors({this.title, this.code});
 
-  factory ProductProperty.fromMap(Map<String, dynamic> map) {
-    return ProductProperty(
-      property: map['property'] ,
-      value: map['value'] ,
-    );
+  Colors.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    code = json['code'];
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'property': property,
-      'value': value,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['title'] = title;
+    data['code'] = code;
+    return data;
   }
 }
 
-class ProductComment {
-  final String user;
-  final String body;
+class Properties {
+  String? property;
+  String? value;
 
-  ProductComment({required this.user, required this.body});
+  Properties({this.property, this.value});
 
-  factory ProductComment.fromMap(Map<String, dynamic> map) {
-    return ProductComment(
-      user: map['user'] ,
-      body: map['body'] ,
-    );
+  Properties.fromJson(Map<String, dynamic> json) {
+    property = json['property'];
+    value = json['value'];
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'user': user,
-      'body': body,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['property'] = property;
+    data['value'] = value;
+    return data;
+  }
+}
+
+class Comments {
+  String? user;
+  String? body;
+
+  Comments({this.user, this.body});
+
+  Comments.fromJson(Map<String, dynamic> json) {
+    user = json['user'];
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['user'] = user;
+    data['body'] = body;
+    return data;
   }
 }

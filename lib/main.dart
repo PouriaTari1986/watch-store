@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthenticationCubit(),
       child: MaterialApp(
         theme: lightTheme(),
+        
         debugShowCheckedModeBanner: false,
         title: "watch store",
         // initialRoute: ScreensNames.rout,

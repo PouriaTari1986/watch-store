@@ -16,4 +16,6 @@ final class ProductSingleLoaded extends ProductSingleState {
   final ProductDetails productDetails;
   const ProductSingleLoaded(this.productDetails);
 
+
+
 }

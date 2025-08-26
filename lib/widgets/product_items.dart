@@ -26,7 +26,7 @@ class ProductItem extends StatefulWidget {
   final int oldPriceT;
   final int discount;
   final String specialExpiration;
-  final id;
+  final int id;
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
@@ -53,25 +53,24 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     bool isExpired = inSeconds <= 0;
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ProductSingleScreen(id: widget.id,)),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(Dimens.small),
-        margin: EdgeInsets.all(Dimens.medium),
-        width: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimens.medium),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: LightAppColors.productPage,
-          ),
+    return Container(
+      padding: EdgeInsets.all(Dimens.small),
+      margin: EdgeInsets.all(Dimens.medium),
+      width: 200,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(Dimens.medium),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: LightAppColors.productPage,
         ),
+      ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context) =>
+          ProductSingleScreen(id: widget.id),));
+        },
         child: Column(
           children: [
             SizedBox(
@@ -104,7 +103,7 @@ class _ProductItemState extends State<ProductItem> {
                   ),
               ],
             ),
-
+            
             if (!isExpired && widget.discount > 0)
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -114,7 +113,7 @@ class _ProductItemState extends State<ProductItem> {
                 ),
                 child: Text("${widget.discount}%"),
               ),
-
+            
             Dimens.large.height,
             if (!isExpired)
               Column(

@@ -4,6 +4,15 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme() {
   return ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(backgroundColor: WidgetStateProperty.resolveWith((callback){
+        if (callback.contains(WidgetState.pressed)) {
+          return LightAppColors.buttonColor;
+        } else{
+          return LightAppColors.wonderText;
+        }
+      }))
+    ),
     brightness: Brightness.light,
     iconTheme: IconThemeData(color: Colors.black),
     primaryColor: LightAppColors.primaryColor,

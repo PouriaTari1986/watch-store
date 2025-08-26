@@ -74,7 +74,7 @@ class ProductRemoteDataSource implements IProductDataSource {
   @override
   Future<ProductDetails> getProductDetails(int id) async {
     final response = await httpClient.get(EndPoints.productDetails+id.toString());
-    HttpResponseValidator.isValidStatusCode(response.statusCode!);
+    HttpResponseValidator.isValidStatusCode(response.statusCode??0);
     return ProductDetails.fromJson(response.data['data'][0]);
   }
 }
