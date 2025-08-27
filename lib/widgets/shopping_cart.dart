@@ -1,33 +1,32 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
+import 'package:di_state_managment/data/models/cart_model.dart';
+import 'package:di_state_managment/screens/cart/bloc/cart_bloc.dart';
 import 'package:di_state_managment/widgets/surface_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../gen/assets.gen.dart';
 
 // ignore: must_be_immutable
-class ShopingCartItem extends StatelessWidget {
-  const ShopingCartItem({
+class ShopingCartItem extends StatefulWidget {
+   ShopingCartItem({
     super.key,
-    required this.count,
-    required this.productTitle,
-    required this.cartTotalPrice,
-    required this.productPtotalWithoutDiscountPricericesWithDiscount, 
-    this.add, 
-    this.remove, 
-    this.delete,
+  required this.cartModel,
+  required this.userCart
   });
-  final VoidCallback? add;
-  final VoidCallback? remove;
-  final VoidCallback? delete;
+  CartModel cartModel;
+  UserCart userCart;
 
-  final int count ;
-  final String productTitle;
-  final int cartTotalPrice;
-  final int productPtotalWithoutDiscountPricericesWithDiscount;
+  @override
+  State<ShopingCartItem> createState() => _ShopingCartItemState();
+}
+
+class _ShopingCartItemState extends State<ShopingCartItem> {
   @override
   Widget build(BuildContext context) {
+    final cartBloc = BlocProvider.of<CartBloc>(context);
     return SurfaceContainer(
       child: Row(
         children: [
@@ -36,15 +35,15 @@ class ShopingCartItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  productTitle,
+                  widget.userCart.product!,
                   style: LightAppTextStyle.prodactTitle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  "${productPtotalWithoutDiscountPricericesWithDiscount.seperatedWithComa}  تومان",
+                  "${widget.cartModel.totalWithoutDiscountPrice!.seperatedWithComa}  تومان",
                   style: LightAppTextStyle.caption,
                 ),
                 Text(
-                  "${cartTotalPrice.seperatedWithComa}  با تخفیف",
+                  "${widget.cartModel.cartTotalPrice!.seperatedWithComa}  با تخفیف",
                   style: LightAppTextStyle.timerStyle,
                 ),
                 Divider(),
@@ -52,20 +51,34 @@ class ShopingCartItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: delete,
+                      onPressed: (){
+                        cartBloc.add(DeleteFromCartEvent(widget.userCart.productId!));
+                      },
                       icon: SvgPicture.asset(Assets.svg.recycleBin),
                     ),
 
                     Expanded(child: SizedBox()),
 
                     IconButton(
-                      onPressed: add,
+                      onPressed: (){
+                        setState(() {
+                          widget.cartModel.countloading = true;
+                        });
+                        cartBloc.add(AddToCartEvent(widget.userCart.productId!));
+                      },
                       icon: SvgPicture.asset(Assets.svg.plus),
                     ),
 
-                    Text("عدد$count"),
+                    widget.cartModel.countloading?
+                    SizedBox(height: 24,width: 24,child: CircularProgressIndicator() ,):
+                    Text("عدد${widget.userCart.count}"),
                     IconButton(
-                      onPressed: remove,
+                      onPressed: (){
+                         setState(() {
+                          widget.cartModel.countloading = true;
+                        });
+                        cartBloc.add(RemoveFromCartEvent(widget.userCart.productId!));
+                      },
                       icon: SvgPicture.asset(Assets.svg.minus),
                     ),
                   ],

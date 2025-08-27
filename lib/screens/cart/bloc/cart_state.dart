@@ -1,10 +1,13 @@
 part of 'cart_bloc.dart';
 
+enum CartAction { add, remove, delete, none }
+
 abstract class CartState extends Equatable {
-  const CartState();
+  final CartAction lastAction;
+  const CartState({this.lastAction = CartAction.none});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [lastAction];
 }
 
 class CartInitial extends CartState {}
@@ -14,10 +17,12 @@ class CartLoading extends CartState {}
 class CartLoaded extends CartState {
   final CartModel cart;
 
-  const CartLoaded(this.cart);
+const CartLoaded(this.cart,{super.lastAction});
+  
+
 
   @override
-  List<Object?> get props => [cart];
+  List<Object?> get props => [cart, lastAction];
 }
 
 class CartError extends CartState {

@@ -32,11 +32,18 @@ class CartRepo implements ICartRepository {
       });
 
   @override
-  Future<CartModel> getUserCart() => _cartDataSource.getUserCart();
+  Future<CartModel> getUserCart() => _cartDataSource.getUserCart().then((value){
+    cartCount.value = value.userCart?.length??0;
+    return value;
+  });
 
   @override
   Future<CartModel> removeFromCart({required int productId}) =>
-      _cartDataSource.removeFromCart(productId: productId);
+      _cartDataSource.removeFromCart(productId: productId).then(
+        (value){
+            cartCount.value = value.userCart?.length??0;
+            return value;
+      });
 
   @override
   Future<int> cartCountItems() =>

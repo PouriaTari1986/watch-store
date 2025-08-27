@@ -14,29 +14,29 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       emit(CartLoading());
       try {
         final cart = await _cartRepository.getUserCart();
-        emit(CartLoaded(cart));
+        emit(CartLoaded(cart, lastAction: CartAction.none));
       } catch (e) {
-        emit(CartError('خطا در دریافت سبد خرید'));
+        emit(const CartError('خطا در دریافت سبد خرید'));
       }
     });
 
     on<AddToCartEvent>((event, emit) async {
-      emit(CartLoading());
+    
       try {
         final cart = await _cartRepository.addToCart(productId: event.productId);
-        emit(CartLoaded(cart));
+        emit(CartLoaded(cart, lastAction: CartAction.add));
       } catch (e) {
-        emit(CartError('خطا در افزودن محصول به سبد خرید'));
+        emit(const CartError('خطا در افزودن محصول به سبد خرید'));
       }
     });
 
     on<RemoveFromCartEvent>((event, emit) async {
-      emit(CartLoading());
+     
       try {
         final cart = await _cartRepository.removeFromCart(productId: event.productId);
-        emit(CartLoaded(cart));
+        emit(CartLoaded(cart, lastAction: CartAction.remove));
       } catch (e) {
-        emit(CartError('خطا در کم کردن محصول از سبد خرید'));
+        emit(const CartError('خطا در کم کردن محصول از سبد خرید'));
       }
     });
 
@@ -44,18 +44,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       emit(CartLoading());
       try {
         final cart = await _cartRepository.deleteFromCart(productId: event.productId);
-        emit(CartLoaded(cart));
+        emit(CartLoaded(cart, lastAction: CartAction.delete));
       } catch (e) {
-        emit(CartError('خطا در حذف محصول از سبد خرید'));
+        emit(const CartError('خطا در حذف محصول از سبد خرید'));
       }
     });
 
     on<CartCountEvent>((event, emit) async {
       try {
         await _cartRepository.cartCountItems();
-        // فقط ValueNotifier به روز می‌شود، نیازی به emit نیست
+        // فقط ValueNotifier آپدیت میشه
       } catch (e) {
-        // خطا در شمارش آیتم‌ها
+        // میتونی لاگ بزنی
       }
     });
   }

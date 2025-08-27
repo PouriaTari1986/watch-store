@@ -3,7 +3,6 @@ import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/data/models/product_details.dart';
 import 'package:di_state_managment/data/repo/cart_repo.dart';
-import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:di_state_managment/resource/strings.dart';
@@ -12,14 +11,12 @@ import 'package:di_state_managment/screens/product_single/bloc/product_single_bl
 import 'package:di_state_managment/widgets/app_bar.dart';
 import 'package:di_state_managment/widgets/cart_badges.dart';
 import 'package:di_state_managment/widgets/main_bottun.dart';
-import 'package:flutter/material.dart' hide Colors;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
-import '../../data/repo/product_repo.dart';
+import '../../gen/assets.gen.dart';
 
 class ProductSingleScreen extends StatelessWidget {
   final int id;
@@ -27,238 +24,135 @@ class ProductSingleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-        BlocProvider(
-          create: (context) {
-            final productBloc = ProductSingleBloc(productRepository);
-            productBloc.add(ProductSingleInIt(id: id));
-            return productBloc;
-          },
-        
-        
-      
-      child: BlocBuilder<ProductSingleBloc, ProductSingleState>(
-        builder: (context, state) {
-          if (state is ProductSingleLoading) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          } else if (state is ProductSingleLoaded) {
-            final product = state.productDetails;
-            return SafeArea(
-              child: Scaffold(
-                appBar: CustomAppBar(
-                  child: Row(
-                    children: [
-                      ValueListenableBuilder(
-                        valueListenable: cartRepository.cartCount,
-                         builder: (context, value, widget) {
-                           return CartBadge(count: value);
-                         },),
-                      
-                      Expanded(
-                        child: FittedBox(
-                          child: Text(
-                            product.title!,
-                            style: LightAppTextStyle.prodactTitle,
-                            textDirection: TextDirection.rtl,
-                          ),
+    // استفاده از ProductSingleBloc موجود
+    final productBloc = BlocProvider.of<ProductSingleBloc>(context);
+    productBloc.add(ProductSingleInIt(id: id)); // فقط یک بار محصول را بارگذاری کن
+
+    return BlocBuilder<ProductSingleBloc, ProductSingleState>(
+      builder: (context, state) {
+        if (state is ProductSingleLoading) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        } else if (state is ProductSingleLoaded) {
+          final product = state.productDetails;
+
+          return SafeArea(
+            child: Scaffold(
+              appBar: CustomAppBar(
+                child: Row(
+                  children: [
+                    ValueListenableBuilder(
+                      valueListenable: cartRepository.cartCount,
+                      builder: (context, value, widget) {
+                        return CartBadge(count: value);
+                      },
+                    ),
+                    Expanded(
+                      child: FittedBox(
+                        child: Text(
+                          product.title ?? "بدون عنوان",
+                          style: LightAppTextStyle.prodactTitle,
+                          textDirection: TextDirection.rtl,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: SvgPicture.asset(Assets.svg.close),
-                      ),
-                    ],
-                  ),
-                ),
-                body: Stack(
-                  children: [
-                    SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          Image.network(product.image!, fit: BoxFit.cover),
-                          Container(
-                            margin: EdgeInsets.all(Dimens.medium),
-                            padding: EdgeInsets.all(Dimens.medium),
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                Dimens.medium,
-                              ),
-                              color: LightAppColors.scaffoldColor,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    product.brand!,
-                                    style: LightAppTextStyle.title,
-                                    textDirection: TextDirection.rtl,
-                                  ),
-                                ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    product.title!,
-                                    style: LightAppTextStyle.caption,
-                                    textDirection: TextDirection.rtl,
-                                  ),
-                                ),
-
-                                Divider(),
-
-                                PruductTabView(productDetails: product),
-                                60.0.height,
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-
-                    BlocConsumer<CartBloc, CartState>(
-                      listener: (cartContext, cartState) {
-                        if (cartState is CartLoaded) {
-                          ScaffoldMessenger.of(context).
-                          showSnackBar(SnackBar(
-                            duration: Duration(seconds: 1),
-                            backgroundColor: LightAppColors.succsessColor,
-                            content: Text(AppStrings.addToBsSuccsses,
-                            style: LightAppTextStyle.caption.
-                            copyWith(color: LightAppColors.onSuccsses),
-                            textAlign: TextAlign.center,)));
-                        }
-                      },
-                      builder: (cartContext, cartState) {
-
-                        if (cartState is CartLoading) {
-                          return Positioned(
-                            bottom: 0,
-                            left: Dimens.large,
-                            right: Dimens.large,
-                            child: LinearProgressIndicator());
-                        }
-
-                        return Positioned(
-                          bottom: 0,
-                          left: Dimens.large,
-                          right: Dimens.large,
-                          child: SizedBox(
-                            height: 60,
-                            child: MainBottun(
-                              text: AppStrings.addToBs,
-                              onPressed: () {
-                                BlocProvider.of<CartBloc>(context).
-                                add(AddToCartEvent(state.productDetails.id!));
-                              },
-                              style: AppButtonStyle.mainButtonStyle,
-                            ),
-                          ),
-                        );
-                      },
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: SvgPicture.asset(Assets.svg.close),
                     ),
                   ],
                 ),
               ),
-            );
-          } else if (state is ProductSingleError) {
-            return Text("error");
-          } else {
-            throw Exception("invalid request");
-          }
-        },
-      ),
+              body: Column(
+                children: [
+                  product.image != null
+                      ? Image.network(product.image!, height: 200, fit: BoxFit.cover)
+                      : const Icon(Icons.image_not_supported, size: 100),
+                  Dimens.large.height,
+                  Expanded(child: PruductTabView(productDetails: product)),
+
+                  SizedBox(
+                    height: 60,
+                    width: double.infinity,
+                    child: MainBottun(
+                      text: AppStrings.addToBs,
+                      onPressed: () {
+                        // فقط وقتی دکمه زده شد، محصول به سبد اضافه و SnackBar نمایش داده می‌شود
+                        BlocProvider.of<CartBloc>(context).add(
+                          AddToCartEvent(product.id!),
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 1),
+                            backgroundColor: LightAppColors.succsessColor,
+                            content: Text(
+                              AppStrings.addToBsSuccsses,
+                              style: LightAppTextStyle.caption.copyWith(
+                                color: LightAppColors.onSuccsses,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      },
+                      style: AppButtonStyle.mainButtonStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return const Scaffold(body: Center(child: Text("خطا در بارگذاری محصول")));
+        }
+      },
     );
   }
 }
 
-class PruductTabView extends StatefulWidget {
+
+class PruductTabView extends StatelessWidget {
   final ProductDetails productDetails;
   const PruductTabView({super.key, required this.productDetails});
 
   @override
-  State<PruductTabView> createState() => _PruductTabViewState();
-}
-
-class _PruductTabViewState extends State<PruductTabView> {
-  var selectedTabIndex = 2;
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: ListView.builder(
-            itemCount: tabs.length,
-            scrollDirection: Axis.horizontal,
-            itemExtent: MediaQuery.sizeOf(context).width / 3,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedTabIndex = index;
-                  });
-                },
-                child: Container(
-                  padding: EdgeInsets.all(Dimens.medium),
-                  child: Text(
-                    tabs[index],
-                    style: index == selectedTabIndex
-                        ? LightAppTextStyle.selectedTab
-                        : LightAppTextStyle.unSelectedTab,
+    return DefaultTabController(
+      length: 3,
+      child: Column(
+        children: [
+          const TabBar(
+            tabs: [
+              Tab(text: AppStrings.comments),
+              Tab(text: AppStrings.review),
+              Tab(text: AppStrings.details),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                CommentList(comments: productDetails.comments ?? []),
+                Review(
+                  description: HtmlWidget(
+                    productDetails.description ?? "بدون توضیحات",
+                    textStyle: LightAppTextStyle.caption,
+                  ),
+                  discussion: HtmlWidget(
+                    productDetails.discussion ?? "موردی ثبت نشده",
+                    textStyle: LightAppTextStyle.caption,
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-        IndexedStack(
-          index: selectedTabIndex,
-          children: [
-            CommentList(comments: widget.productDetails.comments!),
-            Review(
-              description: HtmlWidget(
-                widget.productDetails.discussion!,
-
-                textStyle: LightAppTextStyle.caption,
-                enableCaching: true,
-                onLoadingBuilder: (context, element, loadingProgress) =>
-                    SpinKitFadingCircle(
-                      color: LightAppColors.discountColor,
-                      size: 12,
-                    ),
-              ),
-              discussion: HtmlWidget(
-                widget.productDetails.description!,
-                textStyle: LightAppTextStyle.caption,
-                enableCaching: true,
-                onLoadingBuilder: (context, element, loadingProgress) =>
-                    SpinKitFadingCircle(
-                      color: LightAppColors.discountColor,
-                      size: 12,
-                    ),
-              ),
+                PropertiesList(properties: productDetails.properties ?? []),
+              ],
             ),
-
-            PropertiesList(properties: widget.productDetails.properties!),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
-
-List<String> tabs = [
-  AppStrings.comments,
-  AppStrings.review,
-  AppStrings.details,
-];
 
 class PropertiesList extends StatelessWidget {
   final List<Properties> properties;
@@ -266,28 +160,25 @@ class PropertiesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      width: MediaQuery.of(context).size.height * 0.4,
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        itemCount: properties.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final item = properties[index];
-          return Container(
-            padding: EdgeInsets.all(Dimens.medium),
-            margin: EdgeInsets.all(Dimens.medium),
-            width: double.infinity,
-            color: LightAppColors.surfaceColor,
-            child: Text(
-              "${item.property}  ${item.value}",
-              style: LightAppTextStyle.caption,
-              textAlign: TextAlign.right,
-            ),
-          );
-        },
-      ),
+    if (properties.isEmpty) {
+      return const Center(child: Text("مشخصاتی موجود نیست"));
+    }
+    return ListView.builder(
+      itemCount: properties.length,
+      itemBuilder: (context, index) {
+        final item = properties[index];
+        return Container(
+          padding: const EdgeInsets.all(Dimens.medium),
+          margin: const EdgeInsets.all(Dimens.medium),
+          width: double.infinity,
+          color: LightAppColors.surfaceColor,
+          child: Text(
+            "${item.property ?? ""}: ${item.value ?? ""}",
+            style: LightAppTextStyle.caption,
+            textAlign: TextAlign.right,
+          ),
+        );
+      },
     );
   }
 }
@@ -298,36 +189,33 @@ class CommentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      width: MediaQuery.of(context).size.height * 0.4,
-
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        itemCount: comments.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final item = comments[index];
-          return Container(
-            padding: EdgeInsets.all(Dimens.medium),
-            margin: EdgeInsets.all(Dimens.medium),
-            width: double.infinity,
-            color: LightAppColors.surfaceColor,
-            child: Text(
-              "${item.user}${item.body}",
-              style: LightAppTextStyle.caption,
-              textAlign: TextAlign.right,
-            ),
-          );
-        },
-      ),
+    if (comments.isEmpty) {
+      return const Center(child: Text("نظری ثبت نشده"));
+    }
+    return ListView.builder(
+      itemCount: comments.length,
+      itemBuilder: (context, index) {
+        final item = comments[index];
+        return Container(
+          padding: const EdgeInsets.all(Dimens.medium),
+          margin: const EdgeInsets.all(Dimens.medium),
+          width: double.infinity,
+          color: LightAppColors.surfaceColor,
+          child: Text(
+            "${item.user ?? ""}: ${item.body ?? ""}",
+            style: LightAppTextStyle.caption,
+            textAlign: TextAlign.right,
+          ),
+        );
+      },
     );
   }
 }
 
 class Review extends StatelessWidget {
-  final HtmlWidget description;
-  final HtmlWidget discussion;
+  final Widget description;
+  final Widget discussion;
+
   const Review({
     super.key,
     required this.description,
@@ -336,19 +224,23 @@ class Review extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      padding: const EdgeInsets.all(Dimens.medium),
       children: [
-        Padding(
-          padding: EdgeInsets.all(Dimens.small),
-          child: Text("توضیحات", style: LightAppTextStyle.title),
+        const Text(
+          "توضیحات",
+          style: LightAppTextStyle.title,
+          textAlign: TextAlign.right,
         ),
+        const SizedBox(height: 8),
         description,
-        Dimens.large.height,
-        Padding(
-          padding: EdgeInsets.all(Dimens.small),
-          child: Text("بحث", style: LightAppTextStyle.title),
+        const Divider(),
+        const Text(
+          "گفت‌وگو",
+          style: LightAppTextStyle.title,
+          textAlign: TextAlign.right,
         ),
+        const SizedBox(height: 8),
         discussion,
       ],
     );

@@ -1,14 +1,15 @@
 import 'package:di_state_managment/componnet/theme.dart';
 import 'package:di_state_managment/data/repo/cart_repo.dart';
+import 'package:di_state_managment/data/repo/product_repo.dart';
 import 'package:di_state_managment/route/routes.dart';
 import 'package:di_state_managment/screens/authentication/cubit/authentication_cubit.dart';
 import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
 import 'package:di_state_managment/screens/cart/bloc/cart_bloc.dart';
 import 'package:di_state_managment/screens/main_screen.dart';
+import 'package:di_state_managment/screens/product_single/bloc/product_single_bloc.dart';
 import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,8 +22,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AuthenticationCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => AuthenticationCubit()),
+        BlocProvider(create: (_)=>ProductSingleBloc(productRepository)),
+        BlocProvider<CartBloc>(
+          create: (context) {
+            final cartBloc= CartBloc(cartRepository);
+            cartBloc.add(LoadCartEvent());
+            return cartBloc;
+          },)
+
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Watch Store',
@@ -31,18 +42,7 @@ class MyApp extends StatelessWidget {
         home: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, state) {
             if (state is LoggedInState) {
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider<CartBloc>(
-                    create: (context) {
-                      final cartBloc = CartBloc(cartRepository);
-                      cartBloc.add( LoadCartEvent()); // بارگذاری اولیه سبد خرید
-                      return cartBloc;
-                    },
-                  ),
-                ],
-                child: const MainScreen(),
-              );
+              return const MainScreen();
             } else {
               return SendSmsScreen();
             }

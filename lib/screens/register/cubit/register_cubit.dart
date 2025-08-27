@@ -33,6 +33,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       // انتخاب لوکیشن از روی نقشه
       GeoPoint? value = await showSimplePickerLocation(
+        // ignore: use_build_context_synchronously
         context: context,
         isDismissible: true,
         title: "انتخاب موقعیت مکانی",

@@ -2,9 +2,9 @@ class CartModel {
   List<UserCart>? userCart;
   int? cartTotalPrice;
   int? totalWithoutDiscountPrice;
-  bool counloadin =false;
+  bool countloading =false;
   CartModel(
-      {this.userCart, this.cartTotalPrice, this.totalWithoutDiscountPrice});
+      {this.userCart, this.cartTotalPrice, this.totalWithoutDiscountPrice,this.countloading = false});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     if (json['user_cart'] != null) {

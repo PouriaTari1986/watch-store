@@ -16,110 +16,109 @@ import 'package:flutter_svg/svg.dart';
 
 class CartScreen extends StatelessWidget {
   final CartRepo cartRepository;
-  const CartScreen({super.key, required this.cartRepository});
+  final VoidCallback? onColse;
+  const CartScreen({super.key, required this.cartRepository, this.onColse, });
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-         final bloc = CartBloc(cartRepository);
-          bloc.add( LoadCartEvent()); // ابتدا Bloc ساخته شد، بعد Event اضافه شد
-          return bloc; // Bloc را بازگردانید
-      },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: CustomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ValueListenableBuilder<int>(
-                  valueListenable: cartRepository.cartCount,
-                  builder: (context, value, child) {
-                    return CartBadge(count: value);
-                  },
-                ),
-                Row(
-                  children: [
-                    Text(AppStrings.bestSelled),
-                    Dimens.small.width,
-                    SvgPicture.asset(Assets.svg.list),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: SvgPicture.asset(Assets.svg.close),
-                ),
-              ],
-            ),
-          ),
-          body: Column(
+    final cartBloc = BlocProvider.of<CartBloc>(context);
+    cartBloc.add(LoadCartEvent());
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: BlocBuilder<CartBloc, CartState>(
-                  builder: (context, state) {
-                    if (state is CartLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is CartLoaded) {
-                      final cart = state.cart;
-                      if ((cart.userCart ?? []).isEmpty) {
-                        return const Center(child: Text("سبد خرید خالی است"));
-                      }
-                      return CartList(cart: cart);
-                    } else if (state is CartError) {
-                      return Center(child: Text("خطا: ${state.message}"));
-                    }
-                    return const SizedBox();
-                  },
-                ),
+              ValueListenableBuilder<int>(
+                valueListenable: cartRepository.cartCount,
+                builder: (_, value, _) {
+                  return CartBadge(count: value);
+                },
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimens.medium),
-                  child: SizedBox(
-                    height: 55,
-                    width: 155,
-                    child: MainBottun(
+              Row(
+                children: [
+                  Text(AppStrings.bestSelled),
+                  Dimens.small.width,
+                  SvgPicture.asset(Assets.svg.list),
+                ],
+              ),
+              IconButton(
+                onPressed: onColse??(){},
+                icon: SvgPicture.asset(Assets.svg.close),  // رو این میزنم صفحه جدید باز میشه
+              ),
+            ],
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<CartBloc, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is CartLoaded) {
+                    final cart = state.cart;
+                    if ((cart.userCart ?? []).isEmpty) {
+                      return const Center(child: Text("سبد خرید خالی است"));
+                    }
+                    return CartList( list: [], userCart: [],);
+                  } else if (state is CartError) {
+                    return Center(child: Text("خطا: ${state.message}"));
+                  }
+                  return const SizedBox();
+                },
+              ),
+            ),
+            Container(
+              height: 50,
+              width: double.infinity,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Dimens.medium),
+                child: SizedBox(
+                  height: 55,
+                  width: 155,
+                  child: 
+                     MainBottun(
                       text: AppStrings.edmaeShpping,
                       onPressed: () {},
                       style: AppButtonStyleRed.mainButtonStyle,
                     ),
-                  ),
+                  
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class CartList extends StatelessWidget {
-  final CartModel cart;
-  const CartList({super.key, required this.cart});
+List <CartModel> list;
+List<UserCart> userCart;
+  
+   CartList({super.key, required this.list,required this.userCart});
 
   @override
   Widget build(BuildContext context) {
-    final items = cart.userCart ?? [];
-    final cartBloc = BlocProvider.of<CartBloc>(context);
 
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
-        return ShopingCartItem(
-          productTitle: item.product ?? "",
-          productPtotalWithoutDiscountPricericesWithDiscount: cart.totalWithoutDiscountPrice ?? 0,
-          cartTotalPrice: cart.cartTotalPrice ?? 0,
-          count: item.count ?? 0,
-          add: () => cartBloc.add(AddToCartEvent(item.productId ?? 0)),
-          remove: () => cartBloc.add(RemoveFromCartEvent(item.productId ?? 0)),
-          delete: () => cartBloc.add(DeleteFromCartEvent(item.productId ?? 0)),
-        );
-      },
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          
+          return ShopingCartItem(
+            cartModel: list[index], 
+            
+            userCart: userCart[index],
+        
+          );
+        },
+      ),
     );
   }
 }

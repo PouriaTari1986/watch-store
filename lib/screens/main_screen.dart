@@ -1,21 +1,14 @@
+// main_screen.dart
 import 'package:di_state_managment/data/repo/cart_repo.dart';
-import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resource/app_colors.dart';
-import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/screens/cart/cart_screen.dart';
 import 'package:di_state_managment/screens/home/home_screen.dart';
-import 'package:di_state_managment/screens/profile_screen.dart';
-import 'package:di_state_managment/widgets/button_navigation_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'profile_screen.dart';
+import '../gen/assets.gen.dart';
+import '../resource/app_colors.dart';
+import '../resource/strings.dart';
 
-class ButtonNavigationScreensIndex {
-  ButtonNavigationScreensIndex._();
-  static const home = 0;
-  static const basket = 1;
-  static const profile = 2;
-}
-
-// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -24,41 +17,40 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final List<int> _routeHistory = [ButtonNavigationScreensIndex.home];
-
-  int selectedIndex = ButtonNavigationScreensIndex.home;
+  int selectedIndex = 0;
 
   final GlobalKey<NavigatorState> _homeKey = GlobalKey();
-
   final GlobalKey<NavigatorState> _basketKey = GlobalKey();
-
   final GlobalKey<NavigatorState> _profileKey = GlobalKey();
 
-  late final Map map = {
-    ButtonNavigationScreensIndex.home: _homeKey,
-    ButtonNavigationScreensIndex.basket: _basketKey,
-    ButtonNavigationScreensIndex.profile: _profileKey,
+  late final Map<int, GlobalKey<NavigatorState>> _navKeys = {
+    0: _homeKey,
+    1: _basketKey,
+    2: _profileKey,
   };
 
-  Future<bool> _onPopIvoked() async {
-    if (map[selectedIndex].currentState!.canPop()) {
-      map[selectedIndex].currentState!.pop();
-    } else if (_routeHistory.length > 1) {
-      setState(() {
-        _routeHistory.removeLast();
-        selectedIndex = _routeHistory.last;
-      });
+  void _onBottomNavTap(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  Future<bool> _onWillPop() async {
+    final currentNavigator = _navKeys[selectedIndex]!.currentState!;
+    if (currentNavigator.canPop()) {
+      currentNavigator.pop();
+      return false;
     }
-    return false;
+    return true; // اجازه می‌دهد اپ خارج شود
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double btNavHeight = size.height * 0.1;
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) => _onPopIvoked(),
+
+    return WillPopScope(
+      onWillPop: _onWillPop,
       child: Scaffold(
         body: Stack(
           children: [
@@ -73,18 +65,24 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator(
                     key: _homeKey,
                     onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(builder: (_) => const HomeScreen()),
                   ),
                   Navigator(
                     key: _basketKey,
-                    onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (context) => CartScreen(cartRepository: cartRepository)),
+                    onGenerateRoute: (settings) => MaterialPageRoute(
+                      builder: (_) => CartScreen(
+                        onColse: () {
+                          setState(() {
+                            selectedIndex = 0; // برگرد به خانه
+                          });
+                        }, cartRepository: cartRepository,
+                      ),
+                    ),
                   ),
                   Navigator(
                     key: _profileKey,
-                    onGenerateRoute: (settings) => MaterialPageRoute(
-                      builder: (context) => ProfileScreen(),
-                    ),
+                    onGenerateRoute: (settings) =>
+                        MaterialPageRoute(builder: (_) => const ProfileScreen()),
                   ),
                 ],
               ),
@@ -93,7 +91,6 @@ class _MainScreenState extends State<MainScreen> {
               bottom: 0,
               left: 0,
               right: 0,
-
               child: Container(
                 height: btNavHeight,
                 color: LightAppColors.btNavColor,
@@ -101,36 +98,18 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BtmNAvItems(
-                      iconSvgPath: Assets.svg.user,
-                      text: AppStrings.prIcon,
-                      isActive:
-                          selectedIndex == ButtonNavigationScreensIndex.profile,
-                      onTap: () => btmNAvigationOnPressed(
-                        index: ButtonNavigationScreensIndex.profile,
-                      ),
-                    ),
-
-                    BtmNAvItems(
-                      count: 1,
-                      iconSvgPath: Assets.svg.shoppingBascket,
-                      text: AppStrings.shopBs,
-                      isActive:
-                          selectedIndex == ButtonNavigationScreensIndex.basket,
-                      onTap: () => btmNAvigationOnPressed(
-                        index: ButtonNavigationScreensIndex.basket,
-                      ),
-                    ),
-
-                    BtmNAvItems(
-                      iconSvgPath: Assets.svg.homeHashtag,
-                      text: AppStrings.homeIcon,
-                      isActive:
-                          selectedIndex == ButtonNavigationScreensIndex.home,
-                      onTap: () => btmNAvigationOnPressed(
-                        index: ButtonNavigationScreensIndex.home,
-                      ),
-                    ),
+                    _buildBottomNavItem(
+                        iconPath: Assets.svg.user,
+                        text: AppStrings.prIcon,
+                        index: 2),
+                    _buildBottomNavItem(
+                        iconPath: Assets.svg.shoppingBascket,
+                        text: AppStrings.shopBs,
+                        index: 1),
+                    _buildBottomNavItem(
+                        iconPath: Assets.svg.homeHashtag,
+                        text: AppStrings.homeIcon,
+                        index: 0),
                   ],
                 ),
               ),
@@ -141,10 +120,23 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  void btmNAvigationOnPressed({required int index}) {
-    setState(() {
-      selectedIndex = index;
-      _routeHistory.add(selectedIndex);
-    });
+  Widget _buildBottomNavItem(
+      {required String iconPath, required String text, required int index}) {
+    bool isActive = selectedIndex == index;
+    return GestureDetector(
+      onTap: () => _onBottomNavTap(index),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // ignore: deprecated_member_use
+          SvgPicture.asset(iconPath, color: isActive ? Colors.blue : Colors.grey),
+          const SizedBox(height: 4),
+          Text(
+            text,
+            style: TextStyle(color: isActive ? Colors.blue : Colors.grey),
+          ),
+        ],
+      ),
+    );
   }
 }
