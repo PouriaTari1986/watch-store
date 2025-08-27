@@ -66,6 +66,9 @@ class LightAppColors {
 
   static const Color continueButton = Color.fromARGB(255, 255, 97, 97);
 
+  static const Color succsessColor = Colors.green;
+  static const Color onSuccsses = Colors.white;
+
   static const Color primaryColor = Color.fromARGB(255, 30, 130, 255);
 
   static const Color btNavActiveColor = Color.fromARGB(255, 0, 0, 0);

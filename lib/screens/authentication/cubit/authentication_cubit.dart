@@ -5,6 +5,7 @@ import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:di_state_managment/utils/shared_prefrences_const.dart';
 import 'package:equatable/equatable.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 part 'authentication_state.dart';
 
@@ -22,6 +23,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         data: {"mobile": mobile},
       );
       if (HttpResponseValidator.isValidStatusCode(response.statusCode!)) {
+        final code = response.data["data"]["code"];
+         debugPrint("📩 کد تایید از سرور: $code");
         emit(LoadedState(mobile: mobile));
       } else {
         emit(ErrorState());

@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 part 'register_state.dart';
 
@@ -16,28 +17,49 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   final Dio _dio = Dio();
 
-  // ignore: strict_top_level_inference
   Future<void> pickLocation({required BuildContext context}) async {
-    GeoPoint? value = await showSimplePickerLocation(
-      context: context,
-      isDismissible: true,
-      title: "انتخاب موقعیت مکانی",
-      textCancelPicker: "لغو",
-      textConfirmPicker: "انتخاب",
-      zoomOption: ZoomOption(initZoom: 8),
-      initCurrentUserPosition: UserTrackingOption.withoutUserPosition(),
-      radius: 8.0,
-    );
-    if (value != null) {
-      List<Placemark> placeMark = await placemarkFromCoordinates(
-        value.latitude,
-        value.longitude,
+    try {
+      // چک کردن پرمیشن
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied ||
+            permission == LocationPermission.deniedForever) {
+          emit(ErrorState());
+          return;
+        }
+      }
+
+      // انتخاب لوکیشن از روی نقشه
+      GeoPoint? value = await showSimplePickerLocation(
+        context: context,
+        isDismissible: true,
+        title: "انتخاب موقعیت مکانی",
+        textCancelPicker: "لغو",
+        textConfirmPicker: "انتخاب",
+        zoomOption: ZoomOption(initZoom: 8),
+        initCurrentUserPosition: UserTrackingOption.withoutUserPosition(),
+        radius: 8.0,
       );
 
-      Placemark place = placeMark.first;
-      String address =
-          "${place.street},${place.locality},${place.administrativeArea}";
-      emit(LocationPickedState(location: value, address: address));
+      if (value != null) {
+        List<Placemark> placeMark = await placemarkFromCoordinates(
+          value.latitude,
+          value.longitude,
+        );
+
+        Placemark place = placeMark.first;
+
+        String address =
+            "${place.street ?? ""}, ${place.locality ?? ""}, ${place.subAdministrativeArea ?? ""}, ${place.administrativeArea ?? ""}, ${place.country ?? ""}";
+
+        debugPrint("📍 آدرس انتخاب شده: $address");
+        emit(LocationPickedState(location: value, address: address));
+      }
+    } catch (e) {
+      debugPrint("❌ خطا در pickLocation: $e");
+      emit(ErrorState());
     }
   }
 
@@ -49,16 +71,20 @@ class RegisterCubit extends Cubit<RegisterState> {
         SharedPrefrencesConst.token,
       );
       _dio.options.headers["Authorization"] = "Bearer $token";
-      await _dio
-          .post(EndPoints.register, data: FormData.fromMap(user.toMap()))
-          .then((value) {
-            if (value.statusCode == 201) {
-              emit(OkResponseState());
-            } else {
-              emit(ErrorState());
-            }
-          });
+
+      final response = await _dio.post(
+        EndPoints.register,
+        data: FormData.fromMap(user.toMap()),
+      );
+
+      if (response.statusCode == 201) {
+        emit(OkResponseState());
+      } else {
+        debugPrint("❌ ثبت نام با خطا: ${response.statusCode}");
+        emit(ErrorState());
+      }
     } catch (e) {
+      debugPrint("❌ خطا در ثبت‌نام: $e");
       emit(ErrorState());
     }
   }

@@ -37,6 +37,7 @@ class SendSmsScreen extends StatelessWidget {
               BlocConsumer<AuthenticationCubit, AuthenticationState>(
                 listener: (context, state) {
                   if (state is LoadedState) {
+                     
                     Navigator.pushNamed(
                       context,
                       ScreensNames.verificationCodeScreen,

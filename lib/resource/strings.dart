@@ -81,6 +81,8 @@ abstract class AppStrings {
 
   static const String addToBs = "افزودن به سبد خرید";
 
+  static const String addToBsSuccsses = "افزودن به سبد خرید با موفقیت انجام شد";
+
   static const String sendToAdd = "ارسال به آدرس";
 
   static const String activatedAdd = "آدرس فعال";

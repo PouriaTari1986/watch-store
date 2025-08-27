@@ -8,17 +8,24 @@ import '../gen/assets.gen.dart';
 
 // ignore: must_be_immutable
 class ShopingCartItem extends StatelessWidget {
-  ShopingCartItem({
+  const ShopingCartItem({
     super.key,
+    required this.count,
     required this.productTitle,
-    required this.productPrices,
-    required this.productPricesWithDiscount,
+    required this.cartTotalPrice,
+    required this.productPtotalWithoutDiscountPricericesWithDiscount, 
+    this.add, 
+    this.remove, 
+    this.delete,
   });
+  final VoidCallback? add;
+  final VoidCallback? remove;
+  final VoidCallback? delete;
 
-  int count = 0;
+  final int count ;
   final String productTitle;
-  final int productPrices;
-  final int productPricesWithDiscount;
+  final int cartTotalPrice;
+  final int productPtotalWithoutDiscountPricericesWithDiscount;
   @override
   Widget build(BuildContext context) {
     return SurfaceContainer(
@@ -33,11 +40,11 @@ class ShopingCartItem extends StatelessWidget {
                   style: LightAppTextStyle.prodactTitle.copyWith(fontSize: 12),
                 ),
                 Text(
-                  "${productPrices.seperatedWithComa}  تومان",
+                  "${productPtotalWithoutDiscountPricericesWithDiscount.seperatedWithComa}  تومان",
                   style: LightAppTextStyle.caption,
                 ),
                 Text(
-                  "${productPricesWithDiscount.seperatedWithComa}  با تخفیف",
+                  "${cartTotalPrice.seperatedWithComa}  با تخفیف",
                   style: LightAppTextStyle.timerStyle,
                 ),
                 Divider(),
@@ -45,20 +52,20 @@ class ShopingCartItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: delete,
                       icon: SvgPicture.asset(Assets.svg.recycleBin),
                     ),
 
                     Expanded(child: SizedBox()),
 
                     IconButton(
-                      onPressed: () {},
+                      onPressed: add,
                       icon: SvgPicture.asset(Assets.svg.plus),
                     ),
 
                     Text("عدد$count"),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: remove,
                       icon: SvgPicture.asset(Assets.svg.minus),
                     ),
                   ],

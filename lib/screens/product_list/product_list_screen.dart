@@ -1,5 +1,6 @@
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
+import 'package:di_state_managment/data/repo/cart_repo.dart';
 import 'package:di_state_managment/data/repo/product_repo.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resource/dimens.dart';
@@ -32,7 +33,11 @@ class ProductListScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CartBadge(),
+                ValueListenableBuilder(
+                  valueListenable: cartRepository.cartCount,
+                   builder: (context, value, child) {
+                     return CartBadge(count: value,);
+                   },),
                 Row(
                   children: [
                     Text(AppStrings.bestSelled),
