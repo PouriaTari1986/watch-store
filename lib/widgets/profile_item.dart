@@ -12,13 +12,11 @@ class ProfileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Text(
-            text,
-            style: LightAppTextStyle.title,
-
-            textAlign: TextAlign.right,
-          ),
+        Text(
+          text,
+          style: LightAppTextStyle.title,
+        
+          textAlign: TextAlign.right,
         ),
         Dimens.small.width,
         SvgPicture.asset(iconPath),

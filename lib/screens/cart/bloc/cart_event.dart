@@ -9,6 +9,8 @@ abstract class CartEvent extends Equatable {
 
 class LoadCartEvent extends CartEvent {}
 
+
+
 class AddToCartEvent extends CartEvent {
   final int productId;
   const AddToCartEvent(this.productId);
@@ -34,3 +36,5 @@ class DeleteFromCartEvent extends CartEvent {
 }
 
 class CartCountEvent extends CartEvent {}
+
+class PayCartEvent extends CartEvent {}

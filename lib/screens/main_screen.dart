@@ -4,7 +4,7 @@ import 'package:di_state_managment/screens/cart/cart_screen.dart';
 import 'package:di_state_managment/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'profile_screen.dart';
+import 'profile/profile_screen.dart';
 import '../gen/assets.gen.dart';
 import '../resource/app_colors.dart';
 import '../resource/strings.dart';

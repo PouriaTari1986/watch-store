@@ -4,12 +4,14 @@ import 'package:di_state_managment/utils/response_validator.dart';
 import 'package:dio/dio.dart';
 
 abstract class ICartDataSource {
-  Future<CartModel> getUserCart();
-  Future<CartModel> addToCart({required int productId});
-  Future<CartModel> removeFromCart({required int productId});
-  Future<CartModel> deleteFromCart({required int productId});
+  Future<UserCart> getUserCart();
+  Future<UserCart> addToCart({required int productId});
+  Future<UserCart> removeFromCart({required int productId});
+  Future<UserCart> deleteFromCart({required int productId});
   Future<int> cartCountItems();
+ Future<String> payCart();
 }
+
 
 class CartRemoteDataSrc implements ICartDataSource {
   final Dio httpClient;
@@ -18,40 +20,40 @@ class CartRemoteDataSrc implements ICartDataSource {
   CartRemoteDataSrc(this.httpClient);
 
   @override
-  Future<CartModel> addToCart({required int productId}) async {
+  Future<UserCart> addToCart({required int productId}) async {
     final response = await httpClient.post(
       EndPoints.addToCart,
       data: {productIdJsonKey: productId},
     );
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
-    return CartModel.fromJson(response.data['data']);
+    return UserCart.fromJson(response.data['data']);
   }
 
   @override
-  Future<CartModel> deleteFromCart({required int productId}) async {
+  Future<UserCart> deleteFromCart({required int productId}) async {
     final response = await httpClient.post(
       EndPoints.deleteFromCart,
       data: {productIdJsonKey: productId},
     );
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
-    return CartModel.fromJson(response.data['data']);
+    return UserCart.fromJson(response.data['data']);
   }
 
   @override
-  Future<CartModel> removeFromCart({required int productId}) async {
+  Future<UserCart> removeFromCart({required int productId}) async {
     final response = await httpClient.post(
       EndPoints.removeFromCart,
       data: {productIdJsonKey: productId},
     );
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
-    return CartModel.fromJson(response.data['data']);
+    return UserCart.fromJson(response.data['data']);
   }
 
   @override
-  Future<CartModel> getUserCart() async {
+  Future<UserCart> getUserCart() async {
     final response = await httpClient.post(EndPoints.userCart);
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
-    return CartModel.fromJson(response.data['data']);
+    return UserCart.fromJson(response.data['data']);
   }
 
   @override
@@ -59,6 +61,14 @@ class CartRemoteDataSrc implements ICartDataSource {
     final response = await httpClient.post(EndPoints.userCart);
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
     return (response.data['data']['user_cart'] as List).length;
+  }
+  
+  @override
+  Future<String> payCart()async {
+   
+   final response = await httpClient.post(EndPoints.payment);
+   HttpResponseValidator.isValidStatusCode(response.statusCode??0);
+   return response.data['action'];
   }
 }
 

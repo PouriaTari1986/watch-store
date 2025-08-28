@@ -6,18 +6,16 @@ import 'package:di_state_managment/widgets/surface_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../gen/assets.gen.dart';
 
 // ignore: must_be_immutable
 class ShopingCartItem extends StatefulWidget {
-   ShopingCartItem({
+  ShopingCartItem({
     super.key,
-  required this.cartModel,
-  required this.userCart
+    required this.cartModel,
   });
+
   CartModel cartModel;
-  UserCart userCart;
 
   @override
   State<ShopingCartItem> createState() => _ShopingCartItemState();
@@ -29,68 +27,84 @@ class _ShopingCartItemState extends State<ShopingCartItem> {
     final cartBloc = BlocProvider.of<CartBloc>(context);
     return SurfaceContainer(
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  widget.userCart.product!,
+                  widget.cartModel.product,
                   style: LightAppTextStyle.prodactTitle.copyWith(fontSize: 12),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "${widget.cartModel.totalWithoutDiscountPrice!.seperatedWithComa}  تومان",
+                  "${widget.cartModel.price.seperatedWithComa} تومان",
                   style: LightAppTextStyle.caption,
                 ),
-                Text(
-                  "${widget.cartModel.cartTotalPrice!.seperatedWithComa}  با تخفیف",
-                  style: LightAppTextStyle.timerStyle,
+                Visibility(
+                  visible: widget.cartModel.discount > 0,
+                  child: Text(
+                    "${widget.cartModel.discountPrice.seperatedWithComa} با تخفیف",
+                    style: LightAppTextStyle.timerStyle,
+                  ),
                 ),
-                Divider(),
+                const Divider(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: (){
-                        setState(()=> widget.cartModel.deleteloading = true);
-                        cartBloc.add(DeleteFromCartEvent(widget.userCart.productId!));
+                      onPressed: () {
+                        cartBloc.add(DeleteFromCartEvent(widget.cartModel.productId));
                       },
                       icon: SvgPicture.asset(Assets.svg.recycleBin),
                     ),
-
-                    Expanded(child: SizedBox()),
-
-                    IconButton(
-                      onPressed: (){
-                        setState(()=>
-                          widget.cartModel.countloading = true
-                        );
-                        cartBloc.add(AddToCartEvent(widget.userCart.productId!));
-                      },
-                      icon: SvgPicture.asset(Assets.svg.plus),
-                    ),
-
-                    widget.cartModel.countloading?
-                    SizedBox(height: 24,width: 24,child: CircularProgressIndicator() ,):
-                    Text("عدد${widget.userCart.count}"),
-                    IconButton(
-                      onPressed: (){
-                         setState(() =>
-                          widget.cartModel.countloading = true
-                        );
-                        cartBloc.add(RemoveFromCartEvent(widget.userCart.productId!));
-                      },
-                      icon: SvgPicture.asset(Assets.svg.minus),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                widget.cartModel.countloading = true;
+                              });
+                              cartBloc.add(AddToCartEvent(widget.cartModel.productId));
+                            },
+                            icon: SvgPicture.asset(Assets.svg.plus),
+                          ),
+                          Text("${widget.cartModel.count} عدد"),
+                          widget.cartModel.countloading
+                              ? const SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                )
+                              : IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      widget.cartModel.countloading = true;
+                                    });
+                                    cartBloc.add(RemoveFromCartEvent(widget.cartModel.productId));
+                                  },
+                                  icon: SvgPicture.asset(Assets.svg.minus),
+                                ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-                Visibility(
-                  visible: widget.cartModel.deleteloading,
-                  child: LinearProgressIndicator())
               ],
             ),
           ),
-          Image.asset(Assets.png.product.path, height: 130),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              widget.cartModel.image,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
+          ),
         ],
       ),
     );

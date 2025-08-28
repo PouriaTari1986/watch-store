@@ -15,14 +15,14 @@ class CartInitial extends CartState {}
 class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
-  final CartModel cart;
+  final UserCart userCart;
 
-const CartLoaded(this.cart,{super.lastAction});
+const CartLoaded(this.userCart,{super.lastAction});
   
 
 
   @override
-  List<Object?> get props => [cart, lastAction];
+  List<Object?> get props => [userCart, lastAction];
 }
 
 class CartError extends CartState {
@@ -32,4 +32,11 @@ class CartError extends CartState {
 
   @override
   List<Object?> get props => [message];
+}
+final class RecievedPayLinkState extends CartState{
+  final String url;
+
+ const RecievedPayLinkState(this.url);
+   @override
+  List<Object?> get props => [url];
 }

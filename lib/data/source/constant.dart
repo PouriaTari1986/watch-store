@@ -13,6 +13,7 @@ class EndPoints {
   static const addToCart = "$baseUrl/add_to_cart";
   static const removeFromCart = "$baseUrl/remove_from_cart";
   static const deleteFromCart = "$baseUrl/delete_from_cart";
+  static const payment = "$baseUrl/payment";
 }
 
 class ProductSortRoute {
@@ -20,4 +21,12 @@ class ProductSortRoute {
   static const cheapestProducts = "/cheapest_products";
   static const mostExpensiveProducts = "/most_expensive_products";
   static const mostViewedProducts = "/most_viewed_products";
+}
+class UserInfoConst{
+
+  static const profile = "/profile";
+  static const userAddresses = "/user_addresses";
+  static const userReceivedOrders = "/user_received_orders";
+  static const userCncelledOrders = "/user_cancelled_orders";
+  static const userProcessingOrders = "/user_processing_orders";
 }

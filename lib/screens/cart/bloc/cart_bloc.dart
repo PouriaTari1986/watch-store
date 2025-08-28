@@ -58,5 +58,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         // میتونی لاگ بزنی
       }
     });
+      on<PayCartEvent>((event, emit) async {
+      try {
+        final link = await _cartRepository.payCart();
+        emit(RecievedPayLinkState(link)
+        );
+        // فقط ValueNotifier آپدیت میشه
+      } catch (e) {
+        emit(CartError(e.toString()));
+      }
+    });
   }
 }
