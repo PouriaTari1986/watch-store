@@ -52,6 +52,7 @@ class _ShopingCartItemState extends State<ShopingCartItem> {
                   children: [
                     IconButton(
                       onPressed: (){
+                        setState(()=> widget.cartModel.deleteloading = true);
                         cartBloc.add(DeleteFromCartEvent(widget.userCart.productId!));
                       },
                       icon: SvgPicture.asset(Assets.svg.recycleBin),
@@ -61,9 +62,9 @@ class _ShopingCartItemState extends State<ShopingCartItem> {
 
                     IconButton(
                       onPressed: (){
-                        setState(() {
-                          widget.cartModel.countloading = true;
-                        });
+                        setState(()=>
+                          widget.cartModel.countloading = true
+                        );
                         cartBloc.add(AddToCartEvent(widget.userCart.productId!));
                       },
                       icon: SvgPicture.asset(Assets.svg.plus),
@@ -74,15 +75,18 @@ class _ShopingCartItemState extends State<ShopingCartItem> {
                     Text("عدد${widget.userCart.count}"),
                     IconButton(
                       onPressed: (){
-                         setState(() {
-                          widget.cartModel.countloading = true;
-                        });
+                         setState(() =>
+                          widget.cartModel.countloading = true
+                        );
                         cartBloc.add(RemoveFromCartEvent(widget.userCart.productId!));
                       },
                       icon: SvgPicture.asset(Assets.svg.minus),
                     ),
                   ],
                 ),
+                Visibility(
+                  visible: widget.cartModel.deleteloading,
+                  child: LinearProgressIndicator())
               ],
             ),
           ),

@@ -61,7 +61,7 @@ class CartScreen extends StatelessWidget {
                     if ((cart.userCart ?? []).isEmpty) {
                       return const Center(child: Text("سبد خرید خالی است"));
                     }
-                    return CartList( list: [], userCart: [],);
+                    return CartList(cart: cart);
                   } else if (state is CartError) {
                     return Center(child: Text("خطا: ${state.message}"));
                   }
@@ -97,10 +97,9 @@ class CartScreen extends StatelessWidget {
 
 // ignore: must_be_immutable
 class CartList extends StatelessWidget {
-List <CartModel> list;
-List<UserCart> userCart;
-  
-   CartList({super.key, required this.list,required this.userCart});
+
+  final CartModel cart;
+   const CartList({super.key, required this.cart});
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +107,11 @@ List<UserCart> userCart;
 
     return Expanded(
       child: ListView.builder(
-        itemCount: list.length,
+        itemCount: cart.userCart?.length??0,
         itemBuilder: (context, index) {
           
-          return ShopingCartItem(
-            cartModel: list[index], 
+          return ShopingCartItem(cartModel: cart, userCart: cart.userCart![index],
             
-            userCart: userCart[index],
         
           );
         },

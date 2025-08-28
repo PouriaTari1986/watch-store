@@ -82,32 +82,14 @@ class HomeScreen extends StatelessWidget {
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   physics: ClampingScrollPhysics(),
-                                  itemCount: state.home.amazingProducts.length,
+                                  itemCount: state.home.amazingProducts.length, 
                                   shrinkWrap: true,
-                                  itemBuilder: (context, index) => ProductItem(
-                                    image:
-                                        state.home.amazingProducts[index].image,
-                                    productName:
-                                        state.home.amazingProducts[index].title,
-                                    price: state
-                                        .home
-                                        .amazingProducts[index]
-                                        .discountPrice,
-                                    oldPriceT:
-                                        state.home.amazingProducts[index].price,
-                                    discount: state
-                                        .home
-                                        .amazingProducts[index]
-                                        .discount,
-                                    specialExpiration: state
-                                        .home
-                                        .amazingProducts[index]
-                                        .specialExpiration,
-                                    id:state
-                                    .home
-                                    .amazingProducts[index]
-                                    .id,
-                                  ),
+                                  itemBuilder: (context, index) {
+                                    
+                                    return ProductItem(
+                                  product: state.home.amazingProducts[index]
+                                  );
+                                  },
                                 ),
                               ),
                               VerticalText(amazeText: AppStrings.wonder),
@@ -146,36 +128,15 @@ class HomeScreen extends StatelessWidget {
                                   itemCount:
                                       state.home.mostSellerProducts.length,
                                   shrinkWrap: true,
-                                  itemBuilder: (context, index) => ProductItem(
-                                    image: state
+                                  itemBuilder: (context, index) {
+                                    
+                                    return ProductItem(
+                                      product: state
                                         .home
                                         .mostSellerProducts[index]
-                                        .image,
-                                    productName: state
-                                        .home
-                                        .mostSellerProducts[index]
-                                        .title,
-                                    price: state
-                                        .home
-                                        .mostSellerProducts[index]
-                                        .price,
-                                    discount: state
-                                        .home
-                                        .mostSellerProducts[index]
-                                        .discount,
-                                    oldPriceT: state
-                                        .home
-                                        .mostSellerProducts[index]
-                                        .price,
-                                    specialExpiration: state
-                                        .home
-                                        .mostSellerProducts[index]
-                                        .specialExpiration, 
-                                    id: state
-                                    .home
-                                    .mostSellerProducts[index]
-                                    .id,
-                                  ),
+                                    
+                                  );
+                                  },
                                 ),
                               ),
                               VerticalText(amazeText: AppStrings.bestSelled),
@@ -198,16 +159,13 @@ class HomeScreen extends StatelessWidget {
                                   physics: ClampingScrollPhysics(),
                                   itemCount: state.home.newextProducts.length,
                                   shrinkWrap: true,
-                                  itemBuilder: (context, index) => ProductItem(
-                                    image:
-                                        state.home.newextProducts[index].image,
-                                    productName:
-                                        state.home.newextProducts[index].title,
-                                    price:
-                                        state.home.newextProducts[index].price, 
-                                    id: state
-                                    .home.newextProducts[index].id,
-                                  ),
+                                  itemBuilder: (context, index) {
+                                    
+                                    return ProductItem(
+                                      product: state.home.newextProducts[index]
+                                                                
+                                  );
+                                  },
                                 ),
                               ),
                               VerticalText(amazeText: AppStrings.newest),

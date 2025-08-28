@@ -10,4 +10,6 @@ sealed class ProductSingleEvent extends Equatable {
 class ProductSingleInIt extends ProductSingleEvent{
   final int id;
   const ProductSingleInIt({required this.id});
+   @override
+  List<Object> get props => [id];
 }

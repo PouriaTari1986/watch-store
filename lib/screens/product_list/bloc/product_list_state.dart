@@ -14,4 +14,6 @@ final class ProductListError extends ProductListState {}
 final class ProductListLoaded extends ProductListState {
   final List<Product> productList;
   const ProductListLoaded(this.productList);
+    @override
+  List<Object> get props => productList;
 }

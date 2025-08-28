@@ -3,8 +3,14 @@ class CartModel {
   int? cartTotalPrice;
   int? totalWithoutDiscountPrice;
   bool countloading =false;
+  bool deleteloading =false;
   CartModel(
-      {this.userCart, this.cartTotalPrice, this.totalWithoutDiscountPrice,this.countloading = false});
+      {this.userCart, 
+      this.cartTotalPrice, 
+      this.totalWithoutDiscountPrice,
+      this.countloading = false,
+      this.deleteloading = false
+      });
 
   CartModel.fromJson(Map<String, dynamic> json) {
     if (json['user_cart'] != null) {

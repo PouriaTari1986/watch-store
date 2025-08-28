@@ -2,31 +2,21 @@ import 'dart:async';
 
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
+import 'package:di_state_managment/data/models/product.dart';
 import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:di_state_managment/screens/product_single/product_single_screen.dart';
 import 'package:di_state_managment/utils/format_time.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ProductItem extends StatefulWidget {
-  const ProductItem({
+   ProductItem({
     super.key,
+    required this.product
 
-    this.discount = 0,
-    this.specialExpiration = '',
-    this.oldPriceT = 0,
-    required this.productName,
-    required this.price,
-    required this.image,
-    required this.id,
   });
-  final String image;
-  final String productName;
-  final int price;
-  final int oldPriceT;
-  final int discount;
-  final String specialExpiration;
-  final int id;
+Product product;
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
@@ -39,9 +29,9 @@ class _ProductItemState extends State<ProductItem> {
   void initState() {
     super.initState();
     
-    if (widget.specialExpiration.isNotEmpty) {
+    if (widget.product.specialExpiration.isNotEmpty) {
       DateTime now = DateTime.now();
-      DateTime expiration = DateTime.parse(widget.specialExpiration);
+      DateTime expiration = DateTime.parse(widget.product.specialExpiration);
       _duration = expiration.difference(now);
       inSeconds = _duration.inSeconds;
       if (inSeconds > 0) {
@@ -69,14 +59,14 @@ class _ProductItemState extends State<ProductItem> {
         onTap: () {
           Navigator.push(context, 
           MaterialPageRoute(builder: (context) =>
-          ProductSingleScreen(id: widget.id),));
+          ProductSingleScreen(id: widget.product.id),));
         },
         child: Column(
           children: [
             SizedBox(
               height: MediaQuery.sizeOf(context).height / 9.5,
               child: Image(
-                image: NetworkImage(widget.image),
+                image: NetworkImage(widget.product.image),
                 fit: BoxFit.contain,
               ),
             ),
@@ -84,7 +74,7 @@ class _ProductItemState extends State<ProductItem> {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                widget.productName,
+                widget.product.title,
                 style: LightAppTextStyle.prodactTitle,
               ),
             ),
@@ -93,25 +83,25 @@ class _ProductItemState extends State<ProductItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${widget.price.seperatedWithComa}  تومان",
+                  "${widget.product.price.seperatedWithComa}  تومان",
                   style: LightAppTextStyle.title,
                 ),
-                if (widget.discount > 0 && !isExpired)
+                if (widget.product.discount > 0 && !isExpired)
                   Text(
-                    "${widget.oldPriceT.seperatedWithComa}  تومان",
+                    "${widget.product.discountPrice.seperatedWithComa}  تومان",
                     style: LightAppTextStyle.oldPrice,
                   ),
               ],
             ),
             
-            if (!isExpired && widget.discount > 0)
+            if (!isExpired && widget.product.discount > 0)
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(60),
                   color: Colors.red,
                 ),
-                child: Text("${widget.discount}%"),
+                child: Text("${widget.product.discount}%"),
               ),
             
             Dimens.large.height,

@@ -41,7 +41,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
 
     on<DeleteFromCartEvent>((event, emit) async {
-      emit(CartLoading());
+      
       try {
         final cart = await _cartRepository.deleteFromCart(productId: event.productId);
         emit(CartLoaded(cart, lastAction: CartAction.delete));
