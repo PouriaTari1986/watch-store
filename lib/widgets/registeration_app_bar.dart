@@ -16,6 +16,7 @@ class RegisterationAppBar extends StatelessWidget
       preferredSize: Size(size.width, size.height * 0.1),
       child: SizedBox(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             IconButton(
               onPressed: (() {

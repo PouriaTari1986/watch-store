@@ -40,7 +40,7 @@ class CartScreen extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Text(AppStrings.bestSelled),
+                 
                   Dimens.small.width,
                   SvgPicture.asset(Assets.svg.list),
                 ],

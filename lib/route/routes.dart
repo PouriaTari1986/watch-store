@@ -8,7 +8,7 @@ import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
 import 'package:flutter/widgets.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
-  ScreensNames.root: (context) => SendSmsScreen(),
+  ScreensNames.sendSmsScreen: (context) => SendSmsScreen(),
 
   ScreensNames.verificationCodeScreen: (context) => VerificationCodeScreen(),
 

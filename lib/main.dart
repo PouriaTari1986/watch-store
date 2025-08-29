@@ -1,7 +1,6 @@
 import 'package:di_state_managment/componnet/theme.dart';
 import 'package:di_state_managment/data/repo/cart_repo.dart';
 import 'package:di_state_managment/data/repo/product_repo.dart';
-import 'package:di_state_managment/route/names.dart';
 import 'package:di_state_managment/route/routes.dart';
 import 'package:di_state_managment/screens/authentication/cubit/authentication_cubit.dart';
 import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
@@ -39,7 +38,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Watch Store',
         theme: lightTheme(),
-        initialRoute: ScreensNames.root,
         routes: routes,
         home: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, state) {

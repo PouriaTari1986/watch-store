@@ -2,7 +2,6 @@ import 'package:di_state_managment/componnet/decorations.dart';
 import 'package:di_state_managment/componnet/extension.dart';
 import 'package:di_state_managment/componnet/text_style.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
-import 'package:di_state_managment/resource/app_colors.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/widgets/app_bar.dart';
@@ -71,29 +70,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
 
-                      Container(
-                        height: 2,
-                        width: double.infinity,
-                        color: LightAppColors.surfaceColor,
-                      ),
-                      Dimens.medium.height,
+                     
+                      Dimens.large.height,
                       ProfileItem(
                         iconPath: Assets.svg.card,
-
+                      
                         text: AppStrings.cartNo,
                       ),
-                      Dimens.medium.height,
-                      ProfileItem(
-                        iconPath: Assets.svg.vuesaxLinearCall,
-
-                        text: AppStrings.phonrNo,
-                      ),
-                      Dimens.medium.height,
-                      ProfileItem(
-                        iconPath: Assets.svg.userProfile,
-
-                        text: AppStrings.myNae,
-                      ),
+                         Dimens.medium.height,
+                                            ProfileItem(
+                                              iconPath: Assets.svg.vuesaxLinearCall,
+                      
+                                              text: AppStrings.phonrNo,
+                                            ),
+                                            Dimens.medium.height,
+                                            ProfileItem(
+                                              iconPath: Assets.svg.userProfile,
+                      
+                                              text: AppStrings.myNae,
+                                            ),
+                   
                     ],
                   ),
                   Dimens.large.height,

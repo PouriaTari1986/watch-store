@@ -2,7 +2,7 @@ class ScreensNames {
   ScreensNames._();
 
   static const verificationCodeScreen = "/verificationCodeScreen";
-  static const root = "/sendSmsScreen";
+  static const sendSmsScreen = "/sendSmsScreen";
   static const registerScreen = "/registerScreen";
   static const mainScreen = "/mainScreen";
   static const homeScreen = "/homeScreen";

@@ -1,13 +1,22 @@
 // main_screen.dart
 import 'package:di_state_managment/data/repo/cart_repo.dart';
 import 'package:di_state_managment/screens/cart/cart_screen.dart';
-import 'package:di_state_managment/screens/home/home_screen.dart';
+import 'package:di_state_managment/screens/main_screen/home/home_screen.dart';
+import 'package:di_state_managment/widgets/button_navigation_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../profile/profile_screen.dart';
 import '../../gen/assets.gen.dart';
 import '../../resource/app_colors.dart';
 import '../../resource/strings.dart';
+
+
+class BtmNavScreenIndex{
+  BtmNavScreenIndex._();
+  static const home = 0;
+  static const profile = 2;
+  static const cart = 1;
+
+}
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +26,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int selectedIndex = 0;
+  int selectedIndex = BtmNavScreenIndex.home;
+
+  final List<int> _routeHistory = [BtmNavScreenIndex.home];
+
 
   final GlobalKey<NavigatorState> _homeKey = GlobalKey();
   final GlobalKey<NavigatorState> _basketKey = GlobalKey();
@@ -29,9 +41,10 @@ class _MainScreenState extends State<MainScreen> {
     2: _profileKey,
   };
 
-  void _onBottomNavTap(int index) {
+  void _onBottomNavTap({required int index}) {
     setState(() {
       selectedIndex = index;
+      _routeHistory.add(selectedIndex);
     });
   }
 
@@ -40,6 +53,11 @@ class _MainScreenState extends State<MainScreen> {
     if (currentNavigator.canPop()) {
       currentNavigator.pop();
       return false;
+    }else if(_routeHistory.length>1){
+      setState(() {
+        _routeHistory.removeLast();
+        selectedIndex= _routeHistory.last;
+      });
     }
     return true; // اجازه می‌دهد اپ خارج شود
   }
@@ -66,7 +84,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator(
                     key: _homeKey,
                     onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        MaterialPageRoute(builder: (_) =>  HomeScreen()),
                   ),
                   Navigator(
                     key: _basketKey,
@@ -83,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                   Navigator(
                     key: _profileKey,
                     onGenerateRoute: (settings) =>
-                        MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                        MaterialPageRoute(builder: (_) =>  ProfileScreen()),
                   ),
                 ],
               ),
@@ -99,18 +117,21 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _buildBottomNavItem(
-                        iconPath: Assets.svg.user,
+                    BtmNAvItems(
+                        iconSvgPath: Assets.svg.user,
                         text: AppStrings.prIcon,
-                        index: 2),
-                    _buildBottomNavItem(
-                        iconPath: Assets.svg.shoppingBascket,
+                        isActive: selectedIndex == BtmNavScreenIndex.profile,
+                         onTap: () =>_onBottomNavTap(index: BtmNavScreenIndex.profile)),
+                    BtmNAvItems(
+                        iconSvgPath: Assets.svg.shoppingBascket,
                         text: AppStrings.shopBs,
-                        index: 1),
-                    _buildBottomNavItem(
-                        iconPath: Assets.svg.homeHashtag,
+                        isActive: selectedIndex == BtmNavScreenIndex.cart,
+                         onTap: () =>_onBottomNavTap(index: BtmNavScreenIndex.cart)),
+                    BtmNAvItems(
+                        iconSvgPath: Assets.svg.homeHashtag,
                         text: AppStrings.homeIcon,
-                        index: 0),
+                        isActive: selectedIndex == BtmNavScreenIndex.home, 
+                        onTap: () =>_onBottomNavTap(index: BtmNavScreenIndex.home) ),
                   ],
                 ),
               ),
@@ -121,23 +142,5 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  Widget _buildBottomNavItem(
-      {required String iconPath, required String text, required int index}) {
-    bool isActive = selectedIndex == index;
-    return GestureDetector(
-      onTap: () => _onBottomNavTap(index),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // ignore: deprecated_member_use
-          SvgPicture.asset(iconPath, color: isActive ? Colors.blue : Colors.grey),
-          const SizedBox(height: 4),
-          Text(
-            text,
-            style: TextStyle(color: isActive ? Colors.blue : Colors.grey),
-          ),
-        ],
-      ),
-    );
-  }
+  
 }

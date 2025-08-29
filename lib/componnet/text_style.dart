@@ -78,6 +78,7 @@ class LightAppTextStyle {
     fontFamily: FontFamily.dana,
     fontSize: 12,
     color: LightAppColors.btNavActiveColor,
+    fontWeight: FontWeight.bold,
   );
 
   static const TextStyle btNavInActive = TextStyle(

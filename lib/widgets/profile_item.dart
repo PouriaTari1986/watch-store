@@ -11,6 +11,7 @@ class ProfileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
           text,
