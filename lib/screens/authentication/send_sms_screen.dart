@@ -16,7 +16,6 @@ class SendSmsScreen extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SafeArea(

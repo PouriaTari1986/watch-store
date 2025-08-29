@@ -21,6 +21,9 @@ class $AssetsPngGen {
   /// File path: assets/png/aiW.png
   AssetGenImage get aiW => const AssetGenImage('assets/png/aiW.png');
 
+  /// File path: assets/png/banner.png
+  AssetGenImage get banner => const AssetGenImage('assets/png/banner.png');
+
   /// File path: assets/png/classicW.png
   AssetGenImage get classicW => const AssetGenImage('assets/png/classicW.png');
 
@@ -58,6 +61,7 @@ class $AssetsPngGen {
   List<AssetGenImage> get values => [
     addvertise,
     aiW,
+    banner,
     classicW,
     cnaceled,
     delivered,

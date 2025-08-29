@@ -105,7 +105,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                   if (_timer.isActive) _timer.cancel();
 
                   if (state is VerifiedIsNotRegisterdeState) {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushNamed(
                       context,
                       ScreensNames.registerScreen,
                     );

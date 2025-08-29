@@ -1,4 +1,4 @@
-abstract class AppStrings {
+ class AppStrings {
   AppStrings._();
 
   static const String replace = "replace";

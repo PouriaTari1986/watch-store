@@ -15,4 +15,7 @@ final class HomeLoaded extends HomeState {
   final Home home;
 
   const HomeLoaded(this.home);
+  
+   @override
+  List<Object> get props => [home];
 }

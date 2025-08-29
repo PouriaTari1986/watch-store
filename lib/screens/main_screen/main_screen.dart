@@ -4,10 +4,10 @@ import 'package:di_state_managment/screens/cart/cart_screen.dart';
 import 'package:di_state_managment/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'profile/profile_screen.dart';
-import '../gen/assets.gen.dart';
-import '../resource/app_colors.dart';
-import '../resource/strings.dart';
+import '../profile/profile_screen.dart';
+import '../../gen/assets.gen.dart';
+import '../../resource/app_colors.dart';
+import '../../resource/strings.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -49,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
     Size size = MediaQuery.of(context).size;
     double btNavHeight = size.height * 0.1;
 
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

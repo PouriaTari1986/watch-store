@@ -59,9 +59,16 @@ class HomeScreen extends StatelessWidget {
                                 onTap: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ProductListScreen(
+                                    
+                                    builder: (context) {
+                                      return ProductListScreen(
                                       param: state.home.categories[index].id,
-                                    ),
+                                       title: state.home.categories[index].title,
+                                      
+                                      
+                                    );
+                                    },
+                                    
                                   ),
                                 ),
                               ),
@@ -98,17 +105,17 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: MediaQuery.sizeOf(context).height / 6.7,
-                        width: MediaQuery.sizeOf(context).width / 1.2,
+                        height: MediaQuery.sizeOf(context).height / 6,
+                        width: MediaQuery.sizeOf(context).width / 1.1,
                         decoration: BoxDecoration(
                           color: Colors.black,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(Dimens.medium),
-                            bottomRight: Radius.circular(Dimens.medium),
+                          borderRadius: BorderRadius.all(
+                           Radius.circular(Dimens.large),
+                            
                           ),
                         ),
                         child: Image.asset(
-                          Assets.png.unnamed.path,
+                          Assets.png.banner.path,
                           fit: BoxFit.contain,
                         ),
                       ),

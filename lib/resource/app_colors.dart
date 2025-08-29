@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LightAppColors {
+ class LightAppColors {
   LightAppColors._();
 
   static const List<Color> catClassicColor = [

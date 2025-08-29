@@ -4,7 +4,6 @@ import 'package:di_state_managment/data/repo/cart_repo.dart';
 import 'package:di_state_managment/data/repo/product_repo.dart';
 import 'package:di_state_managment/gen/assets.gen.dart';
 import 'package:di_state_managment/resource/dimens.dart';
-import 'package:di_state_managment/resource/strings.dart';
 import 'package:di_state_managment/screens/product_list/bloc/product_list_bloc.dart';
 import 'package:di_state_managment/widgets/app_bar.dart';
 import 'package:di_state_managment/widgets/cart_badges.dart';
@@ -16,7 +15,8 @@ import 'package:flutter_svg/svg.dart';
 class ProductListScreen extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables, strict_top_level_inference
   final param;
-  const ProductListScreen({super.key, this.param});
+  final String? title;
+  const ProductListScreen({super.key, this.param, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class ProductListScreen extends StatelessWidget {
                    },),
                 Row(
                   children: [
-                    Text(AppStrings.bestSelled),
+                   
                     Dimens.small.width,
                     SvgPicture.asset(Assets.svg.list),
                   ],
@@ -55,8 +55,18 @@ class ProductListScreen extends StatelessWidget {
 
           body: Column(
             children: [
-              TagList(),
+              TagList(text: "تیفورس" ,),
               (Dimens.large * 3).height,
+              Padding(
+                padding: const EdgeInsets.only(right: Dimens.medium),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(title.toString(),style: LightAppTextStyle.title,),
+                  ],
+                ),
+              ),
+              Dimens.medium.height,
               BlocBuilder<ProductListBloc, ProductListState>(
                 builder: (context, state) {
                   if (state is ProductListLoading) {
@@ -98,7 +108,8 @@ class ProductListScreen extends StatelessWidget {
 }
 
 class TagList extends StatelessWidget {
-  const TagList({super.key});
+  final String text;
+  const TagList({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +131,7 @@ class TagList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimens.large),
               ),
               child: Center(
-                child: Text("تیو فورس", style: LightAppTextStyle.taglistStyle),
+                child: Text(text, style: LightAppTextStyle.taglistStyle),
               ),
             );
           },
