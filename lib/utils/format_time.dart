@@ -1,13 +1,17 @@
 String formatTime(int sec) {
   String resultFormat;
-  final duration = Duration(seconds: sec);
-  int hours = duration.inHours;
-  int min = duration.inMinutes;
-  int seconds = duration.inSeconds;
+
+  int hours = sec ~/ 3600;
+  int min = sec~/60;
+  int seconds = sec%60;
+  String hour = hours.toString().padLeft(2,'0');
+  String minStr = min.toString().padLeft(2,'0');
+  String secStr = seconds.toString().padLeft(2,'0');
   if (sec > 3600) {
-    resultFormat = "$hours:$min:$seconds";
+    resultFormat = "$hour:$minStr:$secStr";
   } else {
-    resultFormat = "$min:$seconds";
+    resultFormat = "$min:$secStr";
   }
   return resultFormat;
+
 }

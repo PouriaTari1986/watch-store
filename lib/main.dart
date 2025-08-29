@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           builder: (context, state) {
             if (state is LoggedInState) {
               return const MainScreen();
-            } else {
+            } else{
               return SendSmsScreen();
             }
           },

@@ -21,7 +21,7 @@ final class LoadedState extends AuthenticationState {
   List<Object> get props => [mobile];
 }
 
-final class VerifiedState extends AuthenticationState {}
+
 
 final class VerifiedIsRegisterdeState extends AuthenticationState {}
 

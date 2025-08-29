@@ -36,12 +36,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   void startTimer() {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(oneSec, (timer) {
-      if (!mounted) {
-        timer.cancel();
-        return;
-      }
-
-      setState(() {
+          setState(() {
         if (_start == 0) {
           timer.cancel();
           Navigator.of(context).pop();
@@ -50,8 +45,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
           // چاپ مطمئن در Debug Console
         }
       });
+
     });
   }
+
 
   @override
   void dispose() {
@@ -98,9 +95,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 prefixLable: formatTime(_start),
               ),
               BlocConsumer<AuthenticationCubit, AuthenticationState>(
-                listenWhen: (previous, current) =>
-                    current is VerifiedIsNotRegisterdeState ||
-                    current is VerifiedIsRegisterdeState,
+             
                 listener: (context, state) {
                   if (_timer.isActive) _timer.cancel();
 
@@ -116,9 +111,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     );
                   }
                 },
-                buildWhen: (previous, current) =>
-                    current is! VerifiedIsNotRegisterdeState &&
-                    current is! VerifiedIsRegisterdeState,
+             
                 builder: (context, state) {
                   if (state is LoadingState) {
                     return const Center(child: CircularProgressIndicator());

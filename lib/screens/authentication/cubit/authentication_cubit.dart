@@ -22,7 +22,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         EndPoints.sendSms,
         data: {"mobile": mobile},
       );
-      if (HttpResponseValidator.isValidStatusCode(response.statusCode!)) {
+      if (HttpResponseValidator.isValidStatusCode(response.statusCode??0)) {
         final code = response.data["data"]["code"];
          debugPrint("📩 کد تایید از سرور: $code");
         emit(LoadedState(mobile: mobile));
@@ -36,13 +36,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   /// تایید کد SMS
   void verifyCode(String mobile, String code) async {
-    emit(VerifiedState());
+    emit(VerifiedIsRegisterdeState());
     try {
       final response = await _dio.post(
         EndPoints.checkSmsCode,
         data: {"mobile": mobile, "code": code},
       );
-      if (HttpResponseValidator.isValidStatusCode(response.statusCode!)){
+      if (HttpResponseValidator.isValidStatusCode(response.statusCode??0)){
         SharedPreferencesManager().saveString(
           SharedPrefrencesConst.token,
           response.data["data"]["token"],

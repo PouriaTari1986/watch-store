@@ -9,7 +9,7 @@ abstract class ICartDataSource {
   Future<UserCart> removeFromCart({required int productId});
   Future<UserCart> deleteFromCart({required int productId});
   Future<int> cartCountItems();
- Future<String> payCart();
+  Future<String> payCart();
 }
 
 
