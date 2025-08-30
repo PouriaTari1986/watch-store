@@ -1,7 +1,7 @@
-import 'package:di_state_managment/data/models/banner.dart';
-import 'package:di_state_managment/data/models/category.dart';
+import 'package:di_state_managment/data/models/home/banner.dart';
+import 'package:di_state_managment/data/models/home/category.dart';
 import 'package:di_state_managment/data/models/product.dart';
-import 'package:di_state_managment/data/models/slide.dart';
+import 'package:di_state_managment/data/models/home/slide.dart';
 
 class Home {
   List<SliderModel> sliders;

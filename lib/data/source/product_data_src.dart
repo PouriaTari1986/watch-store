@@ -29,7 +29,7 @@ class ProductRemoteDataSource implements IProductDataSource {
     );
 
     HttpResponseValidator.isValidStatusCode(response.statusCode ?? 0);
-    for (var element in (response.data['all_products']['data']) as List) {
+    for (var element in (response.data['products_by_brand']['data']) as List) {
       product.add(Product.fromJson(element));
     }
     return product;

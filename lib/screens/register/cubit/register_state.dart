@@ -20,5 +20,5 @@ final class LocationPickedState extends RegisterState {
   final String? address;
   const LocationPickedState({required this.location, required this.address});
   @override
-  List<Object> get props => [Location, address ?? ""];
+  List<Object> get props => [Location, address??""];
 }

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:di_state_managment/data/models/home.dart';
+import 'package:di_state_managment/data/models/home/home.dart';
 import 'package:di_state_managment/data/repo/home_repo.dart';
 import 'package:equatable/equatable.dart';
 

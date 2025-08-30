@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:di_state_managment/data/models/slide.dart';
+import 'package:di_state_managment/data/models/home/slide.dart';
 import 'package:di_state_managment/resource/dimens.dart';
 import 'package:flutter/material.dart';
 

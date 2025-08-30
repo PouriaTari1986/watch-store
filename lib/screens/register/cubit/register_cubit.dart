@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:di_state_managment/data/models/user.dart';
 import 'package:di_state_managment/data/source/constant.dart';
+import 'package:di_state_managment/utils/response_validator.dart';
 import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:di_state_managment/utils/shared_prefrences_const.dart';
 import 'package:dio/dio.dart';
@@ -78,7 +79,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         data: FormData.fromMap(user.toMap()),
       );
 
-      if (response.statusCode == 201) {
+      if (HttpResponseValidator.isValidStatusCode(response.statusCode??0)) {
         emit(OkResponseState());
       } else {
         debugPrint("❌ ثبت نام با خطا: ${response.statusCode}");

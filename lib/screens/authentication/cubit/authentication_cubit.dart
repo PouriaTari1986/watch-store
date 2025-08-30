@@ -9,8 +9,14 @@ import 'package:flutter/cupertino.dart';
 
 part 'authentication_state.dart';
 
+
+
+
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit() : super(AuthenticationInitial());
+
+
+
 
   final Dio _dio = Dio();
 
@@ -36,18 +42,24 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   /// تایید کد SMS
   void verifyCode(String mobile, String code) async {
-    emit(VerifiedIsRegisterdeState());
+    emit(LoadingState());
     try {
       final response = await _dio.post(
         EndPoints.checkSmsCode,
         data: {"mobile": mobile, "code": code},
       );
       if (HttpResponseValidator.isValidStatusCode(response.statusCode??0)){
-        SharedPreferencesManager().saveString(
-          SharedPrefrencesConst.token,
-          response.data["data"]["token"],
-        );
+        final data = response.data["data"];
+        final token = data["token"];
+        if (token != null && token.isNotEmpty) {
 
+        await  SharedPreferencesManager().saveString(
+          SharedPrefrencesConst.token,token
+        );
+        }
+        
+      
+        SharedPreferencesManager().getString(SharedPrefrencesConst.token);
         if (response.data["data"]["is_registered"]) {
           emit(VerifiedIsRegisterdeState());
         } else {

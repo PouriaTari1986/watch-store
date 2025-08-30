@@ -1,3 +1,5 @@
+import 'package:di_state_managment/data/models/adresses.dart';
+
 class UserData {
   final UserInfo userInfo;
   final int userProcessingCount;
@@ -35,14 +37,14 @@ class UserInfo {
   final String? name;
   final String mobile;
   final String? phone;
-  final String? address;
+  List <Addresses> address;
 
   UserInfo({
     required this.id,
     this.name,
     required this.mobile,
     this.phone,
-    this.address,
+    required this.address,
   });
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
@@ -51,7 +53,7 @@ class UserInfo {
       name: json['name'],
       mobile: json['mobile'],
       phone: json['phone'],
-      address: json['address'],
+      address: (json['address'] as List<dynamic>).map((e)=>Addresses.fromJson(e)).toList()
     );
   }
 

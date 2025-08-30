@@ -22,13 +22,13 @@ class ImageHandler {
 
       File imageFile = File(pickedFile.path);
       // ignore: use_build_context_synchronously
-      final croopedFile = await Navigator.of(context).push<File>(
+      final cropedFile = await Navigator.of(context).push<File>(
         MaterialPageRoute(
-          builder: (_) => CropImageScrren(imageFile: imageFile),
+          builder: (_) => CropImageScreen(imageFile: imageFile),
         ),
       );
-      if (croopedFile != null) {
-        _image = croopedFile;
+      if (cropedFile != null) {
+        _image = cropedFile;
       }
       return _image;
     } catch (e) {
@@ -38,16 +38,16 @@ class ImageHandler {
   }
 }
 
-class CropImageScrren extends StatefulWidget {
+class CropImageScreen extends StatefulWidget {
   final File imageFile;
 
-  const CropImageScrren({super.key, required this.imageFile});
+  const CropImageScreen({super.key, required this.imageFile});
 
   @override
-  State<CropImageScrren> createState() => _CropImageScrrenState();
+  State<CropImageScreen> createState() => _CropImageScreenState();
 }
 
-class _CropImageScrrenState extends State<CropImageScrren> {
+class _CropImageScreenState extends State<CropImageScreen> {
   final GlobalKey<ExtendedImageEditorState> editorKey =
       GlobalKey<ExtendedImageEditorState>();
   @override

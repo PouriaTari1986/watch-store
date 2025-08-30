@@ -1,13 +1,13 @@
+import 'package:di_state_managment/data/conf/remote_confige.dart';
 import 'package:di_state_managment/data/models/product.dart';
 import 'package:di_state_managment/data/models/product_details.dart';
 import 'package:di_state_managment/data/source/product_data_src.dart';
-import 'package:dio/dio.dart';
 
 abstract class IProductRepo {
   Future<List<Product>> getAllByCategory(int id);
 
   Future<ProductDetails> productDetails(int id);
-
+ 
   Future<List<Product>> getAllByBrand(int id);
 
   Future<List<Product>> getSorted(String routeParam);
@@ -48,4 +48,4 @@ class ProductRepository implements IProductRepo {
         
 }
 
-final productRepository = ProductRepository(ProductRemoteDataSource(Dio()));
+final productRepository = ProductRepository(ProductRemoteDataSource(DioManager.dio));

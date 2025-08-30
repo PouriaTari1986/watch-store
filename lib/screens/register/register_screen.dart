@@ -129,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: AppTextField(
                             lable: AppStrings.location,
                             hint: AppStrings.locationHint,
-                            controller: _controllerAddress,
+                            controller: _controllerLocation,
                             icon: Icon(Icons.location_on_outlined),
                           ),
                         );
@@ -153,6 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             text: AppStrings.register,
                             onPressed: (() async {
                               User user = User(
+                                
                                 name: _controllerNameLastName.text,
                                 phone: _controllerPhone.text,
                                 address: _controllerAddress.text,
