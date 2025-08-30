@@ -24,107 +24,117 @@ Product product;
 class _ProductItemState extends State<ProductItem> {
   Duration _duration = Duration(seconds: 0);
   late Timer timer;
-  int inSeconds = 0;
+  late int inSeconds;
   @override
   void initState() {
     super.initState();
     
-    if (widget.product.specialExpiration.isNotEmpty) {
+  
       DateTime now = DateTime.now();
       DateTime expiration = DateTime.parse(widget.product.specialExpiration);
-      _duration = expiration.difference(now);
-      inSeconds = _duration.inSeconds;
+      _duration = now.difference(expiration).abs();
+       inSeconds = _duration.inSeconds;
       if (inSeconds > 0) {
         startTimer();
-      }
+      
     } 
   }
 
   @override
-  Widget build(BuildContext context) {
-    bool isExpired = inSeconds <= 0;
-    return Container(
-      padding: EdgeInsets.all(Dimens.small),
-      margin: EdgeInsets.all(Dimens.medium),
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimens.medium),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: LightAppColors.productPage,
-        ),
+Widget build(BuildContext context) {
+  return Container(
+    padding: EdgeInsets.all(Dimens.small),
+    margin: EdgeInsets.all(Dimens.medium),
+    constraints: BoxConstraints(
+      maxWidth: 200,
+      maxHeight: MediaQuery.sizeOf(context).height / 3,
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(Dimens.medium),
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: LightAppColors.productPage,
       ),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, 
-          MaterialPageRoute(builder: (context) =>
-          ProductSingleScreen(id: widget.product.id),));
-        },
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height / 9.5,
-              child: Image(
-                image: NetworkImage(widget.product.image),
-                fit: BoxFit.contain,
-              ),
+    ),
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductSingleScreen(id: widget.product.id),
+          ),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height / 9.5,
+            child: Image.network(
+              widget.product.image,
+              fit: BoxFit.contain,
             ),
-            Dimens.medium.height,
-            Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                widget.product.title,
-                style: LightAppTextStyle.prodactTitle,
-              ),
-            ),
-            Dimens.medium.height,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${widget.product.price.seperatedWithComa}  تومان",
+          ),
+          SizedBox(height: Dimens.medium),
+          Text(
+            widget.product.title,
+            style: LightAppTextStyle.title.copyWith(fontWeight: FontWeight.normal),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          SizedBox(height: Dimens.medium),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  "${widget.product.price.seperatedWithComa} تومان",
                   style: LightAppTextStyle.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                if (widget.product.discount > 0 && !isExpired)
-                  Text(
-                    "${widget.product.discountPrice.seperatedWithComa}  تومان",
-                    style: LightAppTextStyle.oldPrice,
+              ),
+              if (_duration.inSeconds > 0 && widget.product.discount ==0)
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(60),
+                    color: Colors.red,
                   ),
-              ],
+                  child: Text("${widget.product.discount}%"),
+                ),
+            ],
+          ),
+          if (_duration.inSeconds > 0 && widget.product.discount == 0)
+            Text(
+              "${widget.product.discountPrice.seperatedWithComa} تومان",
+              style: LightAppTextStyle.oldPrice,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            
-            if (!isExpired && widget.product.discount > 0)
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(60),
-                  color: Colors.red,
-                ),
-                child: Text("${widget.product.discount}%"),
+          if (_duration.inSeconds > 0 && widget.product.discount == 0) ...[
+            SizedBox(height: Dimens.small),
+            Container(
+              height: 2,
+              width: double.infinity,
+              color: Colors.blue,
+            ),
+            SizedBox(height: Dimens.medium),
+            Align(
+              alignment: AlignmentGeometry.center,
+              child: Text(
+                formatTime(inSeconds),
+                style: LightAppTextStyle.prodTimerStyle.copyWith(color: Colors.blue,fontWeight: FontWeight.bold)),
               ),
-            
-            Dimens.large.height,
-            if (!isExpired)
-              Column(
-                children: [
-                  Container(
-                    height: 2,
-                    width: double.infinity,
-                    color: Colors.blue,
-                  ),
-                  Dimens.medium.height,
-                  Text(
-                    formatTime(inSeconds),
-                    style: LightAppTextStyle.prodTimerStyle,
-                  ),
-                ],
-              ),
+           
           ],
-        ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   void startTimer() {
     const oneSec = Duration(seconds: 1);

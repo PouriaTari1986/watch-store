@@ -15,8 +15,9 @@ import 'package:flutter_svg/svg.dart';
 class ProductListScreen extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables, strict_top_level_inference
   final param;
+
   final String? title;
-  const ProductListScreen({super.key, this.param, this.title});
+  const ProductListScreen({super.key, this.param, this.title, });
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +36,18 @@ class ProductListScreen extends StatelessWidget {
               children: [
                 ValueListenableBuilder(
                   valueListenable: cartRepository.cartCount,
-                   builder: (context, value, child) {
-                     return CartBadge(count: value,);
-                   },),
+                  builder: (context, value, child) {
+                    return CartBadge(count: value);
+                  },
+                ),
                 Row(
                   children: [
-                   
                     Dimens.small.width,
                     SvgPicture.asset(Assets.svg.list),
                   ],
                 ),
                 IconButton(
-                  onPressed: ()=>Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context),
                   icon: SvgPicture.asset(Assets.svg.close),
                 ),
               ],
@@ -55,14 +56,14 @@ class ProductListScreen extends StatelessWidget {
 
           body: Column(
             children: [
-              TagList(text: "تیفورس" ,),
+              TagList(text: "تیفورس"),
               (Dimens.large * 3).height,
               Padding(
                 padding: const EdgeInsets.only(right: Dimens.medium),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(title.toString(),style: LightAppTextStyle.title,),
+                    Text(title.toString(), style: LightAppTextStyle.title),
                   ],
                 ),
               ),
@@ -83,12 +84,7 @@ class ProductListScreen extends StatelessWidget {
                         ),
 
                         itemBuilder: (context, index) {
-                          
-                          return ProductItem(
-                            product: state.productList[index]
-                            
-                            
-                          );
+                          return ProductItem(product: state.productList[index]);
                         },
                       ),
                     );
@@ -116,12 +112,12 @@ class TagList extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsGeometry.symmetric(vertical: Dimens.medium),
       child: SizedBox(
-        height: 24,
+        height: Dimens.large,
 
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           reverse: true,
-          itemCount: 6,
+          itemCount: 8,
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.symmetric(horizontal: Dimens.small),

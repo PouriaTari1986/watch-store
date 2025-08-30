@@ -104,7 +104,9 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                       context,
                       ScreensNames.registerScreen,
                     );
-                  } else if (state is VerifiedIsRegisterdeState) {
+                
+                  }
+                  else if (state is VerifiedIsRegisterdeState) {
                     Navigator.pushReplacementNamed(
                       context,
                       ScreensNames.mainScreen,

@@ -1,4 +1,4 @@
-import 'package:di_state_managment/data/models/home/home.dart';
+import 'package:di_state_managment/data/models/home/home_model.dart';
 import 'package:di_state_managment/data/source/constant.dart';
 import 'package:di_state_managment/utils/response_validator.dart';
 import 'package:dio/dio.dart';

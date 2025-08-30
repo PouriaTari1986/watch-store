@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                                       return ProductListScreen(
                                       param: state.home.categories[index].id,
                                        title: state.home.categories[index].title,
-                                      
+                                       
                                       
                                     );
                                     },
@@ -77,31 +77,33 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Dimens.large.height,
-                      SizedBox(
-                        height: 300,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          reverse: true,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                height: 300,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  physics: ClampingScrollPhysics(),
-                                  itemCount: state.home.amazingProducts.length, 
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    
-                                    return ProductItem(
-                                  product: state.home.amazingProducts[index]
-                                  );
-                                  },
-                                ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        reverse: true,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 300,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                physics: ClampingScrollPhysics(),
+                                itemCount: state.home.amazingProducts.length, 
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  
+                                  return ProductItem(
+                                product: state.home.amazingProducts[index]);
+                                }
                               ),
-                              VerticalText(amazeText: AppStrings.wonder),
-                            ],
-                          ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                
+                              },
+                              child: Container(
+                                color: Colors.white,
+                                child: VerticalText(amazeText: AppStrings.wonder))),
+                          ],
                         ),
                       ),
                       Container(
@@ -146,7 +148,13 @@ class HomeScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              VerticalText(amazeText: AppStrings.bestSelled),
+                              GestureDetector(
+                                onTap: () {
+                                  
+                                },
+                                child: Container(
+                                  color: Colors.white,
+                                  child: VerticalText(amazeText: AppStrings.bestSelled))),
                             ],
                           ),
                         ),
@@ -175,7 +183,13 @@ class HomeScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              VerticalText(amazeText: AppStrings.newest),
+                              GestureDetector(
+                                onTap: () {
+                                  
+                                },
+                                child: Container(
+                                  color: Colors.white,
+                                  child: VerticalText(amazeText: AppStrings.newest))),
                             ],
                           ),
                         ),
