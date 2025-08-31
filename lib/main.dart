@@ -3,6 +3,7 @@ import 'package:di_state_managment/data/repo/cart_repo.dart';
 import 'package:di_state_managment/data/repo/product_repo.dart';
 import 'package:di_state_managment/route/routes.dart';
 import 'package:di_state_managment/screens/authentication/cubit/authentication_cubit.dart';
+import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
 import 'package:di_state_managment/screens/cart/bloc/cart_bloc.dart';
 import 'package:di_state_managment/screens/main_screen/main_screen.dart';
 import 'package:di_state_managment/screens/product_single/bloc/product_single_bloc.dart';
@@ -39,17 +40,15 @@ class MyApp extends StatelessWidget {
         title: 'Watch Store',
         theme: lightTheme(),
         routes: routes,
-        home:const MainScreen(),
-        
-        // BlocBuilder<AuthenticationCubit, AuthenticationState>(
-        //   builder: (context, state) {
-        //     if (state is LoggedInState) {
-        //       return const MainScreen();
-        //     } else{
-        //       return SendSmsScreen();
-        //     }
-        //   },
-        // ),
+        home: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+          builder: (context, state) {
+            if (state is LoggedInState) {
+              return const MainScreen();
+            } else{
+              return SendSmsScreen();
+            }
+          },
+        ),
       ),
     );
   }
