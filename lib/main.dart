@@ -1,6 +1,4 @@
-import 'package:di_state_managment/componnet/theme.dart';
-import 'package:di_state_managment/data/repo/cart_repo.dart';
-import 'package:di_state_managment/data/repo/product_repo.dart';
+
 import 'package:di_state_managment/route/routes.dart';
 import 'package:di_state_managment/screens/authentication/cubit/authentication_cubit.dart';
 import 'package:di_state_managment/screens/authentication/send_sms_screen.dart';
@@ -10,6 +8,10 @@ import 'package:di_state_managment/screens/product_single/bloc/product_single_bl
 import 'package:di_state_managment/utils/shared_preferences_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'componnet/theme.dart';
+import 'data/repo/cart_repo.dart';
+import 'data/repo/product_repo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

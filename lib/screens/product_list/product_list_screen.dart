@@ -9,7 +9,7 @@ import 'package:di_state_managment/screens/product_list/bloc/product_list_bloc.d
 import 'package:di_state_managment/resource/dimens.dart';
 
 class ProductListScreen extends StatelessWidget {
-  final param;
+  final dynamic param;
   final String? title;
   const ProductListScreen({super.key, this.param, this.title});
 
@@ -28,7 +28,7 @@ class ProductListScreen extends StatelessWidget {
             actions: [
               ValueListenableBuilder(
                 valueListenable: cartRepository.cartCount,
-                builder: (_, value, __) => CartBadge(count: value),
+                builder: (_, value, widget) => CartBadge(count: value),
               ),
             ],
           ),
